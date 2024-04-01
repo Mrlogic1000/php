@@ -1,12 +1,16 @@
 {
-    "name":"Header footer",
+    "name":"Header Footer",
     "id":"header-footer",
-    "author":"",
+    "author":"mrlogic",
+    "author website":"",
     "thumbnail":"thumbnail.jpg",
     "active":true,
     "index":1,
     "routes":{
         "on":["all"],
         "off":[]
+    },
+    "dependencies":{
+
     }
 }

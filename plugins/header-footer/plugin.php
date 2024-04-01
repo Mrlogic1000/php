@@ -1,22 +1,24 @@
 <?php
 
+/**
+ * Plugin name
+ * Descriptions
+ */
 
-add_action('user_permissions',function($permissions){ 
-    
-    return $permissions;  
-   
-});
-add_action('controller',function(){   
-   
-});
+ 
+
+
+
+
 add_action('before_view',function(){
-    require plugin_path('include/header.view.php');
+    $var = get_value();
+require plugin_path('views/header.php');
 });
 
-
-
-
-
-add_action('after_view',function(){
-    require plugin_path('include/footer.view.php');  
+// display the view files
+add_action('ater_view',function(){   
+    
+require plugin_path('views/footer.php');
 });
+
+// for manipulate data ater query operation

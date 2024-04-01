@@ -109,6 +109,7 @@ function load_plugin($plugin_folder){
             $file = 'plugins/'.$folder . '/plugin.php';            
             
             if(file_exists($file) && valid_route($json)){                 
+                    $json->index = $json->index ?? 1;
                     $json->index_file = $file;
                     $json->path ='plugins/'.$folder . '/';
                     $json->http_pathe = ROOT .'/'.$json->path;                   
@@ -123,9 +124,11 @@ function load_plugin($plugin_folder){
    }
 
     if(!empty($APP['plugins'])){
+        $APP['plugins'] = sort_plugin($APP['plugins']);
         foreach($APP['plugins'] as $json){           
          if(file_exists($json->index_file)){
-             require $json->index_file;
+           
+             require_once $json->index_file;
              $loaded = true;
          }
         }
@@ -133,6 +136,21 @@ function load_plugin($plugin_folder){
    return $loaded;
 
 }
+
+function sort_plugin(array $plugins):array{
+    $to_sort = [];
+    $sorted = [];
+    foreach($plugins as $key=>$obj){
+        $to_sort[$key] = $obj->index;
+    }
+    asort($to_sort);
+    foreach($to_sort as $key=>$value){
+        $sorted[] = $plugins[$key];
+    }
+    
+    return $sorted;
+}
+
 function valid_route(object $json):bool
 {
     if(!empty($json->routes->off) && is_array($json->routes->off)){
@@ -177,21 +195,29 @@ function do_action(string $hook, array $data=[]){
     
      
 }
+function plugin_id(){
+    $call_from = debug_backtrace();
+    $ikey   = array_search(__FUNCTION__,array_column($call_from,'function'));
+    $path   = get_plugin_dir(debug_backtrace()[$ikey]['file']).'config.json';
+    $json = json_decode(file_get_contents($path));
+    return $json->id ?? '';
+
+}
 
 function add_filter(string $hook,mixed $func,$priority=10):bool{
-    global $FILTER;
-    while(!empty($FILTER[$hook][$priority])){
+    global $FILTERS;
+    while(!empty($FILTERS[$hook][$priority])){
         $priority++;
     }
-    $ACTIONS[$hook][$priority] = $func;
+    $FILTERS[$hook][$priority] = $func;
     return true;
     
 }
 function do_filter(string $hook, mixed $data =''):mixed{
-    global $ACTIONS;
-    if(!empty($ACTIONS[$hook])){
-        ksort($ACTIONS[$hook]);
-        foreach($ACTIONS[$hook] as $key=>$func){
+    global $FILTERS;    
+    if(!empty($FILTERS[$hook])){
+        ksort($FILTERS[$hook]);
+        foreach($FILTERS[$hook] as $key=>$func){
 
             $data = $func($data);
         }
@@ -233,15 +259,39 @@ function get_plugin_dir($filepath){
     $path = str_replace($basename,'',$filepath);
     if(strstr($path,DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR)){
         $parts = explode(DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR,$path);
-        $path = 'plugins'. DIRECTORY_SEPARATOR .$parts[1];
+        $parts = explode(DIRECTORY_SEPARATOR,$parts[1]);
+        $path = 'plugins'. DIRECTORY_SEPARATOR .$parts[0]. DIRECTORY_SEPARATOR;
     }
 
     return $path;
 
 }
 
-function user_can($permission){
+function user_can(?string $permission):bool{
+    if(empty($permission)) return true;
+    $ses = new \Core\Session;
+    if($permission == 'logged_in'){
+        if($ses->is_logged_in())
+            return true;
+        return false;
+    }
+    if($permission == 'not_logged_in'){
+        if(!$ses->is_logged_in())
+            return true;
+        return false;
+    }
+    
+    if($ses->is_admin())
+        return true;
+
     global $APP;
+    if(empty($PP['user_permission']))
+        $PP['user_permission'] =[];
+        $PP['user_permission'] = do_filter("before_check_permission",$APP['user_permission']);
+    if(in_array($permission,$APP['user_permission']))
+        return true;
+
+
 return true;
 }
 

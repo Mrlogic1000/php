@@ -47,6 +47,15 @@ public function logout():int{
     }
     return 0;
 }
+public function is_admin(){
+    if($this->is_logged_in())
+        return false;
+    
+    $arr = do_filter('before_check_admin', ['is_admin' => false]);    
+    if($arr['is_admin'])
+        return true;
+    return false;
+}
 public function is_logged_in():bool{
     $this->start_session();
     if(!empty($_SESSION[$this->userkey])){

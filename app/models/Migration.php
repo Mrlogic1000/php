@@ -1,7 +1,8 @@
 <?php
-namespace Core;
-class Migration{
-    use \Model\Database;
+namespace Migration;
+defined('FCPATH') OR exit("Access Denied");
+use \Core\Database;
+class Migration extends Database{
 
     protected $columns              = [];
     protected $keys                 = [];
@@ -9,9 +10,10 @@ class Migration{
     protected $uniqueKeys           = [];
     protected $fullTextKeys          = [];
     protected $data                 = [];
+
     protected function createTable($table){
        if(!empty($this->columns)){
-        $query = "CREATE TABLE IF NOT EXISTS $table(";
+        $query = "CREATE TABLE IF NOT EXISTS $table (";
 
        foreach($this->columns as $column){
         $query.= $column . ",";
@@ -29,7 +31,8 @@ class Migration{
         $query.= "KEY (".$key . "),";
        }
        $query = trim($query,',');
-       $query .= ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+       $query .= ") ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci";
+       
        $this->query($query);
        $this->columns              = [];
        $this->keys                 = [];
@@ -50,20 +53,20 @@ class Migration{
         $this->primaryKeys[] = $key;
 
     }
-    protected function addKey($key){
+    protected function addKey(string $key){
         $this->keys[] = $key;
 
     }
-    protected function addUniqueKey($key){
+    protected function addUniqueKey(string $key){
         $this->uniqueKeys[] = $key;
 
     }
-    protected function fullTextKey($fullTextKeys){
-        $this->fullTextKeys[] = $fullTextKeys;
+    protected function fullTextKey(string $key){
+        $this->fullTextKeys[] = $key;
 
     }
-    protected function addData($key,$value){
-        $this->data[$key] = $value;
+    protected function addData(array $data):void{
+        $this->data[$key] = $data;
 
     }
     protected function dropTable($table){
@@ -71,11 +74,11 @@ class Migration{
         echo "\n\r Table $table successfully removed\n\r";
 
     }
-    protected function insertData($table){
+    protected function insertData(string $table){
         if(!empty($this->data)){
             $keys = array_keys($this->data);
             $query = "insert into $table (".implode(",",$keys). ") values (:".implode(",:",$keys) .")";
-            echo $query;
+           
         $this->query($query,$this->data);
         $this->data = [];
         echo "\n\r Data successfully inserted into $table\n\r";

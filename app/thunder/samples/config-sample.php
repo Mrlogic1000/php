@@ -2,9 +2,9 @@
 define("DEBUG",true);
 
 
-if ((empty($_SERVER["SERVER_NAME"]) && PHP_SAPI == 'cli')|| (!empty($_SERVER["SERVER_NAME"]) && $_SERVER["SERVER_NAME"]=='localhost')) {
+if ((empty($_SERVER["SERVER_NAME"]) && PHP_SAPI != 'cli')|| (!empty($_SERVER["SERVER_NAME"]) && $_SERVER["SERVER_NAME"]=='localhost')) {
       
-   
+
     // Database name
     define("DB_NAME", "plugin_db");
 
@@ -25,4 +25,3 @@ if ((empty($_SERVER["SERVER_NAME"]) && PHP_SAPI == 'cli')|| (!empty($_SERVER["SE
 } else {
     define("ROOT", "http://yourdomain.com");
 }
-

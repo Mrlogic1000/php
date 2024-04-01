@@ -1,13 +1,13 @@
 {
-    "name":"Home Page",
-    "id":"home-page",
-    "author":"",
-    "author website":"",
+    "name":"404",
+    "id":"404",
+    "author":"mrlogic",
+    "author website":"mrlogic1987@gmail.com",
     "thumbnail":"thumbnail.jpg",
     "active":true,
     "index":1,
     "routes":{
-        "on":["home"],
+        "on":["404"],
         "off":[]
     },
     "dependencies":{
