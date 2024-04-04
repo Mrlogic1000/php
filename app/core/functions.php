@@ -16,6 +16,11 @@ function show_plugin(){
     dd($name ?? []);
 }
 
+
+/**
+ * Video 11
+ * topic: variable data
+ */
 function set_value(string|array $key, mixed $value=''){
     global $USER_DATA;
     $call_from = debug_backtrace();
@@ -54,10 +59,10 @@ function get_value(string $key =''):mixed{
         $json = json_decode(file_get_contents($path));
         $plugin_id = $json->id;
 
-
-    if(empty($key))
-        return $USER_DATA;
-    return !empty($USER_DATA[$plugin_id][$key]) ? $USER_DATA[$plugin_id][$key] : null;
+    if(empty($key)){
+         return $USER_DATA[$plugin_id];
+    }
+    return !empty($USER_DATA[$key]) ? $USER_DATA[$key] : null;
     }
     
 }
@@ -195,14 +200,7 @@ function do_action(string $hook, array $data=[]){
     
      
 }
-function plugin_id(){
-    $call_from = debug_backtrace();
-    $ikey   = array_search(__FUNCTION__,array_column($call_from,'function'));
-    $path   = get_plugin_dir(debug_backtrace()[$ikey]['file']).'config.json';
-    $json = json_decode(file_get_contents($path));
-    return $json->id ?? '';
 
-}
 
 function add_filter(string $hook,mixed $func,$priority=10):bool{
     global $FILTERS;
@@ -226,6 +224,14 @@ function do_filter(string $hook, mixed $data =''):mixed{
     return $data;
     
 }
+function plugin_id(){
+    $call_from = debug_backtrace();
+    $ikey   = array_search(__FUNCTION__,array_column($call_from,'function'));
+    $path   = get_plugin_dir(debug_backtrace()[$ikey]['file']).'config.json';
+    $json = json_decode(file_get_contents($path));
+    return $json->id ?? '';
+
+}
 
 function dd($data){
     echo "<pre><div style='margin:1px; background-color:#444; color:white; padding: 5px 10px'>";
@@ -246,7 +252,7 @@ function plugin_path($path=''){
     return get_plugin_dir(debug_backtrace()[$key]['file']).$path;
 
 }
-function http_plugin_path($path=''){
+function plugin_http_path($path=''){
     $call_from = debug_backtrace();
     $key = array_search(__FUNCTION__,array_column($call_from,'function'));
     return ROOT.DIRECTORY_SEPARATOR.get_plugin_dir(debug_backtrace()[$key]['file']).$path;
@@ -385,5 +391,32 @@ function get_image($path='',$type = 'post'){
 
         return ROOT . '/assets/images/no_image.png';
 
+
+}
+
+function esc(?string $str):?string
+{
+    return htmlspecialchars($str);
+
+}
+
+function get_date(string $date):string{
+    return date("jS M Y ",strtotime($date));
+
+}
+
+function message(string $msg = '', bool $erase=false):?string{
+    $ses = new \Core\Session;
+    if(!empty($msg)){
+        $ses->set('message',$msg);
+    }else
+    if(!empty($ses->get('message'))){
+        $msg = $ses->get('message');
+        if($erase)
+        $ses->pop('message');
+    return $msg;
+    
+}
+return '';
 
 }

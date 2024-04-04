@@ -4,21 +4,30 @@ use \PDO;
 use \PDOException;
 defined('ROOT') OR exit("Access Denied");
 
+/**
+ * Video 12
+ * topic: Database
+ */
 class Database{
     private static $query_id        = '';
     public $affected_row            = 0;
     public $inserted_id             = 0;
     public $error                   = '';
     public $has_error               = false;
+    public $table_exists_db         ='';
     private function connect(){
         $VARS['DB_NAME']        = DB_NAME;
         $VARS['DB_USER']        = DB_USER;
         $VARS['DB_PASSWORD']    = DB_PASSWORD;
         $VARS['DB_HOST']        = DB_HOST;
         $VARS['DB_DRIVER']      = DB_DRIVER;
+
         $VARS = do_filter('before_db_connect',$VARS);
+        $this->table_exists_db = $VARS['DB_NAME'];
+
 
         $string = "$VARS[DB_DRIVER]:hostname=$VARS[DB_HOST];dbname=$VARS[DB_NAME]";
+
         try {
             $con = new PDO($string,$VARS['DB_USER'],'');
             $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -82,6 +91,55 @@ class Database{
             return $result;
         }
         return false;
+
+    }
+    public function table_exists(string|array $mytables):bool
+    {
+        global $APP;
+        if(empty($APP['tables']))
+        {
+            $this->error = '';
+            $this->has_error = false;
+            $con = $this->connect();
+            $query = "SELECT TABLE_NAME AS tables FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA ='".$this->table_exists_db."'";
+            $res = $APP['tables'] = $this->query($query);
+            $result = $APP['tables'] = $res['result'];
+        }else
+        {
+            $result = $APP['table'];
+        }
+        if($result)
+        {
+            $all_tables = array_column($result,'tables');
+            if(is_string($mytables))
+            {
+                $mytables = [$mytables];
+                
+
+            }          
+
+            $count = 0;
+                
+
+            foreach($mytables as $key=> $table)
+            {
+                
+                if(in_array($table,  $all_tables))
+                {                   
+                    $count++;
+                    
+                }
+                
+            }
+          
+            if($count == count($mytables))
+            {               
+                return true;
+            }
+            return false;
+
+            
+        }
 
     }
 }

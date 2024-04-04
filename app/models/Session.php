@@ -26,8 +26,8 @@ public function set(mixed $keyOrArray, mixed $value = ''):int{
 }
 public function get(mixed $key, mixed $default = ''):mixed{
     $this->start_session();
-    if(isset($this->mainkey[$key])){
-        return $_SESSION[$this->mainkey[$key]];
+    if(isset($_SESSION[$this->mainkey][$key])){
+        return $_SESSION[$this->mainkey][$key];
 
     }
     return 0;

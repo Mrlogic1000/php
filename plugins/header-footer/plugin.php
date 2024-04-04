@@ -6,12 +6,13 @@
  */
 
  
+ $db = new \Core\Database;
 
 
 
 
 add_action('before_view',function(){
-    $var = get_value();
+    // $var = get_value();
 require plugin_path('views/header.php');
 });
 

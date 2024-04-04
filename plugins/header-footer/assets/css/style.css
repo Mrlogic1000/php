@@ -4,3 +4,11 @@
 body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+header{
+    display: flex; 
+    max-width: 900px; 
+    background-color: #ddd; 
+    margin: auto;
+    padding: 5px;
+}

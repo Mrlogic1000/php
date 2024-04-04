@@ -1,0 +1,16 @@
+{
+    "name":"Card Plugin",
+    "id":"card-plugin",
+    "author":"",
+    "author website":"",
+    "thumbnail":"thumbnail.jpg",
+    "active":true,
+    "index":1,
+    "routes":{
+        "on":["all"],
+        "off":[]
+    },
+    "dependencies":{
+
+    }
+}
