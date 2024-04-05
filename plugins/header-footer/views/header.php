@@ -18,6 +18,8 @@
 </head>
 <body>
     <header>
-        <a class="btn btn-primary" href="<?=ROOT?>">Home</a>
+        <?php foreach($links as $key=>$link): ?>
+        <a class="btn btn-primary" href="<?=ROOT?>/<?= $link->slug ?>"><?= $link->title ?></a>
+        <?php endforeach ?>
 
     </header>
