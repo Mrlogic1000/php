@@ -369,8 +369,7 @@ if(is_array($data)){
     if($data['key'] != $post[$sesKey]){
         return false;
     }
-    if($data['expires'] > time()){
-        echo 'is working';
+    if($data['expires'] > time()){       
         return true;
     }
     $ses->pop($sesKey);

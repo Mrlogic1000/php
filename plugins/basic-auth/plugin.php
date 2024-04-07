@@ -6,28 +6,36 @@
  */
 
  
- 
-
 add_filter('header-footer_before_menu_links', function($links){
-    $vars = get_value();
+   $ses = new \Core\Session;
+  
     $link = (object)[];
    
     $link->id = 0;
     $link->title = 'Signup';
     $link->slug = 'signup';
     $link->image = '';
-    $link->permission = '';
+    $link->permission =  'not_logged_in';
    
-    $links[] = $link;
-
+    
     $link = (object)[];
    
     $link->id = 0;
     $link->title = 'Login';
     $link->slug = 'login';
     $link->image = '';
-    $link->permission = '';
+    $link->permission = 'not_logged_in';
      $links[] = $link;  
+
+    $link = (object)[];
+   
+    $link->id = 0;
+    $link->title = 'Hi '.$ses->user()->first_name;
+    $link->slug = 'profile/'.$ses->user()->id;
+    $link->image = '';
+    $link->permission = 'logged_in';
+     $links[] = $link; 
+
         return $links;
 });
 

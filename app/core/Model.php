@@ -62,10 +62,12 @@ class Model extends Database{
            
         }
         $query = trim( $query," && ");
-        $query .= " limit $this->limit offset $this->offset";        
+        $query .= " limit $this->limit offset $this->offset";  
+       
         // marge data because only one variable supply in the database class/trait
         $data = array_merge($data, $data_not);
-       $result = $this->query($query, $data);     
+       $result = $this->query($query, $data,'object');    
+      
        if($result)
            return $result[0];
        

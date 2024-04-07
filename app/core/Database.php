@@ -64,10 +64,12 @@ class Database{
 
         if($result){
             if($data_type == 'object'){
-                $rows = $stm->fetchAll(PDO::FETCH_OBJ);
+                $rows = $stm->fetchAll(PDO::FETCH_OBJ);               
+                return $rows;
             }else{
                 echo "rows here";
                 $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+                return $rows;
 
             }
         }

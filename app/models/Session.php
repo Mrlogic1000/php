@@ -36,6 +36,7 @@ public function get(mixed $key, mixed $default = ''):mixed{
 
 public function auth(mixed $user_row):int{
     $this->start_session();
+    dd($user_row);
     $_SESSION[$this->userkey] = $user_row;
     return 0;
 }
