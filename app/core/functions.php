@@ -69,10 +69,11 @@ function get_value(string $key =''):mixed{
 // ----------------------end-------------------------------
 
 function split_url($url){
+    
 return explode("/",trim($url,'/'));
 
 }
-function URL($key = ''){
+function URL($key = 0){
     global $APP;
     if(!empty($key) || $key == 0){
         if(!empty($APP['URL'][$key])){  
@@ -81,9 +82,12 @@ function URL($key = ''){
         }
 
     }else{
-        echo 'this is woriking';
+        $APP['URL'];
     }
     return '';  
+}
+function page(){
+    return URL(0);
 }
 
 function get_plugin_folders(){
@@ -239,9 +243,7 @@ function dd($data){
     echo "</div></pre>";
 }
 
-function page(){
-    return URL(0);
-}
+
 
 function redirect($url){
     header('Location: '. ROOT .'/'.$url);

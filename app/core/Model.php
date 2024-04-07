@@ -4,14 +4,21 @@ defined('ROOT') OR exit("Access Denied");
 use \Core\Database;
 class Model extends Database{
     // use \Core\Database;
+    public $primaryKey = '';
+    // public $table = '';
+    // public $allowColumns = [];
+    // public $allowUpdateColumns = [];
+    // public $onUpdateValidationRules = [];
+    // public $onInsertValidationRules = [];
     
     public $limit = 10;
     public $offset = 0;
-    protected $errors = [];
+    public $errors = [];
     protected function getPrimaryKey(){
         return $this->primaryKey ?? 'id';
     }
     public function getErrors($key){
+
         if(!empty($this->errors[$key])){
             return $this->errors[$key];
 
@@ -148,13 +155,13 @@ class Model extends Database{
                             break;
                         case "alpha_space":
                            
-                            if(!preg_match("/^[a-zA-Z ]+$/", $data[$column])){
+                            if(!preg_match("/^[a-zA-Z ]+$/", trim($data[$column]))){
                                 $this->errors[$column] = ucfirst($column). " should only contains alphabetical letters";
                                 
                             }
                             break;
                         case "alpha":
-                            if(!preg_match("/^[a-zA-Z]+$/", $data[$column])){
+                            if(!preg_match("/^[a-zA-Z]+$/", trim($data[$column]))){
                                 $this->errors[$column] = ucfirst($column). " should only contains alphabetical letters";
 
                             }
@@ -166,15 +173,22 @@ class Model extends Database{
                             }
                             break;
                         
+                        case "confirm":
+                            if(trim($data[$column]) != $data['retype_password']){
+                                $this->errors[$column] = ucfirst($column). " do not match";
+                                
+                            }
+                            break;
+                        
                             case "alpha_numeric":
-                                if(!preg_match("/^[a-zA-Z0-9]+$/", $data[$column])){
+                                if(!preg_match("/^[a-zA-Z0-9]+$/", trim($data[$column]))){
                                     $this->errors[$column] = ucfirst($column). " should only contains alphabetical letters";
     
                                 }
                                 break;
 
                             case "alpha_symbol":
-                                if(!preg_match("/^[a-zA-Z\-\_\$\%\*\[\]\(\)\&\{\}]+$/", $data[$column])){
+                                if(!preg_match("/^[a-zA-Z\-\_\$\%\*\[\]\(\)\&\{\}]+$/", trim($data[$column]))){
                                     $this->errors[$column] = ucfirst($column). " should only contains alphabetical letters";
     
                                 }

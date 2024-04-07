@@ -1,5 +1,5 @@
 <?php
-namespace Model;
+namespace {NAMESPACE};
 defined('ROOT') OR exit("Access Denied");
 
 /**

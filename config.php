@@ -6,7 +6,7 @@ if ((empty($_SERVER["SERVER_NAME"]) && PHP_SAPI == 'cli')|| (!empty($_SERVER["SE
       
    
     // Database name
-    define("DB_NAME", "dms");
+    define("DB_NAME", "pluginphp_db");
 
     // Database user
     define("DB_USER", "root");

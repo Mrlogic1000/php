@@ -18,7 +18,7 @@ class Migration extends Database{
        foreach($this->columns as $column){
         $query.= $column . ",";
        }
-       foreach($this->primaryKeys as $key){
+       foreach($this->primarykeys as $key){
         $query.= "PRIMARY KEY (".$key . "),";
        }
        foreach($this->fullTextKeys as $key){
@@ -50,7 +50,7 @@ class Migration extends Database{
 
     }
     protected function addPrimaryKey($key){
-        $this->primaryKeys[] = $key;
+        $this->primarykeys[] = $key;
 
     }
     protected function addKey(string $key){
@@ -65,8 +65,11 @@ class Migration extends Database{
         $this->fullTextKeys[] = $key;
 
     }
-    protected function addData(array $data):void{
-        $this->data[$key] = $data;
+    protected function addData(array $datas):void{
+        foreach($datas as $key=>$data){
+
+            $this->data[$key] = $data;
+        }
 
     }
     protected function dropTable($table){

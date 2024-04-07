@@ -5,18 +5,11 @@
  * Descriptions
  */
 
- set_value([
-    "login_page"=>"login",
-    "signup_page"=>"signup",
-    "table"=>[
-
-    ]
-
- ]);
+ 
  
 
 add_filter('header-footer_before_menu_links', function($links){
-   
+    $vars = get_value();
     $link = (object)[];
    
     $link->id = 0;
@@ -34,27 +27,30 @@ add_filter('header-footer_before_menu_links', function($links){
     $link->slug = 'login';
     $link->image = '';
     $link->permission = '';
-     $links[] = $link;
-    
-    return $links;
+     $links[] = $link;  
+        return $links;
 });
 
+set_value([
+    "signup_page"=>"signup",
+    "login_page"=>"login",
+    "table"=>[
 
+    ]
+
+ ]);
 
 
 add_action('controller',function(){
     $vars = get_value();
     $req = new \Core\Request;
-    if(!$req->posted() && page() != $vars['login_page'])
-    {
-
-        require plugin_path('controllers/login-controller.php');
-    }else
-    {
-        if(!$req->posted() && page() != $vars['login_page']){
-            require plugin_path('controllers/signup-controller.php');
-
-        }
+    if($req->posted() && page() == $vars['login_page'])
+   {    
+       require plugin_path('controllers/login-controller.php');
+    }
+    else
+      if($req->posted() && page() == $vars['signup_page']){
+        require plugin_path('controllers/signup-controller.php');       
     }
     
 });
@@ -62,10 +58,9 @@ add_action('controller',function(){
 // display the view files
 
 add_action('view',function(){   
-    $vars = get_value();
-    $errors = [];
-    $errors['email'] = "Invalid Email";
-    // $errors['errors'] = $vars['errors'];
+    $vars = get_value();      
+    $errors = $vars['errors'] ?? [];
+    // dd($errors);
       
 if(page() == $vars["login_page"]){
     require plugin_path('views/login.php');

@@ -38,10 +38,10 @@ class Database{
     }
 
 
-    public function get_query(string $query, array $data =[], string $data_type = 'object'){
+    public function get_row(string $query, array $data =[], string $data_type = 'object'){
         $result = $this->query($query,$data,$data_type);
         if(is_array($result) && count($result)>0){
-            return $rows[0];
+            return $result[0];
         }
         return false;
     }
