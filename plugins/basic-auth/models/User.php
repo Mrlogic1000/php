@@ -59,21 +59,13 @@ class User extends Model{
 
 
 protected $onUpdateValidationRules = [
-        "email" => [
-            "email",
-            "unique",
+        "email" => [            
             "required",
         ],
-        "password" => [
-            "not_less_than_8",
+        "password" => [           
             "required",
         ],
-        "username" => [
-            "alpha_space",
-            "unique",
-            "required",
-
-        ],
+       
         
 
     ];

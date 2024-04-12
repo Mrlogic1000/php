@@ -5,10 +5,10 @@
     "author website":"",
     "thumbnail":"thumbnail.jpg",
     "active":true,
-    "index":1,
+    "index":3,
     "routes":{
         "on":["all"],
-        "off":[]
+        "off":["admin"]
     },
     "dependencies":{
 

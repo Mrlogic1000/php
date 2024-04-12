@@ -16,6 +16,7 @@ $ACTIONS         = [];
 $FILTERS         = [];
 $APP['URL']     = split_url($_GET['url'] ?? 'home');
 $APP['permissions']     = [];
+// $APP['user_permissions']     = [];
 $USER_DATA      =[];
 
 // loads the plugins folder
@@ -27,6 +28,7 @@ if(!load_plugin($PLUGINS)){
 }
 
 $APP['permissions']     = do_filter('user_permissions',$APP['permissions']);
+ 
 // load website app
 $app = new \Core\App;
 $app->index();

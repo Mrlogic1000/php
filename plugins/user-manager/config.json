@@ -1,0 +1,16 @@
+{
+    "name":"Users Manager",
+    "id":"users-manager",
+    "author":"",
+    "author website":"",
+    "thumbnail":"thumbnail.jpg",
+    "active":true,
+    "index":2,
+    "routes":{
+        "on":["admin"],
+        "off":[]
+    },
+    "dependencies":{
+
+    }
+}

@@ -18,10 +18,13 @@
 </head>
 <body>
     <header>
+
+        <?php if(!empty($links)): ?>            
         <?php foreach($links as $key=>$link): ?>
-        <!-- <?php if(user_can($link->permission)): ?>             -->
-        <a class="btn btn-primary" href="<?=ROOT?>/<?= $link->slug ?>"><?= $link->title ?></a>
-        <!-- <?php endif ?> -->
+            <?php if(user_can($link->permission)): ?>            
+            <a class="btn btn-primary" href="<?=ROOT?>/<?= $link->slug ?>"><?= $link->title ?></a>
+            <?php endif ?>
         <?php endforeach ?>
+        <?php endif ?>
 
     </header>

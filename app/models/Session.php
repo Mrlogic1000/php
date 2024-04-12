@@ -81,11 +81,11 @@ public function is_logged_in():bool{
             return $_SESSION[$this->userkey];
         }else
         if(!empty($_SESSION[$this->userkey]->$key)){
-           if(is_object($_SESSION[$this->userkey]->$key)){
+           if(is_object($_SESSION[$this->userkey])){
             return $_SESSION[$this->userkey]->$key;
            }
-           if(is_array($_SESSION[$this->userkey][$key])){
-            return $_SESSION[$this->userkey]->$key;
+           if(is_array($_SESSION[$this->userkey])){
+            return $_SESSION[$this->userkey][$key];
            }
         }
         return $default;

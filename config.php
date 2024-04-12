@@ -1,5 +1,6 @@
 <?php
 define("DEBUG",true);
+define('APP_NAME','MRlogic');
 
 
 if ((empty($_SERVER["SERVER_NAME"]) && PHP_SAPI == 'cli')|| (!empty($_SERVER["SERVER_NAME"]) && $_SERVER["SERVER_NAME"]=='localhost')) {

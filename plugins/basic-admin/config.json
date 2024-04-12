@@ -1,0 +1,16 @@
+{
+    "name":"Basic Admin",
+    "id":"basic-admin",
+    "author":"",
+    "author website":"",
+    "thumbnail":"thumbnail.jpg",
+    "active":true,
+    "index":2,
+    "routes":{
+        "on":["admin"],
+        "off":[]
+    },
+    "dependencies":{
+
+    }
+}
