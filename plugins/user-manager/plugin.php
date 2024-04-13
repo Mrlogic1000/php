@@ -42,8 +42,30 @@ add_filter('basic-admin_before_admin_links', function ($links) {
 add_action('controller', function () {
     $req = new \Core\Request;
     $vars = get_value();
+
     if ($req->posted() && URL(1) == $vars['plugin_route']) 
-            require plugin_path('controllers/controller.php');
+    {
+        $users = new \UserManager\User;
+    $id = URL(3) ?? null;
+       
+        if($id)
+            $row = $users->first(['id'=>$id]);
+     
+        if(URL(2)=='add')
+        {
+            require plugin_path('controller/add-controller.php');
+        }else
+        if(URL(2)=='edit')
+        {           
+        require plugin_path('controller/edit-controller.php'); 
+        }else
+        if(URL(2)=='edit')
+        {           
+        require plugin_path('controller/delete-controller.php'); 
+        }
+
+    }
+        
     
 });
 
@@ -54,7 +76,11 @@ add_action('basic-admin_main_content', function () {
     $vars = get_value();
     $admin_route = $vars['admin_route'];
     $plugin_route = $vars['plugin_route'];
+
     if (URL(1) == $vars['plugin_route'])
+        $id = URL(3) ?? null;
+        if($id)
+            $row = $users->first(['id'=>$id]);
      {
         if(URL(2)=='add')
         {
@@ -62,7 +88,8 @@ add_action('basic-admin_main_content', function () {
         }else
         if(URL(2)=='edit')
         {
-            require plugin_path('views/edit-view.php');
+           
+        require plugin_path('views/edit-view.php'); 
 
 
         }else

@@ -4,7 +4,7 @@ defined('ROOT') OR exit("Access Denied");
 use \Core\Database;
 class Model extends Database{
     // use \Core\Database;
-    public $primaryKey = '';
+    public $primaryKey = 'id';
     // public $table = '';
     // public $allowColumns = [];
     // public $allowUpdateColumns = [];
