@@ -13,18 +13,23 @@
       <input type="text" value="<?= old_value('first_name', $row->first_name) ?>" class="form-control" placeholder="First Name" aria-label="Username" aria-describedby="addon-wrapping">
     </div>
     <div class="col-md-6 mb-3">
-      <label for="last_name" class="form-label"> Last Name</label>
-      <input type="text" value="<?= old_value('last_name', $row->last_name) ?>" class="form-control" placeholder="Last Name" aria-label="Last name" aria-describedby="addon-wrapping">
+      <label for="email" class="form-label"> First Name</label>
+      <input type="text" value="<?= old_value('email', $row->last_name) ?>" class="form-control" placeholder="First Name" aria-label="Username" aria-describedby="addon-wrapping">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="email" class="form-label"> Email</label>
+      <input type="email" value="<?= old_value('email', $row->email) ?>" class="form-control" placeholder="email" aria-label="email" aria-describedby="addon-wrapping">
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3 col-md-6">
+    <label for="gender" class="form-label"> Gender</label>
       <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
         <option selected>Open this select menu</option>
         <option <?= old_selected('gender', 'male', $row->gender) ?>>Male</option>
         <option <?= old_selected('gender', 'female', $row->gender) ?>>Female</option>
       </select>
     </div>
-    <small class="text-danger">(leave password empty to keep the old password)</small>
+    <small class="text-danger m-2">(leave password empty to keep the old password)</small>
     <div class="col-md-6 mb-3">
       <label for="password" class="form-label"> Password</label>
       <input type="password" value="<?= old_value('password', '') ?>" class="form-control" placeholder="Password" aria-label="password" aria-describedby="addon-wrapping">
