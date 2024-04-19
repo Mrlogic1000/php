@@ -63,9 +63,7 @@ protected $onUpdateValidationRules = [
             "required",
             "email"
         ],
-        "password" => [           
-            "required",
-        ],
+        
        
         
 

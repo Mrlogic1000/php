@@ -45,20 +45,20 @@ add_action('controller', function () {
 
     if ($req->posted() && URL(1) == $vars['plugin_route']) {
 
-        $users = new \UserManager\User;
-        $errors = $vars['errors'] ?? [];
+        $user = new \UserManager\User;       
         $id = URL(3) ?? null;
 
         if ($id)
-            $row = $users->first(['id' => $id]);
+            $row = $user->first(['id' => $id]);
 
         if (URL(2) == 'add') {
             require plugin_path('controllers/add-controller.php');
         } else
-        if (URL(2) == 'edit') {
+        if (URL(2) == 'edit') {          
             require plugin_path('controllers/edit-controller.php');
         } else
-        if (URL(2) == 'edit') {
+        if (URL(2) == 'delete') {
+          
             require plugin_path('controllers/delete-controller.php');
         }
     }
@@ -69,6 +69,7 @@ add_action('basic-admin_main_content', function () {
     $req = new \Core\Request;
     $users = new \UserManager\User;
     $vars = get_value();
+    $errors = $vars['errors'] ?? [];
     $admin_route = $vars['admin_route'];
     $plugin_route = $vars['plugin_route'];
 

@@ -12,7 +12,7 @@ class Database{
     private static $query_id        = '';
     public $affected_row            = 0;
     public $inserted_id             = 0;
-    public $error                   = '';
+    public $sql_error                   = '';
     public $has_error               = false;
     public $table_exists_db         ='';
     private function connect(){
@@ -51,7 +51,7 @@ class Database{
         $query = do_filter('before_query',$query);
         $data = do_filter('before_data',$data);
 
-        $this->error                   = '';
+        $this->sql_error                  = '';
         $this->has_error               = false;
 
         $con = $this->connect();
@@ -67,15 +67,14 @@ class Database{
                 $rows = $stm->fetchAll(PDO::FETCH_OBJ);               
                 return $rows;
             }else{
-                echo "rows here";
+               
                 $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
                 return $rows;
 
             }
         }
         } catch (PDOException $e) {
-            $this->error                   = $e->getMessage();
-            echo $this->error;
+            $this->sql_error               = $e->getMessage();               
             $this->has_error               = true;
 
            

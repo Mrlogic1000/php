@@ -243,7 +243,7 @@
       </div>
       <?php if(!empty(message())):?>
       <div class="alert alert-danger text-center">
-        <?= message()?>
+        <?= message('',true)?>
       </div>
       <?php endif ?>
 
