@@ -1,3 +1,4 @@
+<?php if(user_can('view_users')): ?>
 <div class="table-responsive">
     <table class="table table-striped table-bordered">
         <tr>
@@ -65,3 +66,9 @@
         </tbody>
     </table>
 </div>
+<?php else: ?>
+    <div class="alert alert-danger text-center">
+        Access denied! Please contact admin to view this page
+    </div>
+
+<?php endif ?>

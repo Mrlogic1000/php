@@ -10,9 +10,17 @@ set_value([
     "login_page" => "login",
     "logout_page" => "logout",
     "admin_plugin_route" => "admin",
-    "table" => []
+    "table" => [
+        'users_table'=>'users'
+    ]
 
 ]);
+$db = new \Core\Database;
+$tables = get_value()['table'];
+if(!$db->table_exists($tables)){
+    dd('Please make sure these tables exists in the database: '. implode(',',$db->missing_table));
+    die;
+}
 add_action('controller', function () {
     $vars = get_value();
     $req = new \Core\Request;

@@ -18,6 +18,12 @@ set_value([
 
 //  set user permission for these plugin
 add_filter('permeissions', function ($permissions) {
+    $permissions[] = 'all';
+   
+    return $permissions;
+});
+
+add_filter('user_permissions', function ($permissions) {
     $permissions[] = 'view_users';
     $permissions[] = 'add_user';
     $permissions[] = 'edit_user';
@@ -86,7 +92,7 @@ add_action('basic-admin_main_content', function () {
         } else
         if (URL(2) == 'view') {
             // $rows = $users->findAll();            
-            require plugin_path('view/view-view.php');
+            require plugin_path('views/view-view.php');
         } else
         if (URL(2) == 'delete') {
             require plugin_path('views/delete-view.php');

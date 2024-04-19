@@ -27,7 +27,7 @@ if(!load_plugin($PLUGINS)){
     die("<center><h1 style='font-family:tahoma'>No plugin found! Please put at least one plugin in the plugin folder</center></h1>");
 }
 
-$APP['permissions']     = do_filter('user_permissions',$APP['permissions']);
+$APP['permissions']     = do_filter('permissions',$APP['permissions']);
  
 // load website app
 $app = new \Core\App;

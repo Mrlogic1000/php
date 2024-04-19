@@ -1,3 +1,4 @@
+<?php if(user_can('edit_user')): ?>
 <?php if (!empty($row)) : ?>
 
   <div class="row mx-auto  ">
@@ -101,4 +102,11 @@
   <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>?>">
     <button class="btn btn-primary">Back</button>
   </a>
+<?php endif ?>
+
+<?php else: ?>
+    <div class="alert alert-danger text-center">
+        Access denied! Please contact admin to view this page
+    </div>
+
 <?php endif ?>
