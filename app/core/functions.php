@@ -123,6 +123,8 @@ function load_plugin($plugin_folder)
 
                     if (file_exists($file) && valid_route($json)) {
                         $json->index = $json->index ?? 1;
+                        $json->version = $json->version ?? '1.0.0';
+                        $json->dependencies = $json->dependencies ?? (object)[];
                         $json->index_file = $file;
                         $json->path = 'plugins/' . $folder . '/';
                         $json->http_pathe = ROOT . '/' . $json->path;
@@ -136,14 +138,44 @@ function load_plugin($plugin_folder)
     if (!empty($APP['plugins'])) {
         $APP['plugins'] = sort_plugin($APP['plugins']);
         foreach ($APP['plugins'] as $json) {
-            if (file_exists($json->index_file)) {
+            if (!empty((array)$json->dependencies)) {
+                foreach ((array)$json->dependencies as $plugin_id => $version) {
 
+                    if ($plugin_data = plugin_exist($plugin_id)) {
+                        $require_version = (int)str_replace('.', '', $version);
+                        $exist_version = (int)str_replace('.', '', $plugin_data->version);
+                        if ($exist_version < $require_version) {
+                            dd('Missing plugin dependency ' . $plugin_id . ' version ' . $version . ', requested by ' . $json->id);
+
+                            die;
+                        }
+                    } else {
+                        dd('Missing plugin dependency ' . $plugin_id . ' version ' . $version . ', requested by ' . $json->id);
+
+                        die;
+                    }
+                }
+            }
+            if (file_exists($json->index_file)) {
                 require_once $json->index_file;
                 $loaded = true;
             }
         }
     }
     return $loaded;
+}
+
+function plugin_exist(string $id): string|object
+{
+    global $APP;
+    $ids = array_column($APP['plugins'], 'id');
+    $key = array_search($id, $ids);
+
+    if ($key !== false) {
+
+        return $APP['plugins'][$key];
+    }
+    return false;
 }
 
 function sort_plugin(array $plugins): array

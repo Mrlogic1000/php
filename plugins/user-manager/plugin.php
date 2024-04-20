@@ -9,12 +9,23 @@ set_value([
     "admin_route"   => "admin",
     "plugin_route"  => "users",
     'tables' => [
-        'users_table'       => 'users',
-        'roles_table'       => 'user_roles',
-        'roles_map_table'   => 'user_roles_map',
+        'users_table'               => 'users',
+        
+    ],
+    'optional_table' => [
+        'users_table'               => 'users',
+        'roles_table'               => 'user_roles',
+        'permissions_table'         => 'role_permissions',
+        'roles_map_table'           => 'user_roles_map',
     ]
 
 ]);
+$db = new \Core\Database;
+$tables = get_value()['tables'];
+if(!$db->table_exists($tables)){
+    dd('Missing database tables in '.plugin_id().' plugin : '. implode(',',$db->missing_table));
+    die;
+}
 
 //  set user permission for these plugin
 add_filter('permeissions', function ($permissions) {
@@ -24,10 +35,23 @@ add_filter('permeissions', function ($permissions) {
 });
 
 add_filter('user_permissions', function ($permissions) {
-    $permissions[] = 'view_users';
-    $permissions[] = 'add_user';
-    $permissions[] = 'edit_user';
-    $permissions[] = 'delete_user';
+    $ses = new \Core\Session;
+    if($ses->is_logged_in()){
+        $vars = get_value();
+        $db = new \Core\Database;
+        $query = "select * from ". $vars['optional_table']['roles_table'];
+        $roles = $db->query($query);
+        
+        if(!is_array($roles)){
+          
+        }else{
+            $permissions[] = 'all';
+        }
+    }
+    // $permissions[] = 'view_users';
+    // $permissions[] = 'add_user';
+    // $permissions[] = 'edit_user';
+    // $permissions[] = 'delete_user';
     return $permissions;
 });
 //  set user permission for these plugin

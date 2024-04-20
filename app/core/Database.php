@@ -109,7 +109,7 @@ class Database{
             $result = $APP['tables'] = $res;
         }else
         {
-            $result = $APP['table'];
+            $result = $APP['tables'];
         }
         if($result)
         {

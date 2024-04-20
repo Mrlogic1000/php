@@ -10,15 +10,15 @@ set_value([
     "login_page" => "login",
     "logout_page" => "logout",
     "admin_plugin_route" => "admin",
-    "table" => [
+    "tables" => [
         'users_table'=>'users'
     ]
 
 ]);
 $db = new \Core\Database;
-$tables = get_value()['table'];
+$tables = get_value()['tables'];
 if(!$db->table_exists($tables)){
-    dd('Please make sure these tables exists in the database: '. implode(',',$db->missing_table));
+    dd('Missing database tables in '.plugin_id().' plugin : '. implode(',',$db->missing_table));
     die;
 }
 add_action('controller', function () {
