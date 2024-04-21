@@ -28,6 +28,7 @@ if(!load_plugin($PLUGINS)){
 }
 
 $APP['permissions']     = do_filter('permissions',$APP['permissions']);
+
  
 // load website app
 $app = new \Core\App;

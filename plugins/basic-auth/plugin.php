@@ -12,6 +12,12 @@ set_value([
     "admin_plugin_route" => "admin",
     "tables" => [
         'users_table'=>'users'
+    ],
+    'optional_table' => [
+        'users_table'               => 'users',
+        'roles_table'               => 'user_roles',
+        'permissions_table'         => 'role_permissions',
+        'roles_map_table'           => 'user_roles_map',
     ]
 
 ]);
@@ -21,6 +27,34 @@ if(!$db->table_exists($tables)){
     dd('Missing database tables in '.plugin_id().' plugin : '. implode(',',$db->missing_table));
     die;
 }
+
+add_filter('user_permissions', function ($permissions) {
+    $ses = new \Core\Session;
+    if($ses->is_logged_in()){
+        $vars = get_value();
+        $db = new \Core\Database;
+        $query = "select * from ". $vars['optional_table']['roles_table'];
+        $roles = $db->query($query);
+        
+        if(is_array($roles)){
+            $user_id = $ses->user('id');
+            $query = " select permission from ".$vars['optional_table']['permissions_table'] ." where role_id in  (select role_id from ".
+            $vars['optional_table']['roles_map_table'] . " where user_id = :user_id)";
+            $perms = $db->query($query,['user_id'=>$user_id]);
+            if($perms)
+            {               
+                $permissions = array_column($perms,'permission');
+            }
+          
+        }else{
+            $permissions[] = 'all';
+        }
+    }
+    
+    return $permissions;
+});
+
+
 add_action('controller', function () {
     $vars = get_value();
     $req = new \Core\Request;

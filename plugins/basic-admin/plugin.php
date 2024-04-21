@@ -13,7 +13,7 @@
     ]);
 
     //  set user permission for these plugin
-    add_filter('permeissions', function($permissions){
+    add_filter('permissions', function($permissions){
         $permissions[] = 'view_admin_page';   
         return $permissions;
 

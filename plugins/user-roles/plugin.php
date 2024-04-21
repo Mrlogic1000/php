@@ -1,52 +1,68 @@
 <?php
 
 /**
- * user manager
- * For managing users
+ * user roles
+ * For managing roles
  */
 
 set_value([
     "admin_route"   => "admin",
-    "plugin_route"  => "users",
+    "plugin_route"  => "user-roles",
     'tables' => [
-        'users_table'               => 'users',
-        
-    ],
-    'optional_table' => [
-        'users_table'               => 'users',
+        'users_table'               => 'users',           
         'roles_table'               => 'user_roles',
         'permissions_table'         => 'role_permissions',
         'roles_map_table'           => 'user_roles_map',
     ]
 
 ]);
+
 $db = new \Core\Database;
 $tables = get_value()['tables'];
-if(!$db->table_exists($tables)){
-    dd('Missing database tables in '.plugin_id().' plugin : '. implode(',',$db->missing_table));
+if (!$db->table_exists($tables)) {
+    dd('Missing database tables in ' . plugin_id() . ' plugin : ' . implode(',', $db->missing_table));
     die;
 }
 
 //  set user permission for these plugin
+add_filter('permissions', function ($permissions) {    
+    $permissions[] = 'view_roles';
+    $permissions[] = 'add_role';
+    $permissions[] = 'edit_role';
+    $permissions[] = 'delete_role';    
 
-add_filter('permissions', function ($permissions) {
-    $permissions[] = 'view_users';
-    $permissions[] = 'view_user_detail';
-    $permissions[] = 'add_user';
-    $permissions[] = 'edit_user';
-    $permissions[] = 'delete_user';
-return $permissions;
+    return $permissions;
 });
 
+add_filter('user_permissions', function ($permissions) {
+    $ses = new \Core\Session;
+    if ($ses->is_logged_in()) {
+        $vars = get_value();
+        $db = new \Core\Database;
+        $query = "select * from " . $vars['tables']['roles_table'];
+        $roles = $db->query($query);
 
+        if (is_array($roles)) 
+        {
+
+        } else {
+            $permissions[] = 'all';
+        }
+    }
+    $permissions[] = 'view_roles';
+    $permissions[] = 'add_role';
+    $permissions[] = 'edit_role';
+    $permissions[] = 'delete_role';
+    return $permissions;
+});
 //  set user permission for these plugin
 add_filter('basic-admin_before_admin_links', function ($links) {
     $vars = get_value();
 
     $obj = (object)[];
-    $obj->title = 'Users';
+    $obj->title = 'User Roles';
     $obj->link = ROOT . '/' . $vars['admin_route'] . '/' . $vars['plugin_route'];
-    $obj->icon = 'fa-solid fa-users';
+    $obj->icon = 'fa-solid fa-unlock';
     $obj->parent = 0;
     $links[] = $obj;
 
@@ -58,9 +74,9 @@ add_action('controller', function () {
     $req = new \Core\Request;
     $vars = get_value();
 
-    if ($req->posted() && URL(1) == $vars['plugin_route']) {
+    if (URL(1) == $vars['plugin_route'] && $req->posted()) {
 
-        $user = new \UserManager\User;       
+        $user = new \UserManager\User;
         $id = URL(3) ?? null;
 
         if ($id)
@@ -69,11 +85,11 @@ add_action('controller', function () {
         if (URL(2) == 'add') {
             require plugin_path('controllers/add-controller.php');
         } else
-        if (URL(2) == 'edit') {          
+        if (URL(2) == 'edit') {
             require plugin_path('controllers/edit-controller.php');
         } else
         if (URL(2) == 'delete') {
-          
+
             require plugin_path('controllers/delete-controller.php');
         }
     }
@@ -82,7 +98,7 @@ add_action('controller', function () {
 // display the view files
 add_action('basic-admin_main_content', function () {
     $req = new \Core\Request;
-    $users = new \UserManager\User;
+    $users = new \UserRoles\User_role;
     $vars = get_value();
     $errors = $vars['errors'] ?? [];
     $admin_route = $vars['admin_route'];
