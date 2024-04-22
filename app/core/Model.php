@@ -58,6 +58,8 @@ class Model extends Database
         $query .= " limit $this->limit offset $this->offset";
         // marge data because only one variable supply in the database class/trait
         $data = array_merge($data, $data_not);
+        echo $query;
+
         return $this->query($query, $data);
     }
     public function first($data, $data_not = [])
@@ -155,6 +157,8 @@ class Model extends Database
                     switch ($rule) {
                         case "required":
                             if (empty($data[$column])) {
+                                dd($data[$column]);
+
                                 $this->errors[$column] = "The " . ucfirst($column) . " is required";
                             }
                             break;
@@ -207,9 +211,11 @@ class Model extends Database
                             $key = $this->getPrimaryKey();
                             if (!empty($data[$key])) {
                                 if ($this->first([$column => $data[$column]], [$key => $data[$key]])) {
+                                    dd($data[$column]);
                                     $this->errors[$column] = ucfirst($column) . " should be unique";
                                 } else {
                                     if ($this->where([$column => $data[$column]])) {
+                                        dd($data[$column]);
                                         $this->errors[$column] = ucfirst($column) . " should be unique";
                                     }
                                 }

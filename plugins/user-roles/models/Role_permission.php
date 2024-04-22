@@ -1,23 +1,24 @@
 <?php
 namespace UserRoles;
+use \Model\Model;
 defined('ROOT') OR exit("Access Denied");
 
-use \Model\Model;
 /**
- * User_roles
+ * Role_permission
  */
-class User_role extends Model{
+class Role_permission extends Model{
 
-    protected $table = 'user_roles';
+    protected $table = 'role_permissions';
     protected $allowColumns = [
         'role',
-        'disable'
+        'permission',
+        'disable',
 
     ];
     protected $allowUpdateColumns = [
         'role',
-        'disable'
-
+        'permission',
+        'disable',
         
 
     ];
@@ -39,16 +40,24 @@ class User_role extends Model{
     //     ],
 
     // ];
-    protected $onInsertValidationRules = [
-        "role" => [           
-            "required",
-            "unique",
-        ],
-      
-       
+    // protected $onInsertValidationRules = [
+    //     "email" => [
+    //         "email",
+    //         "unique",
+    //         "required",
+    //     ],
+    //     "password" => [
+    //         "not_less_than_8",
+    //         "required",
+    //     ],
+    //     "username" => [
+    //         "alpha_space",
+    //         "unique",
+    //         "required",
 
-    ];
-   
+    //     ],
+
+    // ];
 
 
 

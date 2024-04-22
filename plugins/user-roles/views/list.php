@@ -1,4 +1,5 @@
-<?php if (user_can('view_users')) : ?>
+<?php if (user_can('view_roles')) : ?>
+    <form method="post">
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <tr>
@@ -34,13 +35,13 @@
                             <td>
                                 <?= $row->disable ? 'No' : 'Yes' ?>
                             </td>
-                            <td style="max-width: 200px;">
+                            <td style="max-width: 300px;">
                                 <div class="row g-2" >
                                     <?php $perms = array_unique(APP('permissions') ?? []) ?>
                                     <?php if (!empty($perms)) : $num = 0; ?>
                                         <?php foreach ($perms as $perm) : $num++; ?>
                                             <div class="form-check col-md-6">
-                                                <input name="check_<?= $row->id ?>_<?= $row->id ?>" class="form-check-input" type="checkbox" value="" id="check<?= $num ?>">
+                                                <input name="check_<?= $row->id ?>_<?= $row->id ?>" class="form-check-input" type="checkbox" value="<?= $perm ?>" id="check<?= $num ?>">
                                                 <label class="form-check-label" for="check<?= $num ?>" style="cursor: pointer;">
                                                     <?= esc(str_replace("_", " ", $perm)) ?>
                                                 </label>
@@ -73,6 +74,7 @@
             </tbody>
         </table>
     </div>
+    </form>
 <?php else : ?>
     <div class="alert alert-danger text-center">
         Access denied! Please contact admin to view this page

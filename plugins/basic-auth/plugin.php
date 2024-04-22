@@ -38,8 +38,8 @@ add_filter('user_permissions', function ($permissions) {
         
         if(is_array($roles)){
             $user_id = $ses->user('id');
-            $query = " select permission from ".$vars['optional_table']['permissions_table'] ." where role_id in  (select role_id from ".
-            $vars['optional_table']['roles_map_table'] . " where user_id = :user_id)";
+            $query = " select permission from ".$vars['optional_table']['permissions_table'] ." where disable = 0 && role_id in  (select role_id from ".
+            $vars['optional_table']['roles_map_table'] . " where disable = 0 && user_id = :user_id)";
             $perms = $db->query($query,['user_id'=>$user_id]);
             if($perms)
             {               

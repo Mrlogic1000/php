@@ -34,27 +34,7 @@ add_filter('permissions', function ($permissions) {
     return $permissions;
 });
 
-add_filter('user_permissions', function ($permissions) {
-    $ses = new \Core\Session;
-    if ($ses->is_logged_in()) {
-        $vars = get_value();
-        $db = new \Core\Database;
-        $query = "select * from " . $vars['tables']['roles_table'];
-        $roles = $db->query($query);
 
-        if (is_array($roles)) 
-        {
-
-        } else {
-            $permissions[] = 'all';
-        }
-    }
-    $permissions[] = 'view_roles';
-    $permissions[] = 'add_role';
-    $permissions[] = 'edit_role';
-    $permissions[] = 'delete_role';
-    return $permissions;
-});
 //  set user permission for these plugin
 add_filter('basic-admin_before_admin_links', function ($links) {
     $vars = get_value();
@@ -76,14 +56,15 @@ add_action('controller', function () {
 
     if (URL(1) == $vars['plugin_route'] && $req->posted()) {
 
-        $user = new \UserManager\User;
+        $user_role = new \UserRoles\User_role;
         $id = URL(3) ?? null;
 
         if ($id)
-            $row = $user->first(['id' => $id]);
+            $row = $user_role->first(['id' => $id]);
 
         if (URL(2) == 'add') {
             require plugin_path('controllers/add-controller.php');
+
         } else
         if (URL(2) == 'edit') {
             require plugin_path('controllers/edit-controller.php');
@@ -91,6 +72,9 @@ add_action('controller', function () {
         if (URL(2) == 'delete') {
 
             require plugin_path('controllers/delete-controller.php');
+        }else{
+            $role_permission = new \UserRoles\Role_permission;
+            require plugin_path('controllers/list-controller.php');
         }
     }
 });
@@ -98,7 +82,7 @@ add_action('controller', function () {
 // display the view files
 add_action('basic-admin_main_content', function () {
     $req = new \Core\Request;
-    $users = new \UserRoles\User_role;
+    $user_role = new \UserRoles\User_role;
     $vars = get_value();
     $errors = $vars['errors'] ?? [];
     $admin_route = $vars['admin_route'];
@@ -107,22 +91,23 @@ add_action('basic-admin_main_content', function () {
     if (URL(1) == $vars['plugin_route']) {
         $id = URL(3) ?? null;
         if ($id)
-            $row = $users->first(['id' => $id]);
+            $row =  $user_role->first(['id' => $id]);
         if (URL(2) == 'add') {
             require plugin_path('views/add-role.php');
+           
         } else
         if (URL(2) == 'edit') {
 
             require plugin_path('views/edit-role.php');
         } else
         if (URL(2) == 'view') {
-            // $rows = $users->findAll();            
+            // $rows =  $user_role->findAll();            
             require plugin_path('views/view-role.php');
         } else
         if (URL(2) == 'delete') {
             require plugin_path('views/delete-role.php');
         } else {
-            $rows = $users->findAll();
+            $rows =  $user_role->findAll();
             require plugin_path('views/list.php');
         }
     }
