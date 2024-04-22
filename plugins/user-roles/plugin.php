@@ -109,18 +109,18 @@ add_action('basic-admin_main_content', function () {
         if ($id)
             $row = $users->first(['id' => $id]);
         if (URL(2) == 'add') {
-            require plugin_path('views/add-view.php');
+            require plugin_path('views/add-role.php');
         } else
         if (URL(2) == 'edit') {
 
-            require plugin_path('views/edit-view.php');
+            require plugin_path('views/edit-role.php');
         } else
         if (URL(2) == 'view') {
             // $rows = $users->findAll();            
-            require plugin_path('views/view-view.php');
+            require plugin_path('views/view-role.php');
         } else
         if (URL(2) == 'delete') {
-            require plugin_path('views/delete-view.php');
+            require plugin_path('views/delete-role.php');
         } else {
             $rows = $users->findAll();
             require plugin_path('views/list.php');

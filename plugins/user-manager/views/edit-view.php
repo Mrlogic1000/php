@@ -51,7 +51,7 @@
       </div>
       <div class="d-flex justify-content-between">
         <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>">
-          <button class="btn btn-primary">
+          <button type="button" class="btn btn-primary">
             <i class="fa-solid fa-chevron-left"></i>
             Back
           </button>
