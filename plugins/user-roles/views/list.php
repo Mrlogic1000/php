@@ -40,9 +40,9 @@
                                     <?php $perms = array_unique(APP('permissions') ?? []) ?>
                                     <?php if (!empty($perms)) : $num = 0; ?>
                                         <?php foreach ($perms as $perm) : $num++; ?>
-                                            <div class="form-check col-md-6">
-                                                <input name="check_<?= $row->id ?>_<?= $row->id ?>" class="form-check-input" type="checkbox" value="<?= $perm ?>" id="check<?= $num ?>">
-                                                <label class="form-check-label" for="check<?= $num ?>" style="cursor: pointer;">
+                                            <div class="form-check col-md-6" >
+                                                <input name="check_<?= $row->id ?>_<?= $num ?>" class="form-check-input" type="checkbox" value="<?= $perm ?>" id="check<?= $num ?><?= $row->id ?>">
+                                                <label class="form-check-label" for="check<?= $num ?><?= $row->id ?>" style="cursor:pointer;">
                                                     <?= esc(str_replace("_", " ", $perm)) ?>
                                                 </label>
                                             </div>

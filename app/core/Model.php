@@ -1,4 +1,8 @@
 <?php
+/**
+ * Database class
+ * video 13 and 14
+ */
 
 namespace Model;
 
@@ -40,7 +44,7 @@ class Model extends Database
     public function findAll()
     {
         $query = "select * from $this->table";
-        $result = $this->query($query);
+        $result = $this->query($query);        
         return $result;
     }
     public function where($data, $data_not = [])
@@ -78,6 +82,7 @@ class Model extends Database
 
         // marge data because only one variable supply in the database class/trait
         $data = array_merge($data, $data_not);
+        
         $result = $this->query($query, $data, 'object');
 
         if ($result)
@@ -156,8 +161,7 @@ class Model extends Database
                 foreach ($rules as $rule) {
                     switch ($rule) {
                         case "required":
-                            if (empty($data[$column])) {
-                                dd($data[$column]);
+                            if (empty($data[$column])) {                           
 
                                 $this->errors[$column] = "The " . ucfirst($column) . " is required";
                             }
@@ -211,11 +215,10 @@ class Model extends Database
                             $key = $this->getPrimaryKey();
                             if (!empty($data[$key])) {
                                 if ($this->first([$column => $data[$column]], [$key => $data[$key]])) {
-                                    dd($data[$column]);
+                                   
                                     $this->errors[$column] = ucfirst($column) . " should be unique";
                                 } else {
-                                    if ($this->where([$column => $data[$column]])) {
-                                        dd($data[$column]);
+                                    if ($this->where([$column => $data[$column]])) {                                        
                                         $this->errors[$column] = ucfirst($column) . " should be unique";
                                     }
                                 }

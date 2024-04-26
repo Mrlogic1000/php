@@ -1,4 +1,8 @@
 <?php
+/**
+ * Database class
+ * video 12
+ */
 namespace Core;
 use \PDO;
 use \PDOException;
@@ -9,7 +13,7 @@ defined('ROOT') OR exit("Access Denied");
  * topic: Database
  */
 class Database{
-    private static $query_id        = '';
+    public static $query_id        = '';
     public $affected_row            = 0;
     public $inserted_id             = 0;
     public $sql_error                   = '';
@@ -63,34 +67,39 @@ class Database{
             $this->affected_row = $stm->rowCount();
             $this->inserted_id = $con->lastInsertId();
 
+           
+
+
         if($result){
             if($data_type == 'object'){
-                $rows = $stm->fetchAll(PDO::FETCH_OBJ);               
-                return $rows;
+                $rows = $stm->fetchAll(PDO::FETCH_OBJ);                             
+               
             }else{
                
                 $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
-                return $rows;
+               
 
             }
-        }
-        } catch (PDOException $e) {
-            $this->sql_error               = $e->getMessage();               
-            $this->has_error               = true;
-
-           
-        }
-       
-        $arr = [];
+        } $arr = [];
         $arr['query']       = $query;
         $arr['data']        = $data;
         $arr['result']      = $rows ?? [];
         $arr['query_id']    = self::$query_id;
-        self::$query_id     ='';
+        self::$query_id     ='';  
+        
 
-        $result = do_filter('after_filter',$arr);
-        if(is_array($result) && count($result)>0){
-            return $result;
+        $result = do_filter('after_query',$arr);
+
+       
+        } catch (PDOException $e) {
+            $this->sql_error               = $e->getMessage();               
+            $this->has_error               = true;           
+        }
+       
+        
+
+        if(is_array($result) && count($result)>0){           
+            return $result['result'];
         }
         return false;
 

@@ -9,7 +9,7 @@ set_value([
     "admin_route"   => "admin",
     "plugin_route"  => "user-roles",
     'tables' => [
-        'users_table'               => 'users',           
+        'users_table'               => 'users',
         'roles_table'               => 'user_roles',
         'permissions_table'         => 'role_permissions',
         'roles_map_table'           => 'user_roles_map',
@@ -25,11 +25,12 @@ if (!$db->table_exists($tables)) {
 }
 
 //  set user permission for these plugin
-add_filter('permissions', function ($permissions) {    
+add_filter('permissions', function ($permissions) {
+    $permissions[] = 'all';
     $permissions[] = 'view_roles';
     $permissions[] = 'add_role';
     $permissions[] = 'edit_role';
-    $permissions[] = 'delete_role';    
+    $permissions[] = 'delete_role';
 
     return $permissions;
 });
@@ -59,12 +60,12 @@ add_action('controller', function () {
         $user_role = new \UserRoles\User_role;
         $id = URL(3) ?? null;
 
-        if ($id)
+        if ($id) {
             $row = $user_role->first(['id' => $id]);
-
+           
+        }
         if (URL(2) == 'add') {
             require plugin_path('controllers/add-controller.php');
-
         } else
         if (URL(2) == 'edit') {
             require plugin_path('controllers/edit-controller.php');
@@ -72,7 +73,7 @@ add_action('controller', function () {
         if (URL(2) == 'delete') {
 
             require plugin_path('controllers/delete-controller.php');
-        }else{
+        } else {
             $role_permission = new \UserRoles\Role_permission;
             require plugin_path('controllers/list-controller.php');
         }
@@ -89,12 +90,15 @@ add_action('basic-admin_main_content', function () {
     $plugin_route = $vars['plugin_route'];
 
     if (URL(1) == $vars['plugin_route']) {
+
+
         $id = URL(3) ?? null;
-        if ($id)
+
+        if ($id) {
             $row =  $user_role->first(['id' => $id]);
+        }
         if (URL(2) == 'add') {
             require plugin_path('views/add-role.php');
-           
         } else
         if (URL(2) == 'edit') {
 
@@ -107,7 +111,9 @@ add_action('basic-admin_main_content', function () {
         if (URL(2) == 'delete') {
             require plugin_path('views/delete-role.php');
         } else {
+            $user_role->limit = 1000;
             $rows =  $user_role->findAll();
+            $user_role::$query_id = 'get_id';
             require plugin_path('views/list.php');
         }
     }
@@ -116,8 +122,12 @@ add_action('basic-admin_main_content', function () {
 // for manipulate data ater query operation
 add_filter('after_query', function ($data) {
 
-    if (empty($data['result']))
+
+    if (empty($data['result'])) {      
         return $data;
+    }
+    $role_map = new \UserRoles\User_roles_map;
+    // dd($data);
 
     foreach ($data['result'] as $key => $row) {
     }

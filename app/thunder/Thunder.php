@@ -205,7 +205,7 @@ class Thunder
 
                 $namespace = str_replace("-"," ",$original_folder);
                 $namespace = ucwords($namespace);
-                $namespace = str_replace(" ","",$original_folder);
+                $namespace = str_replace(" ","",$namespace);
 
                 $content = str_replace("{NAMESPACE}",$namespace,$content);
 

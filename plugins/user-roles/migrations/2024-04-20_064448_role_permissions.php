@@ -16,6 +16,7 @@ class Role_permissions extends Migration{
         
 
         $this->addPrimaryKey('id');        
+        $this->addKey('role_id');
         $this->addKey('disable');
        
         $this->createTable('role_permissions');

@@ -4,7 +4,8 @@ defined('ROOT') OR exit("Access Denied");
 
 /**
  * {CLASS_NAME}
- */
+ */use \Model\Model;
+
 class {CLASS_NAME} extends Model{
 
     protected $table = '{TABLE_NAME}s';

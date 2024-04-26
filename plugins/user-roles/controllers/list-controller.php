@@ -1,30 +1,41 @@
 <?php
 $postdata = $req->post() ?? '';
-dd($postdata);
-$data = [];
-foreach($postdata as $key=>$perm){
 
-    if(!strstr($key,"check_")){
+
+$data = [];
+foreach($postdata as $role_id=>$permission){
+    
+
+    if(!strstr($role_id,"check_")){
         continue;
     }
     
-            $key = str_replace("check_","",$key);
-            $key = preg_replace("/_[0-9]+$/","",$key);
-            $data[$key][] = $perm;
-            
+            $role_id = str_replace("check_","",$role_id);
+            $role_id = preg_replace("/_[0-9]+$/","",$role_id);
+            $data[$role_id][] = $permission;
+           
         }
-        $user_role->query('update '. $vars['tables']['permissions_table'].' set disable=1');
-        foreach($user_role as $id=>$permission){
-            $row = $role_permission->first(['role_id'=>$id,'permission'=>$permission]);
-            if($row){
-                $role_permission->update($row->id,['disable'=>0]);
-            }else{
-                $role_permission->insert([
-                    'role_id'=>$id,
-                    'permission'=>$perm,
-                    'disable'=>0,
-            ]);
-            }
+        
+        $role_permission->query('update '. $vars['tables']['permissions_table'].' set disable=1');
+        foreach($data as $id=>$permissions){
+          
+          foreach($permissions as $perm){           
+                      
+              $row = $role_permission->first(['role_id'=>$id,'permission'=>$perm]);
+              dd($row);
+              if($row){                 
+                  $role_permission->update($row->id,['disable'=>0]);
+              }else{
+                
+                  $role_permission->insert([
+                      'role_id'=>$id,
+                      'permission'=>$perm,
+                      'disable'=>0,
+              ]);
+              
+              }
+
+          }
+          
         }
-        dd($data);
-die;
+      

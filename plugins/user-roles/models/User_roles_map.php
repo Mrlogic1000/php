@@ -1,24 +1,24 @@
 <?php
 namespace UserRoles;
-use \Model\Model;
 defined('ROOT') OR exit("Access Denied");
 
 /**
- * Role_permission
+ * User_roles_map
  */
-class Role_permission extends Model{
+use \Model\Model;
+class User_roles_map extends Model{
 
-    protected $table = 'role_permissions';
+    protected $table = 'user_roles_maps';
     protected $allowColumns = [
         'role_id',
-        'permission',
-        'disable',
+        'user_id',
+        'disable'
 
     ];
     protected $allowUpdateColumns = [
         'role_id',
-        'permission',
-        'disable',
+        'user_id',
+        'disable'
         
 
     ];
