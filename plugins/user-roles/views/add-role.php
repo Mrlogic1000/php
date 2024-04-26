@@ -27,7 +27,7 @@
         </select>
         <?php if (!empty($errors)) : ?>
         <div class="text-center text-danger">
-          <?= print_r($errors) ?>
+          
         </div>
       <?php endif ?>
      

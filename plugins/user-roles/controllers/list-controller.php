@@ -21,8 +21,7 @@ foreach($postdata as $role_id=>$permission){
           
           foreach($permissions as $perm){           
                       
-              $row = $role_permission->first(['role_id'=>$id,'permission'=>$perm]);
-              dd($row);
+              $row = $role_permission->first(['role_id'=>$id,'permission'=>$perm]);              
               if($row){                 
                   $role_permission->update($row->id,['disable'=>0]);
               }else{

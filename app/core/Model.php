@@ -59,11 +59,9 @@ class Model extends Database
             $query .= $k . " != :" . $k . " && ";
         }
         $query = trim($query, " && ");
-        $query .= " limit $this->limit offset $this->offset";
+        $query .= " limit $this->limit offset $this->offset ";
         // marge data because only one variable supply in the database class/trait
         $data = array_merge($data, $data_not);
-        echo $query;
-
         return $this->query($query, $data);
     }
     public function first($data, $data_not = [])
@@ -102,9 +100,7 @@ class Model extends Database
         }
         $keys = array_keys($data);
         $query = "insert into $this->table(" . implode(',', $keys) . ") values(:" . implode(", :", $keys) . ")";
-        // print_r($data);
-        $this->query($query, $data);
-        // echo $query;
+        $this->query($query, $data);       
         return false;
     }
     public function update($id, $data, $id_column = 'id')

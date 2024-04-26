@@ -26,6 +26,7 @@
             <tbody>
                 <?php if (!empty($rows)) : ?>
                     <?php foreach ($rows as $row) : ?>
+                       
                         <tr>
                             <td>#</td>
                             <td>
@@ -41,7 +42,8 @@
                                     <?php if (!empty($perms)) : $num = 0; ?>
                                         <?php foreach ($perms as $perm) : $num++; ?>
                                             <div class="form-check col-md-6" >
-                                                <input name="check_<?= $row->id ?>_<?= $num ?>" class="form-check-input" type="checkbox" value="<?= $perm ?>" id="check<?= $num ?><?= $row->id ?>">
+                                           
+                                                <input <?= in_array($perm,$row->permissions ?? []) ? ' checked ':''?> name="check_<?= $row->id ?>_<?= $num ?>" class="form-check-input" type="checkbox" value="<?= $perm ?>" id="check<?= $num ?><?= $row->id ?>">
                                                 <label class="form-check-label" for="check<?= $num ?><?= $row->id ?>" style="cursor:pointer;">
                                                     <?= esc(str_replace("_", " ", $perm)) ?>
                                                 </label>

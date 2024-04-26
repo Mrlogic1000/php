@@ -91,7 +91,6 @@ add_action('basic-admin_main_content', function () {
 
     if (URL(1) == $vars['plugin_route']) {
 
-
         $id = URL(3) ?? null;
 
         if ($id) {
@@ -112,8 +111,8 @@ add_action('basic-admin_main_content', function () {
             require plugin_path('views/delete-role.php');
         } else {
             $user_role->limit = 1000;
+            $user_role::$query_id = 'get_roles';
             $rows =  $user_role->findAll();
-            $user_role::$query_id = 'get_id';
             require plugin_path('views/list.php');
         }
     }
@@ -126,11 +125,20 @@ add_filter('after_query', function ($data) {
     if (empty($data['result'])) {      
         return $data;
     }
-    $role_map = new \UserRoles\User_roles_map;
-    // dd($data);
+   
+    if($data['query_id']=='get_roles'){
 
-    foreach ($data['result'] as $key => $row) {
+        $role_permission = new \UserRoles\Role_permission;    
+        foreach ($data['result'] as $key => $row) {
+            $permissions = $role_permission->where(['role_id'=>$row->id]);
+            if($permissions){
+                $data['result'][$key]->permissions = array_column($permissions,'permission');
+            }
+            
+        }
+      
+        
     }
-
+    
     return $data;
 });
