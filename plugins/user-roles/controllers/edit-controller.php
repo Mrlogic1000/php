@@ -1,38 +1,18 @@
 <?php
-if (!empty($row)) {
-    $postdata = $req->post();
+$postdata = $req->post() ?? '';
+if (!empty($postdata)) {
+    dd($postdata);
+
     $postdata['id'] = $row->id;
-    $filedata = $req->files();
-    
-    $file_ok = true;
-    if(!empty($filedata)){
+   
+    if ($user_role->validate($postdata)) {     
+       
+            $user_role->update($postdata['id'],$postdata);
+            message('Record created successfully');
+
         
-        $postdata['image'] = $req->upload_files('image');
-       
-    }
-    if(!empty($req->upload_errors)){
-        $file_ok = false;
-    }
-
-
-    if ($file_ok && $user->validate($postdata)) 
-    {
-
-        if (isset($postdata['password']) && empty($postdata['password'])) {
-            unset($postdata['password']);           
-        }
-        
-        $postdata['date_updated'] = date('Y-m-d H:i:s');
-       
-        $user->update($postdata['id'], $postdata);
-        if (!empty($postdata['image']) && file_exists($row->image)) {
-            unlink($row->image);
-        }        
-
-        message('Record updated successfully');
-       
     } else {
-        set_value('errors',array_merge($user->errors));       
-        
+        set_value('errors', $user_role->errors);
     }
+    dd($user_role->sql_error);
 }

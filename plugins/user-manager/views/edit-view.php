@@ -41,15 +41,18 @@
         <?php 
         $query = "select * from user_roles";
         $roles = $user_role->query($query);
+       
+        
         ?>
                                    
                                     <?php if (!empty($roles)) : $num = 0; ?>
                                         <?php foreach ($roles as $role) : $num++; ?>
-                                            <div class="form-check col-md-6" >
-                                           
-                                                <input <?= in_array($role,$row->permissions ?? []) ? ' checked ':''?> name="check_<?= $row->id ?>_<?= $num ?>" class="form-check-input" type="checkbox" value="<?= $role?>" id="check<?= $num ?><?= $row->id ?>">
+                                       
+                                            <div class="form-check col-md-6" >                                           
+                                                <input <?= in_array($role->role,$row->roles ?? []) ? ' checked ':''?> name="check_<?= $row->id ?>_<?= $num ?>" class="form-check-input" type="checkbox" value="<?= $role->role?>" id="check<?= $num ?><?= $row->id ?>">
                                                 <label class="form-check-label" for="check<?= $num ?><?= $row->id ?>" style="cursor:pointer;">
-                                                    <?= esc(str_replace("_", " ", $role)) ?>
+                                                    <?= esc($role->role) ?>
+                                                    
                                                 </label>
                                             </div>
                                         <?php endforeach ?>

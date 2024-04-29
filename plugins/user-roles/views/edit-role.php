@@ -4,13 +4,11 @@
   <div class="row mx-auto  ">
     <form onsubmit="submit_forms(event)" class="row g3 col-md-5 mx-auto shadow p-3 " method="post" enctype="multipart/form-data">
       <?= csrf() ?>
+      
       <h4 class="my-3">Edit Record</h4>
      
-      <?php if (!empty($errors)) : ?>
-        <div class="text-center text-primary">
-          <?= $errors['image'] ?>
-        </div>
-      <?php endif ?>
+     
+   
       <div class="col-md-6 mb-3">
         <label for="role" class="form-label"> Role</label>
         <input type="text" name="role" value="<?= old_value('role', $row->role) ?>" class="form-control" placeholder="Role" aria-label="Username" aria-describedby="addon-wrapping">

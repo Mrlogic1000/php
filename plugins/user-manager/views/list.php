@@ -11,10 +11,14 @@
             <th>Date Created</th>
             <th>Date Updated</th>
             <th>
+            <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/add">
+
                 <button class="btn btn-bd-primary btn-sm">
                     <i class="fa-solid fa-plus"></i>
                     Add New</button>
+            </a>
             </th>
+
         </tr>
         <tbody>
             <?php if(!empty($rows)): ?>

@@ -15,8 +15,8 @@
 
 
                 <th>
-                <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/add">
-                    <button class="btn btn-bd-primary btn-sm">
+                <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/add">
+                    <button type="button" class="btn btn-bd-primary btn-sm">
                         <i class="fa-solid fa-plus"></i>
                         Add New
                     </button>
@@ -58,13 +58,13 @@
 
                                 <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/edit/<?= $row->id ?>">
 
-                                    <button class="btn btn-warning btn-sm">
+                                    <button type="button" class="btn btn-warning btn-sm">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                         Edit
                                     </button>
                                 </a>
                                 <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/delete/<?= $row->id ?>">
-                                    <button class="btn btn-danger btn-sm">
+                                    <button type="button" class="btn btn-danger btn-sm">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                         Delete
                                     </button>

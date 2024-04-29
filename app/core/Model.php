@@ -124,6 +124,7 @@ class Model extends Database
         $query = trim($query, ", ");
         $query .= " where $id_column = :$id_column";
 
+        echo $query;
         $data[$id_column] = $id;
         $this->query($query, $data);
         return false;
@@ -132,6 +133,7 @@ class Model extends Database
     {
         $data[$id_column] = $id;
         $query = "delete from $this->table where $id_column = :$id_column";
+       
         $this->query($query, $data);
         return false;
     }

@@ -39,6 +39,15 @@ class User_role extends Model{
     //     ],
 
     // ];
+    protected $onUpdateValidationRules = [
+        "role" => [           
+            "required",
+            "unique",
+        ],
+      
+       
+
+    ];
     protected $onInsertValidationRules = [
         "role" => [           
             "required",
