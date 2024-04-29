@@ -35,8 +35,16 @@
                 style="width: 80px; height: 80px; object-fit:cover"
                 >            
             </td>
-                <td><?= ucfirst($row->gender) ?></td>
-                <!-- <td><?= $row->role ?></td> -->
+                <td><?= ucfirst($row->gender) ?>
+
+                <td><?php if(!empty($row->roles)):?>
+                <?php foreach($row->roles as $role):?>
+                    <div>
+                    <?= $role ?>
+                    </div>
+                <?php endforeach?>
+                <?php endif?>
+                </td>
                 <td><?= get_date($row->date_created)?></td>
                 <td><?= get_date($row->date_updated) ?></td>
                 <td>

@@ -18,6 +18,8 @@ foreach($postdata as $role_id=>$permission){
         
         $role_permission->query('update '. $vars['tables']['permissions_table'].' set disable=1');
         foreach($data as $id=>$permissions){
+           
+           
           
           foreach($permissions as $perm){           
                       

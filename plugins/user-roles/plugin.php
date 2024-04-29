@@ -130,7 +130,7 @@ add_filter('after_query', function ($data) {
 
         $role_permission = new \UserRoles\Role_permission;    
         foreach ($data['result'] as $key => $row) {
-            $permissions = $role_permission->where(['role_id'=>$row->id]);
+            $permissions = $role_permission->where(['role_id'=>$row->id,'disable'=>0]);
             if($permissions){
                 $data['result'][$key]->permissions = array_column($permissions,'permission');
             }

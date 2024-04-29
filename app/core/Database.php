@@ -98,7 +98,8 @@ class Database{
        
         
 
-        if(is_array($result) && count($result)>0){           
+        if(is_array($result) && count($result)>0){ 
+            dd($result);          
             return $result['result'];
         }
         return false;
