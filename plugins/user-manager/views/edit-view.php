@@ -35,6 +35,28 @@
           <option <?= old_selected('gender', 'female', $row->gender) ?> value="female">Female</option>
         </select>
       </div>
+      <div class="mb-3 col-md-12 border">
+        <h6>Roles</h6>
+      <div class="row g-2" >
+        <?php 
+        $query = "select * from user_roles";
+        $roles = $user_role->query($query);
+        ?>
+                                   
+                                    <?php if (!empty($roles)) : $num = 0; ?>
+                                        <?php foreach ($roles as $role) : $num++; ?>
+                                            <div class="form-check col-md-6" >
+                                           
+                                                <input <?= in_array($role,$row->permissions ?? []) ? ' checked ':''?> name="check_<?= $row->id ?>_<?= $num ?>" class="form-check-input" type="checkbox" value="<?= $role?>" id="check<?= $num ?><?= $row->id ?>">
+                                                <label class="form-check-label" for="check<?= $num ?><?= $row->id ?>" style="cursor:pointer;">
+                                                    <?= esc(str_replace("_", " ", $role)) ?>
+                                                </label>
+                                            </div>
+                                        <?php endforeach ?>
+                                    <?php endif ?>
+                                </div>
+
+      </div>
       <small class="text-danger m-2">(leave password empty to keep the old password)</small>
       <div class="col-md-6 mb-3">
         <label for="password" class="form-label"> Password</label>

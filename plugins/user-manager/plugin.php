@@ -93,10 +93,11 @@ add_action('basic-admin_main_content', function () {
         if ($id)
             $row = $users->first(['id' => $id]);
         if (URL(2) == 'add') {
+            $user_role = new \UserManager\User_role;
             require plugin_path('views/add-view.php');
         } else
         if (URL(2) == 'edit') {
-
+            $user_role = new \UserManager\User_role;
             require plugin_path('views/edit-view.php');
         } else
         if (URL(2) == 'view') {
@@ -124,16 +125,16 @@ add_filter('after_query', function ($data) {
             $role_map = new \UserManager\User_roles_map;    
             foreach ($data['result'] as $key => $row) {
                 $query = 'select * from user_roles where disable = 0 && id in (select role_id from user_roles_map where disable = 0 && user_id = :user_id)';
-                $roles = $role_map->query($query,['user_id',$row->id]);
+                $roles = $role_map->query($query,['user_id'=>$row->id]);            
                 
                 if($roles){
                     $data['result'][$key]->roles = array_column($roles,'role');
                 }
                 
             }
-            dd($data);
+            
           
         }    
-        dd($data);
+       
     return $data;
 });

@@ -100,7 +100,7 @@ add_action('basic-admin_main_content', function () {
             require plugin_path('views/add-role.php');
         } else
         if (URL(2) == 'edit') {
-
+            
             require plugin_path('views/edit-role.php');
         } else
         if (URL(2) == 'view') {

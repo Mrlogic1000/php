@@ -7,7 +7,7 @@
             <th>Last Name</th>
             <th>Image</th>
             <th>Gender</th>
-            <!-- <th>Roles</th> -->
+            <th>Roles</th>
             <th>Date Created</th>
             <th>Date Updated</th>
             <th>
@@ -36,11 +36,10 @@
                 >            
             </td>
                 <td><?= ucfirst($row->gender) ?>
-
                 <td><?php if(!empty($row->roles)):?>
                 <?php foreach($row->roles as $role):?>
                     <div>
-                    <?= $role ?>
+                   <i> <?= esc($role) ?></i>
                     </div>
                 <?php endforeach?>
                 <?php endif?>
