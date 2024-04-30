@@ -61,7 +61,8 @@ class User extends Model{
 protected $onUpdateValidationRules = [
         "email" => [            
             "required",
-            "email"
+            "email",
+            "unique",
         ],
         
        

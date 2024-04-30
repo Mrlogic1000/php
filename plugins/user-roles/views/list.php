@@ -50,7 +50,7 @@
                                                         <?= esc(str_replace("_", " ", $perm)) ?>
                                                     </label>
                                                 </div>
-                                                <div class="modal fade" id="staticBackdrop<?= $row->id ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <!-- <div class="modal fade" id="staticBackdrop<?= $row->id ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -68,7 +68,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
 
                                             <?php endforeach ?>
                                         <?php endif ?>
@@ -86,12 +86,12 @@
                                         </button>
                                     </a>
                                     <!-- Button trigger modal -->
-                                    <!-- <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/edit/<?= $row->id ?>"> -->
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?= $row->id ?>">
+                                    <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/delete/<?= $row->id ?>">
+                                        <button type="button" class="btn btn-primary">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                             Delete
                                         </button>
-                                    <!-- </a> -->
+                                    </a>
                                     <!-- Modal -->
 
                                     <!-- <button type="button" class="btn btn-danger btn-sm">

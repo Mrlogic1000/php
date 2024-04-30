@@ -34,11 +34,16 @@
           </button>
         </a>
         <button type="submit" class="btn btn-danger">
-          <i class="fa-solid fa-save"></i>Save
+          <i class="fa-solid fa-save"></i>Delete
 
         </button>
       </div>
+      <div class="alert alert-danger  col-md-12 m-4 ">
+    Are sure you want to delete these record?
+    </div>
     </form>
+   
+    
     <script type="text/javascript">
       let valid_image = true;
 

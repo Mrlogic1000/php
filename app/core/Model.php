@@ -123,8 +123,7 @@ class Model extends Database
 
         $query = trim($query, ", ");
         $query .= " where $id_column = :$id_column";
-
-        echo $query;
+       
         $data[$id_column] = $id;
         $this->query($query, $data);
         return false;
@@ -185,12 +184,7 @@ class Model extends Database
                                 $this->errors[$column] = ucfirst($column) . " should not be less than 8 characters";
                             }
                             break;
-
-                        case "confirm":
-                            if (trim($data[$column]) != $data['retype_password']) {
-                                $this->errors[$column] = ucfirst($column) . " do not match";
-                            }
-                            break;
+                       
 
                         case "alpha_numeric":
                             if (!preg_match("/^[a-zA-Z0-9]+$/", trim($data[$column]))) {
@@ -230,6 +224,7 @@ class Model extends Database
             }
         }
         if (empty($this->errors)) {
+            dd($this->errors);
             return true;
         }
         return false;

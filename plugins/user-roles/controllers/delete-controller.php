@@ -1,15 +1,11 @@
-<?php
-$postdata = $req->post() ?? '';
-
-if (!empty($postdata)) {   
-
-    $postdata['id'] = $row->id;
-   
-    if ($user_role->validate($postdata)) {                
-            $user_role->update($postdata['id'],$postdata);
-            message('Record created successfully');       
+<?php   
+ 
+    if ($row->id) {  
+        dd($row->id);              
+            $user_role->delete($row->id);
+            message('Record deleted successfully');
+            // redirect($vars['admin_route'] . '/' . $vars['plugin_route']);       
            
     } else {
         set_value('errors', $user_role->errors);
     }
-}

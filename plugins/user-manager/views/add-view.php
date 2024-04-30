@@ -9,7 +9,7 @@
       </label>
       <?php if (!empty($errors)) : ?>
         <div class="text-center text-primary">
-          <?= $errors['image'] ?>
+          <!-- <?= $errors['image'] ?> -->
         </div>
       <?php endif ?>
       <div class="col-md-6 mb-3">
@@ -42,25 +42,25 @@
         
         ?>
                                    
-                                    <?php if (!empty($roles)) : $num = 0; ?>
-                                        <?php foreach ($roles as $role) : $num++; ?>
-                                       
-                                            <div class="form-check col-md-6" >                                           
-                                                <input name="check_<?= $num ?>" class="form-check-input" type="checkbox" value="" id="check<?= $num ?>">
-                                                <label class="form-check-label" for="check<?= $num ?>" style="cursor:pointer;">
-                                                    <?= esc($role->role) ?>
-                                                    
-                                                </label>
-                                            </div>
-                                        <?php endforeach ?>
-                                    <?php endif ?>
-                                </div>
+                    <?php if (!empty($roles)) : $num = 0; ?>
+                        <?php foreach ($roles as $role) : $num++; ?>
+                        
+                            <div class="form-check col-md-6" >                                           
+                                <input name="role_<?= $num ?>" class="form-check-input" type="checkbox" value=" <?= esc($role->id) ?>" id="role<?= $num ?>">
+                                <label class="form-check-label" for="role<?= $num ?>" style="cursor:pointer;">
+                                    <?= esc($role->role) ?>
+                                    
+                                </label>
+                            </div>
+                        <?php endforeach ?>
+                    <?php endif ?>
+                </div>
 
       </div>
       <div class="col-md-6 mb-3">
         <label for="password" class="form-label"> Password</label>
         <input type="password" name="password" value="<?= old_value('password', '') ?>" class="form-control" placeholder="Password" aria-label="password" aria-describedby="addon-wrapping">
-        <?php if (!empty($errors)) : ?>
+        <?php if (!empty($errors['password'] )) : ?>
           <div class="text-center text-primary">
             <?= $errors['password'] ?>
           </div>
@@ -68,7 +68,7 @@
       </div>
       <div class="col-md-6 mb-3">
         <label for="retype-password" class="form-label">Retype Password</label>
-        <input type="password" name="retype_password" value="<?= old_value('retype-password', '') ?>" class="form-control" placeholder="Retype Password" aria-label="retype-password" aria-describedby="addon-wrapping">
+        <input type="password" name="retype-password" value="<?= old_value('retype-password', '') ?>" class="form-control" placeholder="Retype Password" aria-label="retype-password" aria-describedby="addon-wrapping">
       </div>
       <div class="d-flex justify-content-between">
         <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>">
