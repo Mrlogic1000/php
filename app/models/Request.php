@@ -29,6 +29,7 @@ class Request
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             return true;
         }
+        
         return false;
     }
     public function post(string $key = '', mixed $default = ''): mixed
