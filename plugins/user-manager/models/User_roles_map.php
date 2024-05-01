@@ -8,7 +8,7 @@ defined('ROOT') OR exit("Access Denied");
 use \Model\Model;
 class User_roles_map extends Model{
 
-    protected $table = 'user_roles_maps';
+    protected $table = 'user_roles_map';
     protected $allowColumns = [
         'role_id',
         'user_id',

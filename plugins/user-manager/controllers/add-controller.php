@@ -40,49 +40,38 @@ if (!empty($postdata)) {
     if ($file_ok && $user->validate($postdata)) {        
         $postdata['password'] = password_hash($postdata['password'], PASSWORD_DEFAULT);
         $postdata['date_created'] = date('Y-m-d H:i:s');
-        // $user->insert($postdata);
+        $user->insert($postdata);
+
         if (!empty($postdata['image']) && file_exists($row->image)) {
-            // unlink($row->image);
+            unlink($row->image);
+        }
 
             $data = [];
-foreach($postdata as $id=>$role_id){
-    
+            $role_map = new \UserManager\User_roles_map;
+            foreach($postdata as $id=>$role){   
 
-    if(!strstr($role_id,"role_")){
-        continue;
-    }    
-           
-            $data[] = $role_id;
-            dd($data);
-            die;
-           
-        }
+                if(!strstr($id,"role_")){
+                    continue;
+                }               
+                        $data[] = $role;                    
+                    
+                    }
+                    dd($data);
+                    foreach($data as $id=>$role_id){            
+                           
+                        $role_map->insert([
+                                'role_id'=>$role_id,
+                                'user_id'=>$user->inserted_id,
+                                'disable'=>0,
+                        ]);
+                        
+                        
+
+                    
+                    
+                    }
         
-        $role_permission->query('update '. $vars['tables']['permissions_table'].' set disable=1');
-        foreach($data as $id=>$permissions){
-           
-           
-          
-          foreach($permissions as $perm){           
-                      
-              $row = $role_permission->first(['role_id'=>$id,'permission'=>$perm]);              
-              if($row){                 
-                  $role_permission->update($row->id,['disable'=>0]);
-              }else{
-                
-                  $role_permission->insert([
-                      'role_id'=>$id,
-                      'permission'=>$perm,
-                      'disable'=>0,
-              ]);
-              
-              }
-
-          }
-          
-        }
-        }
-       
+       dd($role_map->sql_error);
 
         message('Record updated successfully');
     } else {

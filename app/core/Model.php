@@ -100,6 +100,7 @@ class Model extends Database
         }
         $keys = array_keys($data);
         $query = "insert into $this->table(" . implode(',', $keys) . ") values(:" . implode(", :", $keys) . ")";
+        echo $query;
         $this->query($query, $data);       
         return false;
     }
