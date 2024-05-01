@@ -1,7 +1,6 @@
 <?php   
  
-    if ($row->id) {  
-        dd($row->id);              
+    if ($row->id) {                     
             $user_role->delete($row->id);
             message('Record deleted successfully');
             // redirect($vars['admin_route'] . '/' . $vars['plugin_route']);       

@@ -3,26 +3,34 @@
     <form onsubmit="submit_forms(event)" class="row g3 col-md-5 mx-auto shadow p-3 " method="post" enctype="multipart/form-data">
       <?= csrf() ?>
       <h4 class="my-3">Edit Record</h4>
+      <?php if(!empty($errors)): ?>
+        <h6>Errors</h6>
+      <?php foreach($errors as $error): ?>
+        <div class="text-danger">
+        <?= $error ?>
+        </div>
+        <?php endforeach ?>
+        <?php endif ?>
       <label class="text-center">
         <img src="<?= get_image() ?>" class="img img-thumbnail my-3" style="cursor:pointer; height:100px; width: 100px; object-fit:cover" alt="">
         <input type="file" onchange="display_image(event)" name="image" id="" class="d-none">
       </label>
-      <?php if (!empty($errors)) : ?>
-        <div class="text-center text-primary">
-          <!-- <?= $errors['image'] ?> -->
-        </div>
-      <?php endif ?>
+     
       <div class="col-md-6 mb-3">
         <label for="first_name" class="form-label"> First Name</label>
         <input type="text" name="first_name" value="<?= old_value('first_name') ?>" class="form-control" placeholder="First Name" aria-label="Username" aria-describedby="addon-wrapping">
       </div>
+      
       <div class="col-md-6 mb-3">
         <label for="email" class="form-label"> Last Name</label>
         <input type="text" name="last_name" value="<?= old_value('last_name') ?>" class="form-control" placeholder="First Name" aria-label="Username" aria-describedby="addon-wrapping">
+        
       </div>
       <div class="col-md-6 mb-3">
         <label for="email" class="form-label"> Email</label>
         <input type="email" name="email" value="<?= old_value('email') ?>" class="form-control" placeholder="email" aria-label="email" aria-describedby="addon-wrapping">
+       
+         
       </div>
 
       <div class="mb-3 col-md-6">
