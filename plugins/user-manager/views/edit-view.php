@@ -57,9 +57,11 @@
                                         <?php foreach ($roles as $role) : $num++; ?>
                                        
                                             <div class="form-check col-md-6" >                                           
-                                                <input <?= in_array($role->role,$row->roles ?? []) ? ' checked ':''?> name="role_<?= $row->id ?>_<?= $num ?>" class="form-check-input" type="checkbox" value="<?= $role->id?>" id="role<?= $num ?><?= $row->id ?>">
+                                                <input <?= in_array($role->id,$row->role_ids ?? []) ? ' checked ':''?> name="role_<?= $row->id ?>_<?= $num ?>" class="form-check-input" type="checkbox" value="<?= $role->id?>" id="role<?= $num ?><?= $row->id ?>">
                                                 <label class="form-check-label" for="role<?= $num ?><?= $row->id ?>" style="cursor:pointer;">
                                                     <?= esc($role->role) ?>
+                                                    
+                                                    
                                                     
                                                 </label>
                                             </div>
@@ -139,7 +141,7 @@
 
 <?php else: ?>
     <div class="alert alert-danger text-center">
-        Access denied! Please contact admin to view this page
+        Access denied! You have to login as an admin before you can view this page
     </div>
 
 <?php endif ?>

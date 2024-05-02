@@ -40,18 +40,20 @@ return $permissions;
 
 
 //  set user permission for these plugin
-add_filter('basic-admin_before_admin_links', function ($links) {
-    $vars = get_value();
-
-    $obj = (object)[];
-    $obj->title = 'Users';
-    $obj->link = ROOT . '/' . $vars['admin_route'] . '/' . $vars['plugin_route'];
-    $obj->icon = 'fa-solid fa-users';
-    $obj->parent = 0;
-    $links[] = $obj;
-
-    return $links;
-});
+if(user_can('view_users')){
+    add_filter('basic-admin_before_admin_links', function ($links) {
+        $vars = get_value();
+    
+        $obj = (object)[];
+        $obj->title = 'Users';
+        $obj->link = ROOT . '/' . $vars['admin_route'] . '/' . $vars['plugin_route'];
+        $obj->icon = 'fa-solid fa-users';
+        $obj->parent = 0;
+        $links[] = $obj;
+    
+        return $links;
+    });
+}
 
 
 add_action('controller', function () {
@@ -91,12 +93,15 @@ add_action('basic-admin_main_content', function () {
     if (URL(1) == $vars['plugin_route']) {
         $id = URL(3) ?? null;
         if ($id)
+           { 
+            $users::$query_id = 'get-users';
             $row = $users->first(['id' => $id]);
+        }
         if (URL(2) == 'add') {
             $user_role = new \UserManager\User_role;
             require plugin_path('views/add-view.php');
         } else
-        if (URL(2) == 'edit') {
+        if (URL(2) == 'edit') {           
             $user_role = new \UserManager\User_role;
             require plugin_path('views/edit-view.php');
         } else
@@ -130,7 +135,11 @@ add_filter('after_query', function ($data) {
                 if($roles){
                     $data['result'][$key]->roles = array_column($roles,'role');
                 }
-                
+                $user_roles_map = new \UserManager\User_roles_map;
+                $role_ids = $user_roles_map->where(['user_id'=>$row->id,'disable'=>0]);
+                if($role_ids){
+                    $data['result'][$key]->role_ids = array_column($role_ids,'role_id');
+                }
             }
             
           

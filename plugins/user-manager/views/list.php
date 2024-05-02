@@ -11,12 +11,13 @@
             <th>Date Created</th>
             <th>Date Updated</th>
             <th>
+            <?php if(user_can('view_user')):?>
             <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/add">
-
                 <button class="btn btn-bd-primary btn-sm">
                     <i class="fa-solid fa-plus"></i>
                     Add New</button>
             </a>
+            <?php endif?>
             </th>
 
         </tr>
@@ -52,12 +53,15 @@
                 <td><?= get_date($row->date_created)?></td>
                 <td><?= get_date($row->date_updated) ?></td>
                 <td>
+                <?php if(user_can('view_user_detail')):?>
                     <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/view/<?= $row->id ?>">
                     <button class="btn btn-primary btn-sm">
                         <i class="fa-solid fa-eye"></i>
                         view
                     </button>
                 </a>
+                <?php endif?>
+                <?php if(user_can('edit_user')):?>
                 <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/edit/<?= $row->id ?>">
 
                     <button class="btn btn-warning btn-sm">
@@ -65,12 +69,15 @@
                         Edit
                     </button>
                 </a>
+                <?php endif?>
+                <?php if(user_can('delete_user')):?>
                 <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/delete/<?= $row->id ?>">
                     <button class="btn btn-danger btn-sm">
                         <i class="fa-solid fa-pen-to-square"></i>
                         Delete
                     </button>
                 </a>
+                <?php endif?>
                 </td>
             </tr>
             <?php endforeach ?>

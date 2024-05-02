@@ -37,18 +37,19 @@ add_filter('permissions', function ($permissions) {
 
 
 //  set user permission for these plugin
-add_filter('basic-admin_before_admin_links', function ($links) {
-    $vars = get_value();
-
-    $obj = (object)[];
-    $obj->title = 'User Roles';
-    $obj->link = ROOT . '/' . $vars['admin_route'] . '/' . $vars['plugin_route'];
-    $obj->icon = 'fa-solid fa-unlock';
-    $obj->parent = 0;
-    $links[] = $obj;
-
-    return $links;
-});
+if(user_can('view_roles')){
+    add_filter('basic-admin_before_admin_links', function ($links) {
+        $vars = get_value();
+        $obj = (object)[];
+        $obj->title = 'User Roles';
+        $obj->link = ROOT . '/' . $vars['admin_route'] . '/' . $vars['plugin_route'];
+        $obj->icon = 'fa-solid fa-unlock';
+        $obj->parent = 0;
+        $links[] = $obj;
+    
+        return $links;
+    });
+}
 
 
 add_action('controller', function () {
