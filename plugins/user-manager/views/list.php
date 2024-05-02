@@ -39,7 +39,8 @@
                 style="width: 80px; height: 80px; object-fit:cover"
                 >            
             </td>
-                <td><?= ucfirst($row->gender) ?>
+                <td><?= ucfirst($row->gender) ?></td>
+                
                 <td><?php if(!empty($row->roles)):?>
                 <?php foreach($row->roles as $role):?>
                     <div>

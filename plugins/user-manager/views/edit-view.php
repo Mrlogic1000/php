@@ -5,11 +5,19 @@
     <form onsubmit="submit_forms(event)" class="row g3 col-md-5 mx-auto shadow p-3 " method="post" enctype="multipart/form-data">
       <?= csrf() ?>
       <h4 class="my-3">Edit Record</h4>
+      <?php if(!empty($errors)): ?>
+        <h6>Errors</h6>
+      <?php foreach($errors as $error): ?>
+        <div class="text-danger">
+        <?= $error ?>
+        </div>
+        <?php endforeach ?>
+        <?php endif ?>
       <label class="text-center">
         <img src="<?= get_image($row->image) ?>" class="img img-thumbnail my-3" style="cursor:pointer; height:100px; width: 100px; object-fit:cover" alt="">
         <input type="file" onchange="display_image(event)" name="image" id="" class="d-none">
       </label>
-      <?php if (!empty($errors)) : ?>
+      <?php if (!empty($errors['image'])) : ?>
         <div class="text-center text-primary">
           <?= $errors['image'] ?>
         </div>
@@ -49,8 +57,8 @@
                                         <?php foreach ($roles as $role) : $num++; ?>
                                        
                                             <div class="form-check col-md-6" >                                           
-                                                <input <?= in_array($role->role,$row->roles ?? []) ? ' checked ':''?> name="check_<?= $row->id ?>_<?= $num ?>" class="form-check-input" type="checkbox" value="<?= $role->role?>" id="check<?= $num ?><?= $row->id ?>">
-                                                <label class="form-check-label" for="check<?= $num ?><?= $row->id ?>" style="cursor:pointer;">
+                                                <input <?= in_array($role->role,$row->roles ?? []) ? ' checked ':''?> name="role_<?= $row->id ?>_<?= $num ?>" class="form-check-input" type="checkbox" value="<?= $role->id?>" id="role<?= $num ?><?= $row->id ?>">
+                                                <label class="form-check-label" for="role<?= $num ?><?= $row->id ?>" style="cursor:pointer;">
                                                     <?= esc($role->role) ?>
                                                     
                                                 </label>
@@ -64,7 +72,7 @@
       <div class="col-md-6 mb-3">
         <label for="password" class="form-label"> Password</label>
         <input type="password" name="password" value="<?= old_value('password', '') ?>" class="form-control" placeholder="Password" aria-label="password" aria-describedby="addon-wrapping">
-        <?php if (!empty($errors)) : ?>
+        <?php if (!empty($errors['password'])) : ?>
           <div class="text-center text-primary">
             <?= $errors['password'] ?>
           </div>

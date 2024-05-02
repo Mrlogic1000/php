@@ -84,8 +84,7 @@ add_action('basic-admin_main_content', function () {
     $req = new \Core\Request;
     $users = new \UserManager\User;
     $vars = get_value();
-    $errors = $vars['errors'] ?? [];
-   
+    $errors = $vars['errors'] ?? [];   
     $admin_route = $vars['admin_route'];
     $plugin_route = $vars['plugin_route'];
 
