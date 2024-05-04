@@ -112,8 +112,20 @@ add_action('basic-admin_main_content', function () {
         if (URL(2) == 'delete') {
             require plugin_path('views/delete-view.php');
         } else {
+            $limit = 5;
+            $pager = new \Core\Pager($limit);
+            $offset = $pager->offset;
+            $users->limit = $limit;
+            $users->offset = $offset;
             $users::$query_id = 'get-users';
-            $rows = $users->findAll();
+            if(!empty($_GET['find'])){
+                $find = '%'. trim($_GET['find']) . '%';
+                $query = "select * from users where (first_name like :find || last_name like :find) limit $limit offset $offset";
+                $rows = $users->query($query,['find'=>$find]);
+            }else{
+
+                $rows = $users->findAll();
+            }
             require plugin_path('views/list.php');
         }
     }

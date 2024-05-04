@@ -1,5 +1,11 @@
 <?php if(user_can('view_users')): ?>
 <div class="table-responsive">
+
+<form class="input-group mb-3 mx-auto">  
+  <input type="text" name="find" value="<?= old_value('find','','get') ?>" class="form-control" aria-label="Amount (to the nearest dollar)">
+  <button class="input-group-text bg-primary text-white">Search</button>
+</form>
+
     <table class="table table-striped table-bordered">
         <tr>
             <th>#</th>
@@ -84,6 +90,7 @@
             <?php endif ?>
         </tbody>
     </table>
+    <?= $pager->display()?>
 </div>
 <?php else: ?>
     <div class="alert alert-danger text-center">

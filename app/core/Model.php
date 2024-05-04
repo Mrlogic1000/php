@@ -44,6 +44,7 @@ class Model extends Database
     public function findAll()
     {
         $query = "select * from $this->table";
+        $query .= " limit $this->limit offset $this->offset ";
         $result = $this->query($query);        
         return $result;
     }

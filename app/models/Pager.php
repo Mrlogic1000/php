@@ -67,11 +67,6 @@ class Pager{
 
         
     }
-    public function displayTailwind():string{
-
-    }
-    public function displayCustom():string{
-
-    }
+   
 
 }
