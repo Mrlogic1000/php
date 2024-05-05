@@ -10,8 +10,6 @@ if (!empty($row)) {
         $postdata['image'] = $req->upload_files('image');
     }
 
-// dd($postdata);
-// die;
     if (!empty($req->upload_errors)) {       
         $file_ok = false;        
         $user->errors['image'] = $req->upload_errors;
@@ -42,15 +40,18 @@ if (!empty($row)) {
             }
             $data[] = $role;
         }
+        // dd($data);
+        // die;
        
 
         $role_map->query('update ' . $vars['optional_table']['roles_map_table'] . ' set disable=1 where user_id = :user_id', ['user_id'=>$row->id]);       
         foreach ($data as $id => $role_id) {
             $row_data = $role_map->first(['role_id' => $role_id, 'user_id' => $row->id]);
+          
             if ( $row_data) {
-                // enable the permission
-              
-                $role_map->update($row->id, ['disable' => 0]);
+                // enable the permission  
+                $role_map->update($role_id, ['disable' => 0],'role_id');
+
             } else {
                 // create the permission if permission
                 $role_map->insert([
