@@ -74,8 +74,7 @@ add_action('controller', function () {
         if (URL(2) == 'edit') {          
             require plugin_path('controllers/edit-controller.php');
         } else
-        if (URL(2) == 'delete') {
-          
+        if (URL(2) == 'delete') {          
             require plugin_path('controllers/delete-controller.php');
         }
     }

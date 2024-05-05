@@ -224,8 +224,7 @@ class Model extends Database
                 }
             }
         }
-        if (empty($this->errors)) {
-            dd($this->errors);
+        if (empty($this->errors)) {        
             return true;
         }
         return false;

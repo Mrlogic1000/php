@@ -2,20 +2,6 @@
 
 $postdata = $req->post();
 
-// foreach($postdata as $id=>$role_id){
-    
-
-//     if(!strstr($id,"role_")){
-//         continue;
-//     }    
-           
-//             $data[] = $role_id;
-           
-            
-           
-//         }
-//         dd($data);
-//         die;
 if (!empty($postdata)) {
    
 
@@ -56,7 +42,7 @@ if (!empty($postdata)) {
                         $data[] = $role;                    
                     
                     }
-                    dd($data);
+                 
                     foreach($data as $id=>$role_id){            
                            
                         $role_map->insert([
@@ -71,7 +57,7 @@ if (!empty($postdata)) {
                     
                     }
         
-       dd($role_map->sql_error);
+     
 
         message('Record updated successfully');
     } else {

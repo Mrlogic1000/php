@@ -11,7 +11,7 @@ set_value([
     "logout_page" => "logout",
     "admin_plugin_route" => "admin",
     "tables" => [
-        'users_table'=>'users'
+        'users_table' => 'users'
     ],
     'optional_table' => [
         'users_table'               => 'users',
@@ -23,34 +23,32 @@ set_value([
 ]);
 $db = new \Core\Database;
 $tables = get_value()['tables'];
-if(!$db->table_exists($tables)){
-    dd('Missing database tables in '.plugin_id().' plugin : '. implode(',',$db->missing_table));
+if (!$db->table_exists($tables)) {
+    dd('Missing database tables in ' . plugin_id() . ' plugin : ' . implode(',', $db->missing_table));
     die;
 }
 
 add_filter('user_permissions', function ($permissions) {
     $ses = new \Core\Session;
-    if($ses->is_logged_in()){
+    if ($ses->is_logged_in()) {
         $vars = get_value();
         $db = new \Core\Database;
-        $query = "select * from ". $vars['optional_table']['roles_table'];
+        $query = "select * from " . $vars['optional_table']['roles_table'];
         $roles = $db->query($query);
-        
-        if(is_array($roles)){
+
+        if (is_array($roles)) {
             $user_id = $ses->user('id');
-            $query = " select permission from ".$vars['optional_table']['permissions_table'] ." where disable = 0 && role_id in  ( select role_id from ".
-            $vars['optional_table']['roles_map_table'] . " where disable = 0 && user_id = :user_id)";
-            $perms = $db->query($query,['user_id'=>$user_id]);
-            if($perms)
-            {               
-                $permissions = array_column($perms,'permission');
+            $query = " select permission from " . $vars['optional_table']['permissions_table'] . " where disable = 0 && role_id in  ( select role_id from " .
+                $vars['optional_table']['roles_map_table'] . " where disable = 0 && user_id = :user_id)";
+            $perms = $db->query($query, ['user_id' => $user_id]);
+            if ($perms) {
+                $permissions = array_column($perms, 'permission');
             }
-          
-        }else{
+        } else {
             $permissions[] = 'all';
         }
     }
-    
+
     return $permissions;
 });
 
@@ -71,25 +69,11 @@ add_action('controller', function () {
         require plugin_path('controllers/logout-controller.php');
 });
 
-// require plugin_path('controllers/logout-controller.php'); 
-
-// add_filter('basic-admin_before_admin_links', function ($links) 
-// {
-    
-//     $obj = (object)[];
-//     $obj->title = 'User';
-//     $obj->link = ROOT;
-//     $obj->icon = 'fa-solid fa-earth-africa';
-//     $obj->parent = 0;
-//     $links[] = $obj;
-
-//     return $links;
-// });
 
 
 
-add_filter('header-footer_before_menu_links', function ($links) 
-{
+
+add_filter('header-footer_before_menu_links', function ($links) {
     $ses = new \Core\Session;
     $vars = get_value();
     $link = (object)[];
@@ -157,9 +141,9 @@ add_action('view', function () {
     if (page() == $vars["login_page"])
         require plugin_path('views/login.php');
     else
-if (page() == $vars['signup_page'])
-        require plugin_path('views/signup.php');
-});
+    if (page() == $vars['signup_page'])
+            require plugin_path('views/signup.php');
+    });
 
 // for manipulate data ater query operation
 add_filter('after_query', function ($data) {
@@ -172,4 +156,3 @@ add_filter('after_query', function ($data) {
 
     return $data;
 });
-// dd(debug_backtrace());

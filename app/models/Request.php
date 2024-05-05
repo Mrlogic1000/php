@@ -88,7 +88,7 @@ class Request
         foreach ($filename as $i => $value) {
             # code...
             if(!empty($value)){
-                dd($value);
+              
                 $found = true;
                 break;
             }
