@@ -168,9 +168,10 @@
   </symbol>
 </svg>
 
-<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#"><?=APP_NAME?></a>
-
+<header class="navbar  sticky-top flex-md-nowrap p-0 " data-bs-theme="dark" style="height:60px;  color:white;">
+  <a class=" navbar-brand col-md-3 col-lg-2 me-0 px-4 fs-6 text-center text-white" href="#" style="height:60px;  background-color: #191C1F;  color:white;">
+  <?=APP_NAME?>
+</a>
   <ul class="navbar-nav flex-row d-md-none">
     <li class="nav-item text-nowrap">
       <button class="nav-link px-3 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false" aria-label="Toggle search">
@@ -183,6 +184,17 @@
       </button>
     </li>
   </ul>
+  <ul class="nav flex-row mb-auto">
+          <?php foreach($bottom_links as $link): ?>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="<?= $link->link?>">
+                <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg>
+                <i class="<?= $link->icon?>"></i>
+                <?= $link->title?>
+              </a>
+            </li>
+            <?php endforeach?>           
+          </ul>
 
   <div id="navbarSearch" class="navbar-search w-100 collapse">
     <input class="form-control w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
@@ -191,15 +203,12 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="sidebar border border-right col-md-3 col-lg-2 p-0 " style="background-color: #191C1F;  color:white;">
+    <div class="sidebar  col-md-3 col-lg-2 p-0 " style="background-color: #191C1F;  color:white; ">
       <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="sidebarMenuLabel"><?=APP_NAME?></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
-        </div>
+       
 
         <div class="offcanvas-body d-md-flex flex-column p-0  overflow-y-auto" style="background-color: #191C1F; color:white;">
-          <ul class="nav flex-column">
+          <ul class="nav flex-column" style="background-color: #191C1F;  color:white; padding-top:20px; ">
           <?php foreach($links as $link): ?>
             <li class="nav-item" style="background-color: #191C1F;" >
               <a class="nav-link d-flex align-items-center gap-2 active"  href="<?= $link->link?>" style="background-color: #191C1F; color:white;">

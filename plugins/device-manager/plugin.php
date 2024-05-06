@@ -6,7 +6,8 @@
  */
 
  set_value([
-    "plugin_route"=>"my_route",
+    "admin_route"=>"property",
+    "plugin_route"  => "devices",
     "table"=>"my_table",
 
  ]);
@@ -17,6 +18,16 @@ add_filter('permeissions',function($permissions){
     return $permissions;
 
 });
+add_filter('property-manager_before_property_links',function($links){
+    $vars = get_value();    
+    $obj = (object)[];    
+        $obj->title= 'Device';
+        $obj->link= ROOT.'/'.$vars['admin_route'].'/'.$vars['plugin_route'];
+        $obj->icon= 'fa-solid fa-gauge';
+        $obj->parent= 0;
+        $links[] = $obj;
+        return $links;
+});
 
 
 add_action('controller',function(){
@@ -25,9 +36,12 @@ require plugin_path('controllers/controller.php');
 });
 
 // display the view files
-add_action('view',function(){   
-    $var = get_value();
-require plugin_path('views/view.php');
+add_action('property-manager_main_content', function () {   
+    if(URL(1)=='devices'){
+
+        require plugin_path('views/device.php');
+    }
+    
 });
 
 // for manipulate data ater query operation

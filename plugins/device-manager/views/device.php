@@ -9,11 +9,13 @@
     <table class="table table-striped ">
         <tr>
            
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Image</th>
-            <th>Gender</th>
-            <th>Roles</th>
+            <th>Device</th>
+            <th>Type</th>
+            <th>SN</th>
+            <th>IP</th>
+            <th>MAC</th>
+            <th>Installation</th>
+            <th>Status</th>
             <th>Date Created</th>
             <th>Date Updated</th>
             <th>
