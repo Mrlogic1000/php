@@ -7,9 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>Dashboard Template · Bootstrap v5.3</title>
+    <title><?= APP_TITLE?></title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
+    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/"> -->
 
     
 
@@ -120,7 +120,7 @@
       </symbol>
     </svg>
 
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+    <!-- <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
       <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
               id="bd-theme"
               type="button"
@@ -153,7 +153,7 @@
           </button>
         </li>
       </ul>
-    </div>
+    </div> -->
 
     
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -191,18 +191,19 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+    <div class="sidebar border border-right col-md-3 col-lg-2 p-0 " style="background-color: #191C1F;  color:white;">
       <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="sidebarMenuLabel"><?=APP_NAME?></h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+
+        <div class="offcanvas-body d-md-flex flex-column p-0  overflow-y-auto" style="background-color: #191C1F; color:white;">
           <ul class="nav flex-column">
           <?php foreach($links as $link): ?>
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2 active"  href="<?= $link->link?>">
-                <!-- <svg class="bi"><use xlink:href="#house-fill"/></svg> -->
+            <li class="nav-item" style="background-color: #191C1F;" >
+              <a class="nav-link d-flex align-items-center gap-2 active"  href="<?= $link->link?>" style="background-color: #191C1F; color:white;">
+                <svg class="bi"><use xlink:href="#house-fill"/></svg>
                 <i class="<?= $link->icon?>"></i>
                 <?= $link->title?>
               </a>
@@ -212,21 +213,22 @@
             
           </ul>
 
-          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+          <!-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
            
             <a class="link-secondary" href="#" aria-label="Add a new report">
               <svg class="bi"><use xlink:href="#plus-circle"/></svg>
+              jjjjjjjjjjj
             </a>
-          </h6>
+          </h6> -->
          
 
-          <hr class="my-3">
+          <hr class="my-1">
 
-          <ul class="nav flex-column mb-auto">
+          <ul class="nav flex-column mb-auto" style="background-color: #191C1F;">
           <?php foreach($bottom_links as $link): ?>
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-2" href="<?= $link->link?>">
-                <!-- <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg> -->
+                <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg>
                 <i class="<?= $link->icon?>"></i>
                 <?= $link->title?>
               </a>

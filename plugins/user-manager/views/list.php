@@ -6,9 +6,9 @@
   <button class="input-group-text bg-primary text-white">Search</button>
 </form>
 
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped ">
         <tr>
-            <th>#</th>
+           
             <th>First Name</th>
             <th>Last Name</th>
             <th>Image</th>
@@ -31,7 +31,7 @@
             <?php if(!empty($rows)): ?>
             <?php foreach($rows as $row): ?>
             <tr>
-                <td>#</td>
+               
                 <td>
                 <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/view/<?= $row->id ?>">
                     <?= esc($row->first_name) ?>
@@ -43,8 +43,7 @@
                 </a>
                 </td>
                 <td><img src="<?= get_image($row->image) ?>" class="img-thumbnail" alt=""
-                style="width: 80px; height: 80px; object-fit:cover"
-                >            
+                style="width: 80px; height: 80px; object-fit:cover">            
             </td>
                 <td><?= ucfirst($row->gender) ?></td>
                 

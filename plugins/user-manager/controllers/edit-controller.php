@@ -4,10 +4,15 @@ if (!empty($row)) {
     $postdata = $req->post();
     $postdata['id'] = $row->id;
     $filedata = $req->files();   
+   
 
     $file_ok = true;
     if (!empty($filedata)) {       
         $postdata['image'] = $req->upload_files('image');
+    }
+  
+    if(empty($postdata['image'])){
+        unset($postdata['image']);
     }
 
     if (!empty($req->upload_errors)) {       
@@ -22,11 +27,11 @@ if (!empty($row)) {
     if ($file_ok && $user->validate($postdata)) {  
 
         if (isset($postdata['password']) && empty($postdata['password'])) {
-            unset($postdata['password']);
-        }
+            unset($postdata['password']);        }
 
         $postdata['date_updated'] = date('Y-m-d H:i:s');
         $user->update($postdata['id'], $postdata);
+
         if (!empty($postdata['image']) && file_exists($row->image)) {
             unlink($row->image);
         }
@@ -46,6 +51,7 @@ if (!empty($row)) {
 
         $role_map->query('update ' . $vars['optional_table']['roles_map_table'] . ' set disable=1 where user_id = :user_id', ['user_id'=>$row->id]);       
         foreach ($data as $id => $role_id) {
+            dd($role_id);
             $row_data = $role_map->first(['role_id' => $role_id, 'user_id' => $row->id]);
           
             if ( $row_data) {
