@@ -16,8 +16,9 @@
             <th>MAC</th>
             <th>Installation</th>
             <th>Status</th>
-            <th>Date Created</th>
-            <th>Date Updated</th>
+            <th>Action</th>
+            <!-- <th>Created</th>
+            <th>Updated</th> -->
             <th>
             <?php if(user_can('view_user')):?>
             <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/add">
@@ -35,30 +36,48 @@
             <tr>
                
                 <td>
-                <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/view/<?= $row->id ?>">
-                    <?= esc($row->first_name) ?>
-                </a>
+                    <?= esc($row->name) ?>
                 </td>
                 <td>
-                <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/view/<?= $row->id ?>">
-                    <?= $row->last_name ?>
-                </a>
+                    <?= $row->type ?>
+               
                 </td>
-                <td><img src="<?= get_image($row->image) ?>" class="img-thumbnail" alt=""
-                style="width: 80px; height: 80px; object-fit:cover">            
-            </td>
-                <td><?= ucfirst($row->gender) ?></td>
+                <td>
+                    <?= $row->sn?>
                 
-                <td><?php if(!empty($row->roles)):?>
+                </td>
+                <td>
+                    <?= $row->ip ?>
+                
+                </td>
+                <td>
+                    <?= $row->mac ?>
+                
+                </td>
+                
+                <td>
+                    <?= $row->installation ?>
+                
+                </td>
+                <td>
+                    <?= $row->status ?>
+                
+                </td>
+                <!-- <td><img src="<?= get_image($row->image) ?>" class="img-thumbnail" alt=""
+                style="width: 80px; height: 80px; object-fit:cover">            
+            </td> -->
+                <!-- <td><?= ucfirst($row->gender) ?></td> -->
+                
+                <!-- <td><?php if(!empty($row->roles)):?>
                 <?php foreach($row->roles as $role):?>
                     <div>
                    <i> <?= esc($role) ?></i>
                     </div>
                 <?php endforeach?>
                 <?php endif?>
-                </td>
-                <td><?= get_date($row->date_created)?></td>
-                <td><?= get_date($row->date_updated) ?></td>
+                </td> -->
+                <!-- <td><?= get_date($row->date_created)?></td>
+                <td><?= get_date($row->date_updated) ?></td> -->
                 <td>
                <div class="d-flex">
                <?php if(user_can('view_user_detail')):?>
@@ -93,7 +112,7 @@
             <?php endif ?>
         </tbody>
     </table>
-    <?= $pager->display()?>
+    <!-- <?= $pager->display()?> -->
 </div>
 <?php else: ?>
     <div class="alert alert-danger text-center">

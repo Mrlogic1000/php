@@ -36,11 +36,22 @@ require plugin_path('controllers/controller.php');
 });
 
 // display the view files
-add_action('property-manager_main_content', function () {   
-    if(URL(1)=='devices'){
+add_action('property-manager_main_content', function () { 
+    if(URL(1)=='devices'){  
+        if(URL(2)=='add'){
+            require plugin_path('views/add-device.php');
+        }else
+        if(URL(2)=='edit'){
 
-        require plugin_path('views/device.php');
-    }
+        }else{
+            $devices = new PropertyManager\Device;
+            $rows = $devices->findAll();
+            require plugin_path('views/device.php');
+
+        }
+    
+           
+        }
     
 });
 

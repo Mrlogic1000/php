@@ -11,7 +11,12 @@ class Device extends Migration{
     public function up(){
         $this->addColumn("id int auto_increment");
         $this->addColumn("name varchar(200) null");
-        $this->addColumn("column1 varchar(200) null");
+        $this->addColumn("sn varchar(200) null");
+        $this->addColumn("type varchar(200) null");
+        $this->addColumn("ip varchar(200) null");
+        $this->addColumn("mac varchar(200) null");
+        $this->addColumn("installation varchar(200) null");
+        $this->addColumn("status varchar(200) null");
         $this->addColumn("deleted tinyint(1) unsigned default 0");
         $this->addColumn("date_created datetime default null");
         $this->addColumn("date_updated datetime default null");
@@ -21,7 +26,7 @@ class Device extends Migration{
         $this->addKey('deleted');
         $this->addKey('date_created');
         $this->addKey('date_deleted');
-        $this->createTable('device');
+        $this->createTable('devices');
             /**
              * +++++++++++++++++++++++++++++++++++++++++++++++++
              * +++++ More function in the Migration class ++++++
@@ -31,10 +36,20 @@ class Device extends Migration{
              * addUniqueKey(unique_name)
              * insertData('device')
              */
+            $this->addData(['name'=>'Router']);
+            $this->addData(['sn'=>'D20KD-I839']);
+            $this->addData(['type'=>'Network']);
+            $this->addData(['ip'=>'192.168.1.100']);
+            $this->addData(['mac'=>'D8.F5:A9:0D:A9:0D']);
+            $this->addData(['installation'=>'Server Room']);
+            $this->addData(['status'=>date('Y-m-d H:i:s')]);
+            $this->addData(['date_created'=>date('Y-m-d H:i:s')]);
+            $this->addData(['date_updated'=>date('Y-m-d H:i:s')]);
+            $this->insertData('devices');
     }
 
     public function down(){
-        $this->dropTable('device');
+        $this->dropTable('devices');
     }
 
 }

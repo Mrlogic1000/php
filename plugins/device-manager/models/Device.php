@@ -1,5 +1,5 @@
 <?php
-namespace DeviceManager;
+namespace PropertyManager;
 defined('ROOT') OR exit("Access Denied");
 
 /**
