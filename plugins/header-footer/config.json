@@ -9,7 +9,7 @@
     "index":3,
     "routes":{
         "on":["all"],
-        "off":["admin","property"]
+        "off":["admin","asset"]
     },
     "dependencies":{
 

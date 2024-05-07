@@ -1,7 +1,7 @@
 <?php
-namespace Thunder;
+namespace Logic;
 defined('FCPATH') OR exit("Access Denied");
-class Thunder
+class Logic
 {
     public function make(array $args){
         $action         = $args[1] ?? null;
@@ -53,7 +53,7 @@ class Thunder
         mkdir($module_folder,0777,true);
 
 
-        $sample_folder = "app/thunder/samples/";
+        $sample_folder = "app/logic/samples/";
         // copy 
         // plugin files
         $plugins_file = $folder. "/plugin.php";
@@ -139,7 +139,7 @@ class Thunder
                 if(!file_exists($migration_folder))
                     mkdir($migration_folder,0777,true);
 
-                $file_sample = "app/thunder/samples/migration-sample.php";
+                $file_sample = "app/logic/samples/migration-sample.php";
 
                 if(!file_exists($file_sample))
                     $this->message("sample file is not found in the ".$file_sample,true);
@@ -182,7 +182,7 @@ class Thunder
                 if(!file_exists($model_folder))
                     mkdir($model_folder,0777,true);
 
-                $file_sample = "app/thunder/samples/model-sample.php";
+                $file_sample = "app/logic/samples/model-sample.php";
 
                 if(!file_exists($file_sample))
                     $this->message("sample file is not found in the ".$file_sample,true);
@@ -288,8 +288,8 @@ class Thunder
 
             }else
                 if($action=='migrate:refresh'){
-                    $this->migrate(['thunder', 'migrate:rollback',$folder,$file_name]);
-                    $this->migrate(['thunder', 'migrate',$folder,$file_name]);
+                    $this->migrate(['logic', 'migrate:rollback',$folder,$file_name]);
+                    $this->migrate(['logic', 'migrate',$folder,$file_name]);
                     
                 }           
             
@@ -304,7 +304,7 @@ class Thunder
     {
         $version = is_array($version) ? $version[0] : $version;
         echo "
-        Thunder v$version Command Line Tool
+        Logic v$version Command Line Tool
         Database       
         migrate............Locates and runs a migration from the specified plugin floder.
         migrate:refresh....Does  refresh (run down and up) the current state of the database.

@@ -8,7 +8,7 @@
     "active":true,
     "index":1,
     "routes":{
-        "on":["property"],
+        "on":["asset"],
         "off":[]
     },
     "dependencies":{

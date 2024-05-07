@@ -11,22 +11,21 @@
            
             <th>Device</th>
             <th>Type</th>
-            <th>SN</th>
             <th>IP</th>
             <th>MAC</th>
-            <th>Installation</th>
+            <th>Installed</th>
             <th>Status</th>
-            <th>Action</th>
-            <!-- <th>Created</th>
-            <th>Updated</th> -->
+            <th>Report</th>
+            <th>Task</th>
+            
             <th>
-            <?php if(user_can('view_user')):?>
-            <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/add">
+            
+            <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/add">
                 <button class="btn btn-bd-primary btn-sm">
                     <i class="fa-solid fa-plus"></i>
                     Add New</button>
             </a>
-            <?php endif?>
+          
             </th>
 
         </tr>
@@ -42,10 +41,7 @@
                     <?= $row->type ?>
                
                 </td>
-                <td>
-                    <?= $row->sn?>
-                
-                </td>
+               
                 <td>
                     <?= $row->ip ?>
                 
@@ -56,11 +52,19 @@
                 </td>
                 
                 <td>
-                    <?= $row->installation ?>
+                    <?= $row->installed ?>
                 
                 </td>
                 <td>
                     <?= $row->status ?>
+                
+                </td>
+                <td>
+                    No
+                
+                </td>
+                <td>
+                    No
                 
                 </td>
                 <!-- <td><img src="<?= get_image($row->image) ?>" class="img-thumbnail" alt=""

@@ -95,6 +95,19 @@
       .bd-mode-toggle .dropdown-menu .active .bi {
         display: block !important;
       }
+      /* ---------------------- */
+      .mylink{
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: #191C1F;
+        padding: 5px;
+      }
+
+      .active{
+        color: #191C1F;
+        border-bottom: #191C1F 3px solid;
+      }
     </style>
 
     
@@ -184,22 +197,24 @@
       </button>
     </li>
   </ul>
-  <ul class="nav flex-row mb-auto">
+  <div class="nav flex-row mb-auto">
           <?php foreach($bottom_links as $link): ?>
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="<?= $link->link?>">
-                <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg>
+            <div>
+              <a class="link-primary d-flex align-items-center text-center text-dark m-1 p-1 gap-2" href="<?= $link->link?>" style="text-decoration: none; ">
+                <!-- <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg> -->
                 <i class="<?= $link->icon?>"></i>
                 <?= $link->title?>
               </a>
-            </li>
+            </div>
             <?php endforeach?>           
-          </ul>
+          </div>
 
   <div id="navbarSearch" class="navbar-search w-100 collapse">
     <input class="form-control w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
   </div>
 </header>
+
+
 
 <div class="container-fluid">
   <div class="row">
@@ -237,9 +252,25 @@
     </div>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h3"><?= esc($section_title)?></h1>       
       </div>
+     <?php if(!empty($sub_links)):?>
+     
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light my-2">
+      <?php foreach($sub_links as $link):?>
+      
+        <div>
+          <a class="mylink <?= $link->active ? 'active':'' ?>" href="<?= $link->link ?>" ><?= $link->title ?></a>
+        </div>
+      <?php endforeach?>
+  </nav>
+
+     <?php endif?>
+ 
+
       <?php if(!empty(message())):?>
       <div class="alert alert-danger text-center">
         <?= message('',true)?>

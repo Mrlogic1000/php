@@ -1,6 +1,6 @@
 
 <div class="row mx-auto  ">
-    <form onsubmit="submit_forms(event)" class="row g3 col-md-5 mx-auto shadow p-3 " method="post" enctype="multipart/form-data">
+    <form class="row g3 col-md-5 mx-auto shadow p-3 " method="post" >
       <?= csrf() ?>
       <h4 class="my-3">Add New Device</h4>
       <?php if(!empty($errors)): ?>
@@ -43,16 +43,16 @@
         <label for="gender" class="form-label">Status</label>
         <select name="status" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
           <option selected>Select status</option>
-          <option <?= old_selected('status', '1') ?> value="1">Good</option>
-          <option <?= old_selected('status', '0') ?> value="0">Fauty</option>
+          <option <?= old_selected('status', '0') ?> value="0">Good</option>
+          <option <?= old_selected('status', '1') ?> value="1">Fauty</option>
         </select>
       </div>
       <div class="mb-3 ">
         <label for="install" class="form-label">Installation</label>
-        <select name="status" class="form-select form-select-sm mb-3" aria-label=".install">
+        <select name="installed" class="form-select form-select-sm mb-3" aria-label=".install">
           <option selected>Installed?</option>
-          <option <?= old_selected('install', '1') ?> value="1">Yes</option>
-          <option <?= old_selected('install', '0') ?> value="0">No</option>
+          <option <?= old_selected('install', '0') ?> value="0">Yes</option>
+          <option <?= old_selected('install', '1') ?> value="1">No</option>
         </select>
       </div>
       <div class="mb-3">

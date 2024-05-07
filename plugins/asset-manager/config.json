@@ -1,14 +1,14 @@
 {
-    "name":"Property Manager",
+    "name":"Asset Manager",
     "version":"1.0.0",
-    "id":"property-manager",
+    "id":"asset-manager",
     "author":"",
     "author website":"",
     "thumbnail":"thumbnail.jpg",
     "active":true,
     "index":1,
     "routes":{
-        "on":["property"],
+        "on":["asset"],
         "off":[]
     },
     "dependencies":{

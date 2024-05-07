@@ -8,6 +8,7 @@
     set_value([
         "plugin_route"=>"admin",
         "logout_page"=>"logout",
+        "admin_page"=>"asset",
     
 
     ]);
@@ -61,11 +62,21 @@
             $bottom_links[] = $obj;
 
             $obj = (object)[];
-            $obj->title= 'Logout';
-            $obj->link= ROOT.'/'.$vars['logout_page'];
-            $obj->icon= 'fa-solid fa-right-from-bracket';
+            $obj->title= 'asset';
+            $obj->link= ROOT.'/'.$vars['admin_page'];
+            $obj->icon= '';
             $obj->parent= 0;
             $bottom_links[] = $obj;
+
+            $obj = (object)[];
+            $obj->title= 'Logout';
+            $obj->link= ROOT.'/'.$vars['logout_page'];
+            $obj->icon= '';
+            $obj->parent= 0;
+            $bottom_links[] = $obj;
+
+
+           
          
     
     require plugin_path('views/view.php');

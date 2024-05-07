@@ -10,7 +10,7 @@ set_value([
     "login_page" => "login",
     "logout_page" => "logout",
     "admin_plugin_route" => "admin",
-    "property_plugin_route" => "property",
+    "asset_plugin_route" => "asset",
     "tables" => [
         'users_table' => 'users'
     ],
@@ -96,8 +96,8 @@ add_filter('header-footer_before_menu_links', function ($links) {
     
     $link = (object)[];
     $link->id = 0;
-    $link->title = 'Propety';
-    $link->slug = $vars['property_plugin_route'];
+    $link->title = 'Asset';
+    $link->slug = $vars['asset_plugin_route'];
     $link->icon = '';
     $link->permission =  'logged_in';
     $links[] = $link;

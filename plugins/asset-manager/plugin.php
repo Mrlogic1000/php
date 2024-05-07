@@ -6,8 +6,9 @@
  */
 
 set_value([
-    "plugin_route"=>"property",
+    "plugin_route"=>"asset",
     "logout_page"=>"logout",
+    "admin_page"=>"admin",
 
 
 ]);
@@ -51,27 +52,34 @@ add_action('view',function(){
         $obj->parent= 0;
         $links[] = $obj;
 
+    // $sub_links = [];
+    $sub_links = do_filter(plugin_id().'_before_sub_links', []);
 
-
-
-
-    $links = do_filter(plugin_id().'_before_property_links',$links);
+    $links = do_filter(plugin_id().'_before_asset_links',$links);
 
     $bottom_links = [];
     $obj = (object)[];    
         $obj->title= 'Website Home';
         $obj->link= ROOT;
-        $obj->icon= 'fa-solid fa-earth-africa';
+        $obj->icon= '';
+        $obj->parent= 0;
+        $bottom_links[] = $obj;
+
+       
+        
+        $obj = (object)[];
+        $obj->title= 'Admin';
+        $obj->link= ROOT.'/'.$vars['admin_page'];
+        $obj->icon= '';
         $obj->parent= 0;
         $bottom_links[] = $obj;
 
         $obj = (object)[];
         $obj->title= 'Logout';
         $obj->link= ROOT.'/'.$vars['logout_page'];
-        $obj->icon= 'fa-solid fa-right-from-bracket';
+        $obj->icon= '';
         $obj->parent= 0;
         $bottom_links[] = $obj;
-     
 
 require plugin_path('views/view.php');
 });

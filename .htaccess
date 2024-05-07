@@ -1,9 +1,9 @@
 Options -Indexes
 RewriteEngine On
 
-#deny access to thunder CLI file
-RewriteRule ^(thunder)$ index.php?url=$1 [L,QSA]
-RewriteRule ^(thunder/) index.php?url=$1 [L,QSA]
+#deny access to logic CLI file
+RewriteRule ^(logic)$ index.php?url=$1 [L,QSA]
+RewriteRule ^(logic/) index.php?url=$1 [L,QSA]
 
 #accept loading of actual files and directories
 RewriteCond %{REQUEST_FILENAME} !-f

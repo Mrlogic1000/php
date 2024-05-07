@@ -7,7 +7,7 @@ if(PHP_SAPI != 'cli')
  die("This can only run in command line interface");
 define('FCPATH',__DIR__.DIRECTORY_SEPARATOR);
 chdir(FCPATH);
-require FCPATH. "app/thunder/init.php";
+require FCPATH. "app/logic/init.php";
 
 $action = $argv[1] ?? '';
 $action = explode(':',$action);
@@ -16,12 +16,12 @@ $action = $action[0];
 // echo $action;
 
 
-$thunder = new \Thunder\Thunder;
+$logic = new \Logic\Logic;
 if(empty($action)){
-    call_user_func_array([$thunder,'help'],[$VERSION]);
+    call_user_func_array([$logic,'help'],[$VERSION]);
 }else{
-    if(is_callable([$thunder,$action])){
-        call_user_func_array([$thunder,$action],[$argv]);
+    if(is_callable([$logic,$action])){
+        call_user_func_array([$logic,$action],[$argv]);
     }else{
         echo "\n\rhere  Unknow command $action \n\r";
     }
