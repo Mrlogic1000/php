@@ -1,5 +1,15 @@
 
 <div class="row mx-auto  ">
+<?php if(!empty($errors)): ?>
+    
+<?php foreach($errors as $error): ?>
+  <div class="alert alert-success">
+    <?= $error ?>
+    </div>
+  <?php endforeach ?>
+  <?php endif ?>
+
+
     <form class="row g3 col-md-5 mx-auto shadow p-3 " method="post" >
       <?= csrf() ?>
       <h4 class="my-3">Add New Device</h4>
@@ -13,8 +23,8 @@
         <?php endif ?>
      
       <div class="col-md-6 mb-3">
-        <label for="device_name" class="form-label">Device Name</label>
-        <input type="text" name="device_name" value="<?= old_value('device_namee') ?>" class="form-control" placeholder="Device Name" aria-label="Username" aria-describedby="addon-wrapping">
+        <label for="name" class="form-label">Device Name</label>
+        <input type="text" name="name" value="<?= old_value('name') ?>" class="form-control" placeholder="Device Name" aria-label="Username" aria-describedby="addon-wrapping">
       </div>
       
       <div class="col-md-6 mb-3">
@@ -42,22 +52,24 @@
       <div class="mb-3 col-md-6">
         <label for="gender" class="form-label">Status</label>
         <select name="status" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
-          <option selected>Select status</option>
-          <option <?= old_selected('status', '0') ?> value="0">Good</option>
-          <option <?= old_selected('status', '1') ?> value="1">Fauty</option>
+          
+          <option <?= old_selected('status', 'good') ?> value="good">Good</option>
+          <option <?= old_selected('status', 'bad') ?> value="faulty">Fauty</option>
         </select>
       </div>
       <div class="mb-3 ">
         <label for="install" class="form-label">Installation</label>
         <select name="installed" class="form-select form-select-sm mb-3" aria-label=".install">
-          <option selected>Installed?</option>
-          <option <?= old_selected('install', '0') ?> value="0">Yes</option>
-          <option <?= old_selected('install', '1') ?> value="1">No</option>
+         
+          <option <?= old_selected('install', 'yes') ?> value="yes">Yes</option>
+          <option <?= old_selected('install', 'no') ?> value="no">No</option>
         </select>
       </div>
       <div class="mb-3">
   <label for="comment" class="form-label">Comment</label>
-  <textarea name="comment" class="form-control" id="comment" rows="3"></textarea>
+  <textarea name="comment"  class="form-control" id="comment" rows="3">
+  <?= old_value('comment') ?>
+  </textarea>
 </div>
     
      

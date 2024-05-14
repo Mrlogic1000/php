@@ -1,5 +1,5 @@
 <?php
-namespace PropertyManager;
+namespace DeviceManager;
 defined('ROOT') OR exit("Access Denied");
 
 /**
@@ -63,24 +63,17 @@ class Device extends Model{
     //     ],
 
     // ];
-    // protected $onInsertValidationRules = [
-    //     "email" => [
-    //         "email",
-    //         "unique",
-    //         "required",
-    //     ],
-    //     "password" => [
-    //         "not_less_than_8",
-    //         "required",
-    //     ],
-    //     "username" => [
-    //         "alpha_space",
-    //         "unique",
-    //         "required",
+    protected $onInsertValidationRules = [
+        "name" => [            
+            "required",
+        ],
+       
+        "status" => [           
+            "required",
 
-    //     ],
+        ],
 
-    // ];
+    ];
 
 
 

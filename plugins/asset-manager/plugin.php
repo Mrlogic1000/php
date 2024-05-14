@@ -52,18 +52,24 @@ add_action('view',function(){
         $obj->parent= 0;
         $links[] = $obj;
 
-    // $sub_links = [];
-    $sub_links = do_filter(plugin_id().'_before_sub_links', []);
+
+       
+        $sub_links = null; 
+       
+        $sub_links = do_filter(plugin_id().'_before_sub_links', $sub_links);
+      
+
+    // side bar menu links
 
     $links = do_filter(plugin_id().'_before_asset_links',$links);
 
-    $bottom_links = [];
+    $top_links = [];
     $obj = (object)[];    
         $obj->title= 'Website Home';
         $obj->link= ROOT;
         $obj->icon= '';
         $obj->parent= 0;
-        $bottom_links[] = $obj;
+        $top_links[] = $obj;
 
        
         
@@ -72,14 +78,14 @@ add_action('view',function(){
         $obj->link= ROOT.'/'.$vars['admin_page'];
         $obj->icon= '';
         $obj->parent= 0;
-        $bottom_links[] = $obj;
+        $top_links[] = $obj;
 
         $obj = (object)[];
         $obj->title= 'Logout';
         $obj->link= ROOT.'/'.$vars['logout_page'];
         $obj->icon= '';
         $obj->parent= 0;
-        $bottom_links[] = $obj;
+        $top_links[] = $obj;
 
 require plugin_path('views/view.php');
 });

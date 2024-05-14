@@ -5,12 +5,15 @@
  * Descriptions
  */
 
+use DeviceManager\Device;
+
  set_value([
     "admin_route"=>"asset",
     "plugin_route"  => "it",
     "table"=>"my_table",
 
  ]);
+ 
 
  add_filter('asset-manager_before_section_title',function($title){
     $vars = get_value();
@@ -36,22 +39,18 @@ add_filter('asset-manager_before_asset_links',function($links){
         $links[] = $obj;
         return $links;
 });
-add_filter('asset-manager_before_sub_links',function($sub_links){
-    $vars = get_value();    
-    $obj = (object)[];    
-        $obj->title= 'Device';
-        $obj->link= ROOT.'/'.$vars['admin_route'].'/'.$vars['plugin_route'];
-        $obj->icon= 'fa-solid fa-gauge';
-        $obj->parent= 0;
-        $obj->active= true;
-        $sub_links[] = $obj;
-        return $sub_links;
-});
+
+
+    
+        
 
 
 
 add_action('controller',function(){
     $req = new \Core\Request;
+    $id = URL(3) ?? '';
+    $devices = new DeviceManager\Device;  
+    $device = $devices->first(['id'=>$id]);     
     $vars = get_value();
     $admin_route = $vars['admin_route'];
     $plugin_route = $vars['plugin_route'];
@@ -59,6 +58,11 @@ add_action('controller',function(){
     if($req->posted() && URL(1)== $plugin_route){
         if(URL(2)=='add'){
             require plugin_path('controllers/add-controller.php');
+        }else
+        if(URL(2)== 'edit'){
+            require plugin_path('controllers/edit-controller.php');
+
+
         }
 
     }
@@ -67,19 +71,39 @@ add_action('controller',function(){
 
 // display the view files
 add_action('asset-manager_main_content', function () { 
+    
     $vars = get_value();
     $admin_route = $vars['admin_route'];
     $plugin_route = $vars['plugin_route'];
+    $errors = $vars['errors'] ?? [];      
 
     if(URL(1)== $plugin_route){  
+        $id = URL(3) ?? '';
+        $devices = new DeviceManager\Device;
+        
         if(URL(2)=='add'){
             require plugin_path('views/add-device.php');
         }else
         if(URL(2)=='edit'){
+           
+            $device = $devices->first(['id'=>$id]);  
+            require plugin_path('views/edit-device.php');
 
-        }else{
-            $devices = new PropertyManager\Device;
-            $rows = $devices->findAll();
+        }else
+        if(URL(2)=='delete'){
+
+        }else
+        if(URL(2)=='view'){
+            $device = $devices->first(['id'=>$id]);  
+            require plugin_path('views/view-device.php');
+
+
+        }
+        
+        else{
+            $vars = get_value();       
+            $devices = new DeviceManager\Device;
+            $devices = $devices->findAll();           
             require plugin_path('views/device.php');
 
         }

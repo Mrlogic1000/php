@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="<?=plugin_http_path('assets/js/color-modes.js')?>"></script>
+  <head>
+    <script src="<?=plugin_http_path('assets/js/color-modes.js')?>"></script>
+    <script src="<?=plugin_http_path('assets/js/bootstrap.bundle.min.js')?>"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -198,7 +200,7 @@
     </li>
   </ul>
   <div class="nav flex-row mb-auto">
-          <?php foreach($bottom_links as $link): ?>
+          <?php foreach($top_links as $link): ?>
             <div>
               <a class="link-primary d-flex align-items-center text-center text-dark m-1 p-1 gap-2" href="<?= $link->link?>" style="text-decoration: none; ">
                 <!-- <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg> -->
@@ -256,19 +258,7 @@
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h3"><?= esc($section_title)?></h1>       
       </div>
-     <?php if(!empty($sub_links)):?>
      
-
-      <nav class="navbar navbar-expand-lg navbar-light bg-light my-2">
-      <?php foreach($sub_links as $link):?>
-      
-        <div>
-          <a class="mylink <?= $link->active ? 'active':'' ?>" href="<?= $link->link ?>" ><?= $link->title ?></a>
-        </div>
-      <?php endforeach?>
-  </nav>
-
-     <?php endif?>
  
 
       <?php if(!empty(message())):?>
