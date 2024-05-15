@@ -18,7 +18,7 @@ use DeviceManager\Device;
  add_filter('asset-manager_before_section_title',function($title){
     $vars = get_value();
     if(URL(1)==$vars['plugin_route'])
-        $title = 'IT Page';
+        $title = 'IT';
 
     return $title;
  });
@@ -62,6 +62,10 @@ add_action('controller',function(){
         if(URL(2)== 'edit'){
             require plugin_path('controllers/edit-controller.php');
 
+        }else
+        if(URL(2)== 'delete'){
+            require plugin_path('controllers/delete-controller.php');
+
 
         }
 
@@ -75,26 +79,28 @@ add_action('asset-manager_main_content', function () {
     $vars = get_value();
     $admin_route = $vars['admin_route'];
     $plugin_route = $vars['plugin_route'];
-    $errors = $vars['errors'] ?? [];      
+    $errors = $vars['errors'] ?? []; 
+         
 
     if(URL(1)== $plugin_route){  
         $id = URL(3) ?? '';
         $devices = new DeviceManager\Device;
+        $device = $devices->first(['id'=>$id]);  
         
         if(URL(2)=='add'){
             require plugin_path('views/add-device.php');
         }else
         if(URL(2)=='edit'){
            
-            $device = $devices->first(['id'=>$id]);  
             require plugin_path('views/edit-device.php');
 
         }else
         if(URL(2)=='delete'){
+            require plugin_path('views/delete-device.php');
+
 
         }else
         if(URL(2)=='view'){
-            $device = $devices->first(['id'=>$id]);  
             require plugin_path('views/view-device.php');
 
 

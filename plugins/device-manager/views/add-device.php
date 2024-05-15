@@ -75,12 +75,12 @@
      
       <div class="d-flex justify-content-between">
         <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>">
-          <button type="button" class="btn btn-primary">
+          <button type="button" class="btn btn-warning">
             <i class="fa-solid fa-chevron-left"></i>
             Back
           </button>
         </a>
-        <button type="submit" class="btn btn-danger">
+        <button type="submit" class="btn btn-primary">
           <i class="fa-solid fa-save"></i>Save
 
         </button>

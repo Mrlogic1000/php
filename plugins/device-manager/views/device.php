@@ -90,21 +90,7 @@
                         No
 
                     </td>
-                    <!-- <td><img src="<?= get_image($device->image) ?>" class="img-thumbnail" alt=""
-                style="width: 80px; height: 80px; object-fit:cover">            
-            </td> -->
-                    <!-- <td><?= ucfirst($device->gender) ?></td> -->
-
-                    <!-- <td><?php if(!empty($device->roles)):?>
-                <?php foreach($device->roles as $role):?>
-                    <div>
-                   <i> <?= esc($role) ?></i>
-                    </div>
-                <?php endforeach?>
-                <?php endif?>
-                </td> -->
-                    <!-- <td><?= get_date($device->date_created)?></td>
-                <td><?= get_date($device->date_updated) ?></td> -->
+                    
                     <td>
                         <div class="d-flex">
                             <?php if(user_can('view_user_detail')):?>

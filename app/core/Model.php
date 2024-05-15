@@ -133,8 +133,7 @@ class Model extends Database
     public function delete($id, $id_column = "id")
     {
         $data[$id_column] = $id;
-        $query = "delete from $this->table where $id_column = :$id_column";
-       
+        $query = "delete from $this->table where $id_column = :$id_column";     
         $this->query($query, $data);
         return false;
     }
@@ -206,17 +205,12 @@ class Model extends Database
                             break;
                         case "unique":
 
-                            $key = $this->getPrimaryKey();
-                            if (!empty($data[$key])) {
-                                if ($this->first([$column => $data[$column]], [$key => $data[$key]])) {
-                                   
-                                    $this->errors[$column] = ucfirst($column) . " should be unique";
-                                } else {
+                            
                                     if ($this->where([$column => $data[$column]])) {                                        
                                         $this->errors[$column] = ucfirst($column) . " should be unique";
                                     }
-                                }
-                            }
+                                
+                            
                             break;
                         default:
                             $this->errors["rules"] = "The rule " . $rule . " was not found";

@@ -1,0 +1,17 @@
+{
+    "name":"Outlet Manager",
+    "version":"1.0.0",
+    "id":"outlet-manager",
+    "author":"",
+    "author website":"",
+    "thumbnail":"thumbnail.jpg",
+    "active":true,
+    "index":4,
+    "routes":{
+        "on":["admin"],
+        "off":[]
+    },
+    "dependencies":{
+
+    }
+}

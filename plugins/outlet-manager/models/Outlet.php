@@ -1,50 +1,25 @@
 <?php
-namespace DeviceManager;
+namespace OutletManager;
 defined('ROOT') OR exit("Access Denied");
 
 /**
- * Devices
+ * Outlet
  */use \Model\Model;
 
-class Device extends Model{
+class Outlet extends Model{
 
-    protected $table = 'devices';
+    protected $table = 'outlet';
     protected $allowColumns = [
-        'name',
-        'sn',
-        'type',
-        'ip',
-        'mac',
-        'comment',
-        'installed',
-        'status',
-        'date_updated',
-        'date_deleted',
-        'deleted',
         'date_created'
 
     ];
     protected $allowUpdateColumns = [
-        'name',
-        'sn',
-        'type',
-        'ip',
-        'mac',
-        'comment',
-        'installed',
-        'status',
         'date_updated',
         'date_deleted',
         'deleted',
         
 
     ];
-
-
-
-   
-    
-    
     // protected $onUpdateValidationRules = [
     //     "email" => [
     //         "email",
@@ -63,18 +38,24 @@ class Device extends Model{
     //     ],
 
     // ];
-    protected $onInsertValidationRules = [
-        "name" => [            
-            "required",
-            "unique",
-        ],
-       
-        "status" => [           
-            "required",
+    // protected $onInsertValidationRules = [
+    //     "email" => [
+    //         "email",
+    //         "unique",
+    //         "required",
+    //     ],
+    //     "password" => [
+    //         "not_less_than_8",
+    //         "required",
+    //     ],
+    //     "username" => [
+    //         "alpha_space",
+    //         "unique",
+    //         "required",
 
-        ],
+    //     ],
 
-    ];
+    // ];
 
 
 
