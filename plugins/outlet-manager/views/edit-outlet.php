@@ -24,7 +24,7 @@
      
       <div class="col-md-6 mb-3">
         <label for="outlet" class="form-label">Outlet Name</label>
-        <input type="text" name="outlet" value="<?= old_value('outlet') ?>" class="form-control" placeholder="Outlet Name" aria-label="outlet" aria-describedby="addon-wrapping">
+        <input type="text" name="outlet" value="<?= old_value('outlet',$outlet->outlet) ?>" class="form-control" placeholder="Outlet Name" aria-label="outlet" aria-describedby="addon-wrapping">
       </div>
       
       
@@ -33,7 +33,7 @@
       <div class="mb-3">
   <label for="description" class="form-label">Description</label>
   <textarea name="description"  class="form-control" id="description" rows="3">
-  <?= old_value('description') ?>
+  <?= old_value('description',$outlet->description) ?>
   </textarea>
 </div>
     

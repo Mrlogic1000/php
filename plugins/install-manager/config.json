@@ -1,12 +1,12 @@
 {
-    "name":"Device Manager",
+    "name":"Insall Manager",
     "version":"1.0.0",
-    "id":"device-manager",
+    "id":"install-Manager",
     "author":"",
     "author website":"",
     "thumbnail":"thumbnail.jpg",
     "active":true,
-    "index":5,
+    "index":6,
     "routes":{
         "on":["admin"],
         "off":[]

@@ -1,5 +1,5 @@
 <?php
-namespace OutletManager;
+namespace InstallManager;
 defined('ROOT') OR exit("Access Denied");
 
 /**

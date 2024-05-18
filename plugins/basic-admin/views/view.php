@@ -9,7 +9,7 @@
     <meta name="generator" content="Hugo 0.122.0">
     <title><?= APP_TITLE?></title>
 
-    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/"> -->
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
 
     
 
@@ -120,7 +120,7 @@
       </symbol>
     </svg>
 
-    <!-- <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
       <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
               id="bd-theme"
               type="button"
@@ -153,7 +153,7 @@
           </button>
         </li>
       </ul>
-    </div> -->
+    </div>
 
     
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">

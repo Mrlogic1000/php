@@ -77,6 +77,7 @@ add_action('controller', function () {
 add_filter('header-footer_before_menu_links', function ($links) {
     $ses = new \Core\Session;
     $vars = get_value();
+    $errors = $vars['errors'] ?? [];
     $link = (object)[];
 
     $link->id = 0;
@@ -93,16 +94,9 @@ add_filter('header-footer_before_menu_links', function ($links) {
     $link->icon = '';
     $link->permission =  'logged_in';
     $links[] = $link;
+
+
     
-    $link = (object)[];
-    $link->id = 0;
-    $link->title = 'Asset';
-    $link->slug = $vars['asset_plugin_route'];
-    $link->icon = '';
-    $link->permission =  'logged_in';
-    $links[] = $link;
-
-
     $link = (object)[];
 
     $link->id = 0;

@@ -52,7 +52,7 @@ class User extends Model{
         "password" => [
             "not_less_than_8",
             "required",           
-            "confirm",
+            
         ],
        
     ];

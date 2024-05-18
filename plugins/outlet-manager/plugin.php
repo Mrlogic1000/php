@@ -46,15 +46,36 @@ if(user_can('view_outlets')){
 }
 
 add_action('controller',function(){
-    $var = get_value();
-require plugin_path('controllers/controller.php');
+    $vars = get_value();
+    $req = new \Core\Request;
+    $outlets = new \OutletManager\Outlet;
+    if (URL(1) == $vars['plugin_route'] && $req->posted()) {
+        $id = URL(3) ?? null;
+        $outlet = $outlets->first(['id'=>$id]);
+        if (URL(2) == 'add') {         
+           
+            require plugin_path('controllers/add-controller.php');
+        } else
+        if (URL(2) == 'edit') {        
+           
+            require plugin_path('controllers/edit-controller.php');
+        } else
+        if (URL(2) == 'view') {
+            // $rows = $users->findAll();            
+            require plugin_path('controllers/view-controller.php');
+        } else
+        if (URL(2) == 'delete') {
+            require plugin_path('controllers/delete-controller.php');
+        } 
+    }
+
 });
 
 // display the view files
 
 // display the view files
 add_action('basic-admin_main_content', function () {   
-    $outletsManager = new \OutletManager\Outlet;
+    $outlets = new \OutletManager\Outlet;
     $vars = get_value();
     $errors = $vars['errors'] ?? [];   
     $admin_route = $vars['admin_route'];
@@ -64,22 +85,22 @@ add_action('basic-admin_main_content', function () {
         $id = URL(3) ?? null;
         if ($id)
            { 
-           
+           $outlet = $outlets->first(['id'=>$id]);           
         }
+        $outlet = $outlets->first(['id'=>$id]);
         if (URL(2) == 'add') {
            
             require plugin_path('views/add-outlet.php');
         } else
-        if (URL(2) == 'edit') {        
-           
-            require plugin_path('views/edit-oulet.php');
+        if (URL(2) == 'edit') {                
+            require plugin_path('views/edit-outlet.php');
         } else
         if (URL(2) == 'view') {
             // $rows = $users->findAll();            
-            require plugin_path('views/view-oulet.php');
+            require plugin_path('views/view-outlet.php');
         } else
         if (URL(2) == 'delete') {
-            require plugin_path('views/delete-oulet.php');
+            require plugin_path('views/delete-outlet.php');
         } else {
             // $limit = 5;
             // $pager = new \Core\Pager($limit);
@@ -88,12 +109,12 @@ add_action('basic-admin_main_content', function () {
             // $outlets->offset = $offset;
             // $outletsManager::$query_id = 'get-users';
             if(!empty($_GET['find'])){
-                // $find = '%'. trim($_GET['find']) . '%';
-                // $query = "select * from users where (first_name like :find || last_name like :find) limit $limit offset $offset";
-                // $outlets = $outletsManager->query($query,['find'=>$find]);
+                $find = '%'. trim($_GET['find']) . '%';
+                $query = "select * from users where (first_name like :find || last_name like :find) limit $limit offset $offset";
+                $outlets = $outlets->query($query,['find'=>$find]);
             }else{
 
-                $outlets = $outletsManager->findAll();
+                $outlets = $outlets->findAll();
             }
             require plugin_path('views/outlets.php');
         }

@@ -51,18 +51,21 @@
 
       <div class="mb-3 col-md-6">
         <label for="gender" class="form-label">Status</label>
-        <select name="status" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
-          
+        <select name="status" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">          
           <option <?= old_selected('status', 'good') ?> value="good">Good</option>
           <option <?= old_selected('status', 'bad') ?> value="faulty">Fauty</option>
         </select>
       </div>
       <div class="mb-3 ">
         <label for="install" class="form-label">Installation</label>
-        <select name="installed" class="form-select form-select-sm mb-3" aria-label=".install">
-         
-          <option <?= old_selected('install', 'yes') ?> value="yes">Yes</option>
-          <option <?= old_selected('install', 'no') ?> value="no">No</option>
+        <select name="installed" class="form-select form-select-sm mb-3" aria-label=".install">         
+        <?php if(!empty($outlet)): ?>
+                <?php foreach($outlet as $out): ?>
+                <option <?= old_selected('install', 'yes',$out->name) ?> value="<?= $out->id?>"><?= $out->name?></option>
+
+
+                <?php endforeach?>
+                <?php endif ?>
         </select>
       </div>
       <div class="mb-3">

@@ -1,6 +1,11 @@
 <main class="container">
 <div class="col-md-6 mx-auto my-3" style="background-color: #ddd;">
-    
+    <?php if(!empty($errors)): ?>
+    <?php foreach($errors as $error): ?>
+    <?= $error ?>
+    <?php endforeach ?>
+    <?php endif?>
+
 <form method="post" class="col-md-6 mx-auto py-4">
  
 <?= csrf() ?>

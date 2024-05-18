@@ -42,8 +42,8 @@ return $permissions;
 //  set user permission for these plugin
 if(user_can('view_users')){
     add_filter('basic-admin_before_admin_links', function ($links) {
-        $vars = get_value();
-    
+
+        $vars = get_value();    
         $obj = (object)[];
         $obj->title = 'Users';
         $obj->link = ROOT . '/' . $vars['admin_route'] . '/' . $vars['plugin_route'];

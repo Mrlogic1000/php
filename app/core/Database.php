@@ -96,12 +96,15 @@ class Database{
             $this->has_error               = true;           
         }
        
-        
-
-        if(is_array($result) && count($result)>0){ 
+        if(!empty($result)){
+            if(is_array($result) && count($result)>0){ 
                
-            return $result['result'];
+                return $result['result'];
+            }
+
         }
+
+        
         return false;
 
     }

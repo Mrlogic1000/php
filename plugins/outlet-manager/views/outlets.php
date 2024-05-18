@@ -30,7 +30,7 @@
             <tr>
                
                 <td>
-                    <?= esc($outlet->name) ?>
+                    <?= esc($outlet->outlet) ?>
                 </td>
                 <td>
                     <?= $outlet->description ?>

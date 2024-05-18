@@ -3,7 +3,7 @@
 
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="false">Devices</button>
+                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="false">installs</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="true">Profile</button>
@@ -30,14 +30,12 @@
                     <table class="table table-striped ">
                         <tr>
 
+                            <th>Installer</th>
                             <th>Device</th>
-                            <th>Type</th>
-                            <th>IP</th>
-                            <th>MAC</th>
-                            <th>Installed</th>
+                            <th>Outlet</th>
                             <th>Status</th>
-                            <th>Report</th>
-                            <th>Task</th>
+                            <th>Date Created</th>
+                            <th>Date Updated</th>
 
                             <th>
                                 <?php if (user_can('view_users')) : ?>
@@ -53,37 +51,30 @@
 
                         </tr>
                         <tbody>
-                            <?php if (!empty($devices)) : ?>
-                                <?php foreach ($devices as $device) : ?>
+                            <?php if (!empty($installs)) : ?>
+                                <?php foreach ($installs as $install) : ?>
                                     <tr>
 
                                         <td>
-                                            <?= esc($device->name) ?>
+                                            <?= esc($install->name) ?>
                                         </td>
                                         <td>
-                                            <?= $device->type ?>
-
-                                        </td>
-
-                                        <td>
-                                            <?= $device->ip ?>
-
-                                        </td>
-                                        <td>
-                                            <?= $device->mac ?>
+                                            <?= $install->type ?>
 
                                         </td>
 
-                                        <td>
-                                            <a href="<?= ROOT ?>/<?= $admin_route ?>/outlet/view/<?= $device->outlet->id ?>">
+                                        
 
-                                            <?= $device->outlet->outlet ?>
+                                        <td>
+                                            <a href="<?= ROOT ?>/<?= $admin_route ?>/outlet/view/<?= $install->outlet->id ?>">
+
+                                            <?= $install->outlet->outlet ?>
                                             </a>
                                             
 
                                         </td>
                                         <td>
-                                            <?= $device->status ?>
+                                            <?= $install->status ?>
 
                                         </td>
                                         <td>
@@ -98,7 +89,7 @@
                                         <td>
                                             <div class="d-flex">
                                                 <?php if (user_can('view_device_detail')) : ?>
-                                                    <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/view/<?= $device->id ?>">
+                                                    <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/view/<?= $install->id ?>">
                                                         <button class="btn btn-primary btn-sm">
                                                             <i class="fa-solid fa-eye"></i>
                                                             view
@@ -106,7 +97,7 @@
                                                     </a>
                                                 <?php endif ?>
                                                 <?php if (user_can('edit_device')) : ?>
-                                                    <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/edit/<?= $device->id ?>">
+                                                    <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/edit/<?= $install->id ?>">
 
                                                         <button class="btn btn-warning btn-sm">
                                                             <i class="fa-solid fa-pen-to-square"></i>
@@ -115,7 +106,7 @@
                                                     </a>
                                                 <?php endif ?>
                                                 <?php if (user_can('delete_device')) : ?>
-                                                    <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/delete/<?= $device->id ?>">
+                                                    <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/delete/<?= $install->id ?>">
                                                         <button class="btn btn-danger btn-sm">
                                                             <i class="fa-solid fa-pen-to-square"></i>
                                                             Delete
