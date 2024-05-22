@@ -15,8 +15,9 @@ class Device extends Migration{
         $this->addColumn("type varchar(200) null");
         $this->addColumn("ip varchar(200) null");
         $this->addColumn("mac varchar(200) null");
+        $this->addColumn("model varchar(200) null");
+        $this->addColumn("version varchar(200) null");
         $this->addColumn("comment text null");
-        $this->addColumn("outlet_id tinyint(1) unsigned default 0");
         $this->addColumn("status varchar(200) null");
         $this->addColumn("deleted tinyint(1) unsigned default 0");
         $this->addColumn("date_created datetime default null");
@@ -28,7 +29,6 @@ class Device extends Migration{
         $this->addKey('type');
         $this->addKey('ip');
         $this->addKey('mac');
-        $this->addKey('outlet_id');
         $this->addKey('deleted');
         $this->addKey('date_created');
         $this->addKey('date_deleted');
@@ -46,8 +46,7 @@ class Device extends Migration{
             $this->addData(['sn'=>'D20KD-I839']);
             $this->addData(['type'=>'Network']);
             $this->addData(['ip'=>'192.168.1.100']);
-            $this->addData(['mac'=>'D8.F5:A9:0D:A9:0D']);
-            $this->addData(['outlet_id'=>1]);
+            $this->addData(['mac'=>'D8.F5:A9:0D:A9:0D']);            
             $this->addData(['status'=>'good']);
             $this->addData(['date_created'=>date('Y-m-d H:i:s')]);
             $this->addData(['date_updated'=>date('Y-m-d H:i:s')]);

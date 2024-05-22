@@ -34,10 +34,11 @@
                             <th>Type</th>
                             <th>IP</th>
                             <th>MAC</th>
+                            <th>Model</th>
+                            <th>Version</th>
                             <th>Installed</th>
                             <th>Status</th>
-                            <th>Report</th>
-                            <th>Task</th>
+                            
 
                             <th>
                                 <?php if (user_can('view_users')) : ?>
@@ -73,15 +74,15 @@
                                             <?= $device->mac ?>
 
                                         </td>
-
                                         <td>
-                                            <a href="<?= ROOT ?>/<?= $admin_route ?>/outlet/view/<?= $device->outlet->id ?>">
-
-                                            <?= $device->outlet->outlet ?>
-                                            </a>
-                                            
+                                            <?= $device->model ?? 'Unknown' ?>
 
                                         </td>
+                                        <td>
+                                            0.00
+                                        </td>
+
+                                      
                                         <td>
                                             <?= $device->status ?>
 

@@ -32,6 +32,7 @@ if (!empty($postdata)) {
             unlink($row->image);
         }
 
+        // user role if it selected
             $data = [];
             $role_map = new \UserManager\User_roles_map;
             foreach($postdata as $id=>$role){   

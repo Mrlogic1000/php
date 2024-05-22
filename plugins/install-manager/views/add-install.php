@@ -59,19 +59,39 @@
       <input type="text" name="mac" value="<?= old_value('sn') ?>" class="form-control" placeholder="MAC Address" aria-label="MAC" aria-describedby="addon-wrapping">
 
     </div>
-    <div class="col-md-6 mb-3">
+    <!-- <div class="col-md-6 mb-3">
       <label for="installer" class="form-label">Installer</label>
-      <input type="text" name="installer" value="<?= old_value('installer') ?>" class="form-control" placeholder="installer" aria-label="installer" aria-describedby="addon-wrapping">
+      <select name="user_id" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+        <?php if (!empty($users)) : ?>
+          <?php foreach ($users as $user) : ?>
+            <option <?= old_selected('user_id', $user->id) ?> value="<?= $user->id ?>"><?= $user->first_name ?> <?= $user->last_name ?></option>
 
+          <?php endforeach ?>
+        <?php endif ?>
+      </select>
+      
 
-    </div>
+    </div> -->
 
     <div class="mb-3 col-md-6">
       <label for="gender" class="form-label">Status</label>
       <select name="status" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
         <option <?= old_selected('status', 'good') ?> value="good">Good</option>
-        <option <?= old_selected('status', 'bad') ?> value="faulty">Fauty</option>
+        <option <?= old_selected('status', 'pending') ?> value="pending">Pending</option>
+        <option <?= old_selected('status', 'faulty') ?> value="faulty">Fauty</option>
       </select>
+    </div>
+    <!-- <div class="mb-3 col-md-6">
+      <label for="software" class="form-label">Software Upgraded</label>
+      <select name="software" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+        <option <?= old_selected('software', 'yes') ?> value="yes">Yes</option>
+        <option <?= old_selected('software', 'no') ?> value="faulty">No</option>
+      </select>
+    </div> -->
+    <div class="mb-3 col-md-6">
+      <label for="version" class="form-label">Software Version</label>
+      <input type="number" name="version" value="<?= old_value('version') ?>" class="form-control" placeholder="Software Version" aria-label="installer" aria-describedby="addon-wrapping">
+
     </div>
 
     <div class="mb-3">

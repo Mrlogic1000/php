@@ -44,7 +44,7 @@
       </div>
       <div class="col-md-6 mb-3">
         <label for="type" class="form-label">Type</label>
-        <input type="type" name="type" value="<?= old_value('type') ?>" class="form-control" placeholder="Type" aria-label="type" aria-describedby="addon-wrapping">
+        <input type="text" name="type" value="<?= old_value('type') ?>" class="form-control" placeholder="Type" aria-label="type" aria-describedby="addon-wrapping">
        
          
       </div>
@@ -56,17 +56,17 @@
           <option <?= old_selected('status', 'bad') ?> value="faulty">Fauty</option>
         </select>
       </div>
-      <div class="mb-3 ">
-        <label for="install" class="form-label">Installation</label>
-        <select name="installed" class="form-select form-select-sm mb-3" aria-label=".install">         
-        <?php if(!empty($outlet)): ?>
-                <?php foreach($outlet as $out): ?>
-                <option <?= old_selected('install', 'yes',$out->name) ?> value="<?= $out->id?>"><?= $out->name?></option>
+      <div class="mb-3 col-md-6 ">
+        <label for="install" class="form-label">Version</label>
+        <input type="number" name="version" value="<?= old_value('version') ?>" class="form-control" placeholder="Version" aria-label="type" aria-describedby="addon-wrapping">
 
+        
+      </div>
+      <div class="mb-3 col-md-6 ">
+        <label for="model" class="form-label">Model</label>
+        <input type="text" name="model" value="<?= old_value('model') ?>" class="form-control" placeholder="Model" aria-label="Model" aria-describedby="addon-wrapping">
 
-                <?php endforeach?>
-                <?php endif ?>
-        </select>
+        
       </div>
       <div class="mb-3">
   <label for="comment" class="form-label">Comment</label>

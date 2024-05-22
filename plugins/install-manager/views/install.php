@@ -30,10 +30,11 @@
                     <table class="table table-striped ">
                         <tr>
 
-                            <th>Installer</th>
-                            <th>Device</th>
                             <th>Outlet</th>
-                            <th>Status</th>
+                            <th>Device</th>
+                            <th>Installer</th>
+                            <th>Software</th>
+                            <th>Version</th>
                             <th>Date Created</th>
                             <th>Date Updated</th>
 
@@ -56,33 +57,50 @@
                                     <tr>
 
                                         <td>
-                                            <?= esc($install->name) ?>
-                                        </td>
-                                        <td>
-                                            <?= $install->type ?>
-
-                                        </td>
-
-                                        
-
-                                        <td>
                                             <a href="<?= ROOT ?>/<?= $admin_route ?>/outlet/view/<?= $install->outlet->id ?>">
 
-                                            <?= $install->outlet->outlet ?>
+                                                <?= $install->outlet->outlet ?>
                                             </a>
-                                            
+
 
                                         </td>
                                         <td>
-                                            <?= $install->status ?>
+                                            <a href="<?= ROOT ?>/<?= $admin_route ?>/device/view/<?= $install->device->id ?>">
+
+                                                <?= $install->device->name ?>
+                                            </a>
 
                                         </td>
                                         <td>
-                                            No
+                                            <a href="<?= ROOT ?>/<?= $admin_route ?>/user/view/<?= $install->installer->id ?? '' ?>">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                            <img src="<?= get_image($install->installer->image??'') ?>" class="img-thumbnail" style="width: 80px; height: 80px; object-fit:cover" alt="" style="width: 80px; height: 80px; object-fit:cover"> 
+                                                <?= $install->installer->first_name ?? '' ?> <?= $install->installer->last_name ?? '' ?>
+                                            </div>
+
+                                                
+                                            </a>
+
+                                        </td>
+
+
+
+
+
+                                        <td>
+                                            <?= $install->software ?>
 
                                         </td>
                                         <td>
-                                            No
+                                            <?= $install->version ?>
+
+                                        </td>
+                                        <td>
+                                            <?= $install->date_created ?>
+
+                                        </td>
+                                        <td>
+                                            <?= $install->date_updated ?>
 
                                         </td>
 

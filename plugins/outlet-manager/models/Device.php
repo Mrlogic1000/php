@@ -1,5 +1,5 @@
 <?php
-namespace DeviceManager;
+namespace OutletManager;
 defined('ROOT') OR exit("Access Denied");
 
 /**
@@ -15,8 +15,6 @@ class Device extends Model{
         'type',
         'ip',
         'mac',
-        'model',
-        'version',
         'comment',
         'installed',
         'status',
@@ -32,8 +30,6 @@ class Device extends Model{
         'type',
         'ip',
         'mac',
-        'model',
-        'version',
         'comment',
         'installed',
         'status',

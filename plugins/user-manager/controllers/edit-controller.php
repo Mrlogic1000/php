@@ -50,8 +50,7 @@ if (!empty($row)) {
        
 
         $role_map->query('update ' . $vars['optional_table']['roles_map_table'] . ' set disable=1 where user_id = :user_id', ['user_id'=>$row->id]);       
-        foreach ($data as $id => $role_id) {
-            dd($role_id);
+        foreach ($data as $id => $role_id) {            
             $row_data = $role_map->first(['role_id' => $role_id, 'user_id' => $row->id]);
           
             if ( $row_data) {

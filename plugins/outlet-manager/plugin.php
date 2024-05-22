@@ -85,9 +85,10 @@ add_action('basic-admin_main_content', function () {
         $id = URL(3) ?? null;
         if ($id)
            { 
+            $outlets::$query_id = 'get-outlets';
            $outlet = $outlets->first(['id'=>$id]);           
         }
-        $outlet = $outlets->first(['id'=>$id]);
+        
         if (URL(2) == 'add') {
            
             require plugin_path('views/add-outlet.php');
@@ -107,7 +108,7 @@ add_action('basic-admin_main_content', function () {
             // $offset = $pager->offset;
             // $outlets->limit = $limit;
             // $outlets->offset = $offset;
-            // $outletsManager::$query_id = 'get-users';
+            $outlets::$query_id = 'get-outlets';
             if(!empty($_GET['find'])){
                 $find = '%'. trim($_GET['find']) . '%';
                 $query = "select * from users where (first_name like :find || last_name like :find) limit $limit offset $offset";
@@ -127,9 +128,26 @@ add_filter('after_query',function($data){
     if(empty($data['result']))
     return $data;
 
-    foreach($data['result'] as $key=>$row){
+    if($data['query_id']=='get-outlets'){
+        $installs = new \OutletManager\Install;
+        $outlets = new \OutletManager\Outlet;
+        $devices = new \OutletManager\Device;
+     
 
+        
+        foreach($data['result'] as $key=>$row){
+            $query = 'select * from devices where id in (select device_id from install where outlet_id = :outlet_id)';
+            $device = $outlets->query($query,['outlet_id'=>$row->id]);
+            
+            if($device){               
+                $data['result'][$key]->device = $device;
+            }      
+        
+    
+        }
+      
     }
+
 
     return $data;
 

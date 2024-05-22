@@ -10,10 +10,12 @@ class Install extends Migration{
 
     public function up(){
         $this->addColumn("id int auto_increment");
-        $this->addColumn("description text null");       
-        $this->addColumn("user_id tinyint(1) unsigned default 0");
-        $this->addColumn("device_id tinyint(1) unsigned default 0");
+        $this->addColumn("comment text null");       
+        $this->addColumn("software varchar(100) null");       
+        $this->addColumn("version varchar(100) null");       
         $this->addColumn("outlet_id tinyint(1) unsigned default 0");
+        $this->addColumn("device_id tinyint(1) unsigned default 0");
+        $this->addColumn("user_id tinyint(1) unsigned default 0");
         $this->addColumn("deleted tinyint(1) unsigned default 0");
         $this->addColumn("date_created datetime default null");
         $this->addColumn("date_updated datetime default null");

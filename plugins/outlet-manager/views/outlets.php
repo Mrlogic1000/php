@@ -10,6 +10,7 @@
         <tr>
            
             <th>Name</th>
+            <th>Device</th>
             <th>Description</th>
             <th>Date Created</th>
             <th>Date Updated</th>
