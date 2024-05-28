@@ -35,8 +35,7 @@
                             <th>Installer</th>
                             <th>Software</th>
                             <th>Version</th>
-                            <th>Date Created</th>
-                            <th>Date Updated</th>
+                          
 
                             <th>
                                 <?php if (user_can('view_users')) : ?>
@@ -74,7 +73,7 @@
                                         <td>
                                             <a href="<?= ROOT ?>/<?= $admin_route ?>/user/view/<?= $install->installer->id ?? '' ?>">
                                             <div class="d-flex align-items-center justify-content-between">
-                                            <img src="<?= get_image($install->installer->image??'') ?>" class="img-thumbnail" style="width: 80px; height: 80px; object-fit:cover" alt="" style="width: 80px; height: 80px; object-fit:cover"> 
+                                            <!-- <img src="<?= get_image($install->installer->image??'') ?>"  style="width: 60px; height: 60px; object-fit:cover" alt="" >  -->
                                                 <?= $install->installer->first_name ?? '' ?> <?= $install->installer->last_name ?? '' ?>
                                             </div>
 
@@ -95,14 +94,7 @@
                                             <?= $install->version ?>
 
                                         </td>
-                                        <td>
-                                            <?= $install->date_created ?>
-
-                                        </td>
-                                        <td>
-                                            <?= $install->date_updated ?>
-
-                                        </td>
+                                       
 
                                         <td>
                                             <div class="d-flex">

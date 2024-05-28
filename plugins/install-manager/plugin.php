@@ -140,7 +140,7 @@ add_action('basic-admin_main_content', function () {
         }
         
         else{
-            dd($userId);
+            
             $vars = get_value();                
             $installModel::$query_id = 'get-installed';
             $installs = $installModel->findAll();
@@ -179,7 +179,7 @@ if($data['query_id']=='get-installed'){
 
     }
     foreach($data['result'] as $key=>$row){
-        $installer =$users->first(['id'=>$row->device_id]);
+        $installer =$users->first(['id'=>$row->user_id]);
         $data['result'][$key]->installer  = $installer ;
 
     }
