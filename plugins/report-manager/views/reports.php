@@ -1,3 +1,4 @@
+
 <?php if(user_can('view_users')): ?>
 <div class="table-responsive">
 
@@ -9,8 +10,9 @@
     <table class="table table-striped ">
         <tr>
            
-            <th>Name</th>
-            <th>Description</th>
+            <th>Device</th>
+            <th>Comment</th>
+            <th>Status</th>
             <th>Date Created</th>
             <th>Date Updated</th>
             <th>
@@ -25,26 +27,34 @@
 
         </tr>
         <tbody>
-            <?php if(!empty($outlets)): ?>
-            <?php foreach($outlets as $outlet): ?>
+            <?php if(!empty($reports)): ?>
+            <?php foreach($reports as $report): ?>
+               
             <tr>
                
                 <td>
-                    <?= esc($outlet->outlet) ?>
+                    <?php if(!empty($report->device)): ?>                       
+                        <?php foreach($report->device as $device): ?>
+                            <?= $device->name ?>
+                        <?php endforeach ?>
+                    <?php endif ?>
                 </td>
-                <td colspan="2">
-                    <?= $outlet->description ?>
+                <td >
+                    <?= $report->comment ?>
+                </td>
+                <td >
+                    <?= $report->status ?>
                 </td>
                 
                
                 
                
-                <td><?= get_date($outlet->date_created)?></td>
-                <td><?= get_date($outlet->date_updated) ?></td>
+                <td><?= get_date($report->date_created)?></td>
+                <td><?= get_date($report->date_updated) ?></td>
                 <td>
                <div class="d-flex gap-2">
                <?php if(user_can('view_user_detail')):?>
-                    <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/view/<?= $outlet->id ?>">
+                    <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/view/<?= $report->id ?>">
                     <button class="btn btn-primary btn-sm">
                         <i class="fa-solid fa-eye"></i>
                         view
@@ -52,7 +62,7 @@
                 </a>
                 <?php endif?>
                 <?php if(user_can('edit_user')):?>
-                <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/edit/<?= $outlet->id ?>">
+                <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/edit/<?= $report->id ?>">
 
                     <button class="btn btn-warning btn-sm">
                         <i class="fa-solid fa-pen-to-square"></i>
@@ -61,7 +71,7 @@
                 </a>
                 <?php endif?>
                 <?php if(user_can('delete_user')):?>
-                <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/delete/<?= $outlet->id ?>">
+                <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/delete/<?= $report->id ?>">
                     <button class="btn btn-danger btn-sm">
                         <i class="fa-solid fa-pen-to-square"></i>
                         Delete

@@ -58,7 +58,7 @@
                 <td><?= get_date($row->date_created)?></td>
                 <td><?= get_date($row->date_updated) ?></td>
                 <td>
-               <div class="d-flex">
+               <div class="d-flex gap-2">
                <?php if(user_can('view_user_detail')):?>
                     <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/view/<?= $row->id ?>">
                     <button class="btn btn-primary btn-sm">

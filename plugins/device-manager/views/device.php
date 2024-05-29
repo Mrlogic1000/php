@@ -36,7 +36,6 @@
                             <th>MAC</th>
                             <th>Model</th>
                             <th>Version</th>
-                            <th>Installed</th>
                             <th>Status</th>
                             
 
@@ -87,17 +86,10 @@
                                             <?= $device->status ?>
 
                                         </td>
+                                       
+                                      
                                         <td>
-                                            No
-
-                                        </td>
-                                        <td>
-                                            No
-
-                                        </td>
-
-                                        <td>
-                                            <div class="d-flex">
+                                            <div class="d-flex gap-2">
                                                 <?php if (user_can('view_device_detail')) : ?>
                                                     <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/view/<?= $device->id ?>">
                                                         <button class="btn btn-primary btn-sm">

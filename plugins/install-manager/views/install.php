@@ -35,7 +35,7 @@
                             <th>Installer</th>
                             <th>Software</th>
                             <th>Version</th>
-                          
+
 
                             <th>
                                 <?php if (user_can('view_users')) : ?>
@@ -72,12 +72,12 @@
                                         </td>
                                         <td>
                                             <a href="<?= ROOT ?>/<?= $admin_route ?>/user/view/<?= $install->installer->id ?? '' ?>">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                            <!-- <img src="<?= get_image($install->installer->image??'') ?>"  style="width: 60px; height: 60px; object-fit:cover" alt="" >  -->
-                                                <?= $install->installer->first_name ?? '' ?> <?= $install->installer->last_name ?? '' ?>
-                                            </div>
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <!-- <img src="<?= get_image($install->installer->image ?? '') ?>"  style="width: 60px; height: 60px; object-fit:cover" alt="" >  -->
+                                                    <?= $install->installer->first_name ?? '' ?> <?= $install->installer->last_name ?? '' ?>
+                                                </div>
 
-                                                
+
                                             </a>
 
                                         </td>
@@ -94,10 +94,10 @@
                                             <?= $install->version ?>
 
                                         </td>
-                                       
+
 
                                         <td>
-                                            <div class="d-flex">
+                                            <div class="d-flex gap-2">
                                                 <?php if (user_can('view_device_detail')) : ?>
                                                     <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/view/<?= $install->id ?>">
                                                         <button class="btn btn-primary btn-sm">
