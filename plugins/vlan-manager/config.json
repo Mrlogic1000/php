@@ -1,0 +1,17 @@
+{
+    "name":"Vlan Manager",
+    "version":"1.0.0",
+    "id":"vlan-manager",
+    "author":"",
+    "author website":"",
+    "thumbnail":"thumbnail.jpg",
+    "active":true,
+    "index":8,
+    "routes":{
+        "on":["admin"],
+        "off":[]
+    },
+    "dependencies":{
+
+    }
+}

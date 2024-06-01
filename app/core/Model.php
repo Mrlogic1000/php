@@ -167,6 +167,10 @@ class Model extends Database
                             if (!filter_var($data[$column], FILTER_VALIDATE_EMAIL)) {
                                 $this->errors[$column] = "Invalid " . $column . " address";
                             }
+                        case "ip":
+                            if (!filter_var($data[$column], FILTER_VALIDATE_IP)) {
+                                $this->errors[$column] = "Invalid " . $column . " address";
+                            }
                             break;
                         case "alpha_space":
 
@@ -189,6 +193,12 @@ class Model extends Database
                         case "alpha_numeric":
                             if (!preg_match("/^[a-zA-Z0-9]+$/", trim($data[$column]))) {
                                 $this->errors[$column] = ucfirst($column) . " should only contains alphabetical letters";
+                            }
+                            break;
+
+                        case "numeric":
+                            if (!preg_match("/^[0-9]+$/", trim($data[$column]))) {
+                                $this->errors[$column] = ucfirst($column) . " should only contains Number";
                             }
                             break;
 

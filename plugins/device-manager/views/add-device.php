@@ -34,7 +34,14 @@
       </div>
       <div class="col-md-6 mb-3">
         <label for="IP" class="form-label"> IP</label>
-        <input type="text" name="ip" value="<?= old_value('ip') ?>" class="form-control" placeholder="IP Address" aria-label="IP" aria-describedby="addon-wrapping">
+        <select name="ip" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">          
+          <?php if(!empty($all_ip)): ?>
+          <?php foreach($all_ip as $ip): ?>
+            <option <?= old_selected('type', $ip) ?> value="<?=$ip?>"><?=$ip?></option>
+          <?php endforeach ?>
+          <?php endif ?>
+          
+        </select>
         
       </div>
       <div class="col-md-6 mb-3">
@@ -44,7 +51,15 @@
       </div>
       <div class="col-md-6 mb-3">
         <label for="type" class="form-label">Type</label>
-        <input type="text" name="type" value="<?= old_value('type') ?>" class="form-control" placeholder="Type" aria-label="type" aria-describedby="addon-wrapping">
+        <select name="type" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">          
+          <option <?= old_selected('type', 'Switch') ?> value="Switch">Router</option>
+          <option <?= old_selected('type', 'Router') ?> value="Router">Router</option>
+          <option <?= old_selected('type', 'Save') ?> value="Save">Save</option>
+          <option <?= old_selected('type', 'Access Point') ?> value="Access Point">Access Point</option>
+          <option <?= old_selected('type', 'TV') ?> value="TV">TV</option>
+          <option <?= old_selected('type', 'Camera') ?> value="Camera">Camera</option>
+          <option <?= old_selected('type', 'Door') ?> value="Door">Door</option>
+        </select>
        
          
       </div>

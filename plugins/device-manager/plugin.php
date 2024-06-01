@@ -7,6 +7,7 @@
 
 use DeviceManager\Device;
 use OutletManager\Outlet;
+use DeviceManager\Vlan;
 
  set_value([
     "admin_route"=>"admin",
@@ -86,7 +87,19 @@ add_action('basic-admin_main_content', function () {
     $admin_route = $vars['admin_route'];
     $plugin_route = $vars['plugin_route'];
     $errors = $vars['errors'] ?? []; 
-         
+
+    $vlans = new Vlan;
+    $vlan_ips = $vlans->findAll();
+
+    $all_ip = [];
+
+    foreach($vlan_ips as $key=>$vlan){
+        
+        $all_ip[$key] = getEachIpInRange("$vlan->ip/$vlan->cidr");
+        
+    }
+         $all_ip = array_merge($all_ip[1],$all_ip[0]);
+        //  dd($all_ip);
 
     if(URL(1)== $plugin_route){  
         $id = URL(3) ?? '';
