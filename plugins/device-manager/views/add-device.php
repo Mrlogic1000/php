@@ -35,8 +35,8 @@
       <div class="col-md-6 mb-3">
         <label for="IP" class="form-label"> IP</label>
         <select name="ip" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">          
-          <?php if(!empty($all_ip)): ?>
-          <?php foreach($all_ip as $ip): ?>
+          <?php if(!empty($ip_remain)): ?>
+          <?php foreach($ip_remain as $ip): ?>
             <option <?= old_selected('type', $ip) ?> value="<?=$ip?>"><?=$ip?></option>
           <?php endforeach ?>
           <?php endif ?>
@@ -46,7 +46,7 @@
       </div>
       <div class="col-md-6 mb-3">
         <label for="MAC" class="form-label">MAC</label>
-        <input type="text" name="mac" value="<?= old_value('sn') ?>" class="form-control" placeholder="MAC Address" aria-label="MAC" aria-describedby="addon-wrapping">
+        <input type="text" name="mac" value="<?= old_value('mac') ?>" class="form-control" placeholder="MAC Address" aria-label="MAC" aria-describedby="addon-wrapping">
         
       </div>
       <div class="col-md-6 mb-3">

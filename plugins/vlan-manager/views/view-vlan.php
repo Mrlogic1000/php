@@ -27,13 +27,24 @@
            
 
        
-            <?php if (!empty($vlan)) : ?>
-
-              
+            <?php if (!empty($vlan)) : ?>            
                    
                         <div class="card p-2" style="display: grid; gap:20px; grid-template-columns: repeat(8, auto); ">
-                            <?php $ips = getEachIpInRange("$vlan->ip/$vlan->cidr") ?>
-                            <?php foreach ($ips as $ip) : ?>
+                            <?php 
+                            
+                            $ips = getEachIpInRange("$vlan->ip/$vlan->cidr") ;                                           
+                            
+                            
+                            ?>
+                            
+                            <?php foreach ($ips as $key=>$ip) :
+                                
+                                
+                                ?>
+                                 <?php if(in_array($ip,$device_ip)) :?>
+                                    <?php $ip =  '<div style="background-color: red; text-align:center">'.  $ip .'</div>'?>                                    
+                                   
+                                    <?php endif ?>
                              
                              <div>   <?= $ip ?></div>
                            

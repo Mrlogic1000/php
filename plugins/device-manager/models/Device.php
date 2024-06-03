@@ -59,6 +59,14 @@ class Device extends Model{
             "required",
 
         ],
+        "ip" => [           
+            "ip",
+
+        ],
+        "mac" => [           
+            "mac",
+
+        ],
 
     ];
     protected $onInsertValidationRules = [
@@ -69,6 +77,18 @@ class Device extends Model{
        
         "status" => [           
             "required",
+
+        ],
+        "status" => [           
+            "required",
+
+        ],
+        "ip" => [           
+            "ip",
+
+        ],
+        "mac" => [           
+            "mac",
 
         ],
 

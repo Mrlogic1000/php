@@ -172,6 +172,14 @@ class Model extends Database
                                 $this->errors[$column] = "Invalid " . $column . " address";
                             }
                             break;
+
+                        case "mac":
+                            if (false === filter_var($data[$column], FILTER_VALIDATE_MAC)) {
+                                $this->errors[$column] = "Invalid " . $column . " address";
+                            }
+                           
+                            break;
+
                         case "alpha_space":
 
                             if (!preg_match("/^[a-zA-Z ]+$/", trim($data[$column]))) {

@@ -30,7 +30,7 @@ if(user_can('view_outlets')){
         $vars = get_value();
     
         $obj = (object)[];
-        $obj->title = 'Vlans';
+        $obj->title = 'IP';
         $obj->link = ROOT . '/' . $vars['admin_route'] . '/' . $vars['plugin_route'];
         $obj->icon = 'fa-solid fa-users';
         $obj->parent = 0;
@@ -98,7 +98,7 @@ add_action('basic-admin_main_content', function () {
             $devices = new \VlanManager\Device;
             $device = $devices->findAll();
             $device_ip = array_column($device,'ip');      
-            dd($device_ip)  ;    
+             
             require plugin_path('views/view-vlan.php');
         } else
         if (URL(2) == 'delete') {

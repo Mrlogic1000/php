@@ -12,7 +12,7 @@
 
         <form class="row g3 col-md-5 mx-auto shadow p-3 " method="post">
             <?= csrf() ?>
-            <h4 class="my-3">Add New Device</h4>
+            <h4 class="my-3">Edit Device</h4>
             <?php if (!empty($errors)) : ?>
                 <h6>Errors</h6>
                 <?php foreach ($errors as $error) : ?>
@@ -34,18 +34,25 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="IP" class="form-label"> IP</label>
+                
                 <select name="ip" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
-                    <?php if (!empty($all_ip)) : ?>
-                        <?php foreach ($all_ip as $ip) : ?>
-                            <option <?= old_selected('type', $ip) ?> value="<?= $ip ?>"><?= $ip ?></option>
+                    <?php if (!empty($all_ip)) : 
+                      
+                        ?>
+                        
+                        <?php foreach ($all_ip as $ip) : 
+                            ?>
+                            
+                            <option <?=  $device->ip ==  $ip ? ' selected ':''?> <?= old_selected('type', $ip) ?> value="<?= $ip ?>"> <?= $ip ?></option>
+                           
                         <?php endforeach ?>
                     <?php endif ?>
 
                 </select>
             </div>
             <div class="col-md-6 mb-3">
-                <label for="MAC" class="form-label">MAC</label>
-                <input type="text" name="mac" value="<?= old_value('sn', $device->sn) ?>" class="form-control" placeholder="MAC Address" aria-label="MAC" aria-describedby="addon-wrapping">
+                <label for="mac" class="form-label">MAC</label>
+                <input type="text" name="mac" value="<?= old_value('mac', $device->mac) ?>" class="form-control" placeholder="MAC Address" aria-label="mac" aria-describedby="addon-wrapping">
 
             </div>
             <div class="col-md-6 mb-3">

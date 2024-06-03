@@ -51,7 +51,18 @@
 
     <div class="col-md-6 mb-3">
       <label for="IP" class="form-label"> IP</label>
-      <input type="text" name="ip" value="<?= old_value('ip') ?>" class="form-control" placeholder="IP Address" aria-label="IP" aria-describedby="addon-wrapping">
+      <select name="ip" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+        <?php if (!empty($ip_remain)) : ?>
+
+          <?php foreach ($ip_remain as $ip) : ?>
+            <option <?= old_selected('ip', $ip) ?> value="<?= $ip ?>">
+            <?= $ip ?>
+          </option>
+
+          <?php endforeach ?>
+        <?php endif ?>
+      </select>
+      
 
     </div>
     <div class="col-md-6 mb-3">
