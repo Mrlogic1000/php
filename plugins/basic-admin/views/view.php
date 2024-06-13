@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="<?=plugin_http_path('assets/js/color-modes.js')?>"></script>
+  <head>
+    <script src="<?=plugin_http_path('assets/js/color-modes.js')?>"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,6 +19,8 @@
     
     <link href="<?=plugin_http_path('/assets/css/bootstrap.min.css')?>" rel="stylesheet">
     <link href="<?=plugin_http_path('/assets/css/all.min.css')?>" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <style>
@@ -96,6 +100,66 @@
       .bd-mode-toggle .dropdown-menu .active .bi {
         display: block !important;
       }
+      .modal-confirm {		
+	color: #636363;
+	width: 550px;
+}
+.modal-confirm .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;        
+}
+.modal-confirm .modal-header {
+	padding: 0 15px;
+	border-bottom: none;   
+	position: relative;
+}
+.modal-confirm h4 {
+	display: inline-block;
+	font-size: 26px;
+}
+.modal-confirm .close {
+	position: absolute;
+	top: -5px;
+	right: -5px;
+}
+.modal-confirm .modal-body {
+	color: #999;
+}
+.modal-confirm .modal-footer {
+	background: #ecf0f1;
+	border-color: #e6eaec;
+	text-align: right;
+	margin: 0 -20px -20px;
+	border-radius: 0 0 5px 5px;
+}	
+.modal-confirm .btn {
+	color: #fff;
+	border-radius: 4px;
+	transition: all 0.4s;
+	border: none;
+	padding: 8px 20px;
+	outline: none !important;
+}	
+.modal-confirm .btn-info {
+	background: #b0c1c6;
+}
+.modal-confirm .btn-info:hover, .modal-confirm .btn-info:focus {
+	background: #92a9af;
+}
+.modal-confirm .btn-danger {
+	background: #f15e5e;
+}
+.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+	background: #ee3535;
+}
+.modal-confirm .modal-footer .btn + .btn {
+	margin-left: 10px;
+}
+.trigger-btn {
+	display: inline-block;
+	margin: 100px auto;
+}
     </style>
 
     
@@ -265,5 +329,6 @@
   </div>
 </div>
 <script src="<?=plugin_http_path('assets/js/bootstrap.bundle.min.js')?>"></script>
+<script src="<?=plugin_http_path('assets/js/plugin.js')?>"></script>
 
 </html>

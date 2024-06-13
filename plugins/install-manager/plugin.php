@@ -118,17 +118,15 @@ add_action('basic-admin_main_content', function () {
 
         $outlets = $outletModel->findAll();
         $installs = $installModel->findAll();
+        $vlan_id = $vlans->findAll();
         $users = $userModel->findAll();
-        $install = $installModel->first(['id' => $id]);
 
-        $vlan_ips = $vlans->findAll();
-        $all_ip = [];
-        foreach ($vlan_ips as $key => $vlan) {
-            $all_ip[$key] = getEachIpInRange("$vlan->ip/$vlan->cidr");
-        }
-        $all_ip = array_merge([], ...$all_ip);
+        $installModel::$query_id = 'get-installed';
+        $install = $installModel->first(['id' => $id]);    
+       
+        
         $device_ip = array_column($devices, 'ip');
-        $ip_remain = array_diff($all_ip, $device_ip ?? []);
+        // $ip_remain = array_diff($all_ip, $device_ip ?? []);
         
         if (URL(2) == 'add') {
             require plugin_path('views/add-install.php');
@@ -166,6 +164,7 @@ add_filter('after_query', function ($data) {
         $outlets = new Outlet;
         $devices = new Device;
         $users = new User;
+        $vlans = new Vlan;
 
         foreach ($data['result'] as $key => $row) {
             $outlet = $outlets->first(['id' => $row->outlet_id]);
@@ -179,7 +178,8 @@ add_filter('after_query', function ($data) {
             $installer = $users->first(['id' => $row->user_id]);
             $data['result'][$key]->installer  = $installer;
         }
+        
     }
-
     return $data;
+
 });

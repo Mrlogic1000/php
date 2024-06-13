@@ -51,16 +51,8 @@
 
     </div>
 
-    <div class="col-md-6 mb-3">
-      <label for="IP" class="form-label"> IP</label>
-      <input type="text" name="ip" value="<?= old_value('ip') ?>" class="form-control" placeholder="IP Address" aria-label="IP" aria-describedby="addon-wrapping">
-
-    </div>
-    <div class="col-md-6 mb-3">
-      <label for="MAC" class="form-label">MAC</label>
-      <input type="text" name="mac" value="<?= old_value('sn') ?>" class="form-control" placeholder="MAC Address" aria-label="MAC" aria-describedby="addon-wrapping">
-
-    </div>
+    
+    
     <!-- <div class="col-md-6 mb-3">
       <label for="installer" class="form-label">Installer</label>
       <select name="user_id" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
@@ -93,6 +85,12 @@
     <div class="mb-3 col-md-6">
       <label for="version" class="form-label">Software Version</label>
       <input type="number" name="version" value="<?= old_value('version') ?>" class="form-control" placeholder="Software Version" aria-label="installer" aria-describedby="addon-wrapping">
+
+    </div>
+    <div class="col-md-12 mb-3">
+     
+      <label for="IP" class="form-label"> IP</label>
+      <input type="text" name="ip" value="<?= old_value('ip',$install->ip??'0.0.0.0') ?>" class="form-control" placeholder="IP Address" aria-label="MAC" aria-describedby="addon-wrapping">
 
     </div>
 

@@ -16,7 +16,6 @@ class Device extends Migration{
         $this->addColumn("ip varchar(200) null");
         $this->addColumn("mac varchar(200) null");
         $this->addColumn("model varchar(200) null");
-        $this->addColumn("version varchar(200) null");
         $this->addColumn("comment text null");
         $this->addColumn("status varchar(200) null");
         $this->addColumn("deleted tinyint(1) unsigned default 0");

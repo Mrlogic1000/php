@@ -85,12 +85,12 @@ add_action('basic-admin_main_content', function () {
 
 /** Device Ip managment */
     $vlans = new Vlan;
-    $vlan_ips = $vlans->findAll();
+    $vlan = $vlans->first(['id'=>4]);
     $all_ip = [];
-    foreach ($vlan_ips as $key => $vlan) {
-        $all_ip[$key] = getEachIpInRange("$vlan->ip/$vlan->cidr");
-    }
-    $all_ip = array_merge([], ...$all_ip);
+   
+        $all_ip= getEachIpInRange("172.3.100.0/24");
+    
+  
 //   Device Ip managment
 
 
@@ -100,21 +100,17 @@ add_action('basic-admin_main_content', function () {
         $outlets = new OutletManager\Outlet;
         $outlet = $outlets->findAll();
         $device = $devices->first(['id' => $id]);
+        $device_ip = $devices->findAll();
+       
+        $device_ip = array_column($device_ip, 'ip');
+        
+        $ip_remain = array_diff($all_ip, $device_ip ?? []);
+       
+        
 
-        if (URL(2) == 'add') {
-
-            $device_ip = $devices->findAll();
-            $device_ip = array_column($device_ip, 'ip');
-            $ip_remain = array_diff($all_ip, $device_ip ?? []);
-
-            require plugin_path('views/add-device.php');
-        } else
+       
         if (URL(2) == 'edit') {
-
             require plugin_path('views/edit-device.php');
-        } else
-        if (URL(2) == 'delete') {
-            require plugin_path('views/delete-device.php');
         } else
         if (URL(2) == 'view') {
             require plugin_path('views/view-device.php');

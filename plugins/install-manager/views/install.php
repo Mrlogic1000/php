@@ -20,6 +20,9 @@
                             <?= message() ?>
                         </div>
                     <?php endif ?>
+                    <div id="errorMessage" class="alert alert-danger d-none">
+
+                    </div>
 
 
                     <form class="input-group mb-3 mx-auto">
@@ -32,9 +35,8 @@
 
                             <th>Outlet</th>
                             <th>Device</th>
+                            <th>IP</th>
                             <th>Installer</th>
-                            <th>Software</th>
-                            <th>Version</th>
 
 
                             <th>
@@ -71,6 +73,14 @@
 
                                         </td>
                                         <td>
+                                            <a href="<?= ROOT ?>/<?= $admin_route ?>/device/view/<?= $install->device->id ?>">
+
+                                                <?= $install->device->ip ?>
+                                            </a>
+
+                                        </td>
+                                        
+                                        <td>
                                             <a href="<?= ROOT ?>/<?= $admin_route ?>/user/view/<?= $install->installer->id ?? '' ?>">
                                                 <div class="d-flex align-items-center justify-content-between">
                                                     <!-- <img src="<?= get_image($install->installer->image ?? '') ?>"  style="width: 60px; height: 60px; object-fit:cover" alt="" >  -->
@@ -80,24 +90,16 @@
 
                                             </a>
 
-                                        </td>
-
-
-
-
-
-                                        <td>
-                                            <?= $install->software ?>
+                                        
+                                           
 
                                         </td>
-                                        <td>
-                                            <?= $install->version ?>
-
-                                        </td>
+                                        
 
 
                                         <td>
                                             <div class="d-flex gap-2">
+                                               
                                                 <?php if (user_can('view_device_detail')) : ?>
                                                     <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/view/<?= $install->id ?>">
                                                         <button class="btn btn-primary btn-sm">
@@ -116,12 +118,12 @@
                                                     </a>
                                                 <?php endif ?>
                                                 <?php if (user_can('delete_device')) : ?>
-                                                    <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/delete/<?= $install->id ?>">
-                                                        <button class="btn btn-danger btn-sm">
+                                                    <!-- <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/delete/<?= $install->id ?>"> -->
+                                                        <button id="<?= $install->id ?>" class="delete btn btn-danger btn-sm">
                                                             <i class="fa-solid fa-pen-to-square"></i>
                                                             Delete
                                                         </button>
-                                                    </a>
+                                                    <!-- </a> -->
                                                 <?php endif ?>
                                             </div>
                                         </td>
@@ -133,7 +135,7 @@
                                 <?php endif ?>
                         </tbody>
                     </table>
-                    <!-- <?= $pager->display() ?> -->
+               
                 </div>
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">first</div>
                 <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">second</div>
@@ -148,12 +150,26 @@
         </div>
 
     <?php endif ?>
-    <script>
-        let show = false;
+    <script src="<?=plugin_http_path('/assets/js/plugin.js')?>">
+    $(document).on('click','.delete',function(){
+    var id = $(this).attr("id");
+    $.ajax({
+        url:"<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/delete/"+id,
+        method: "POST",
+        data:{id:id},
+        success:function(response){
+            var res = jQuery.parseJSON(response);
+            if(res.status == 422){
 
-        function display() {
-            show = true;
-            return show;
 
+            }
+            alert('delete successfully')
         }
+    })
+})
+      
+  
+
     </script>
+
+    

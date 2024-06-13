@@ -72,7 +72,7 @@ class Device extends Model{
     protected $onInsertValidationRules = [
         "name" => [            
             "required",
-            "unique",
+            
         ],
        
         "status" => [           

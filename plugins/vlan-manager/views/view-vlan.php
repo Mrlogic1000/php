@@ -32,7 +32,7 @@
                         <div class="card p-2" style="display: grid; gap:20px; grid-template-columns: repeat(8, auto); ">
                             <?php 
                             
-                            $ips = getEachIpInRange("$vlan->ip/$vlan->cidr") ;                                           
+                            $ips = getEachIpInRange("$vlan->ip/$vlan->cidr") ;                              
                             
                             
                             ?>
