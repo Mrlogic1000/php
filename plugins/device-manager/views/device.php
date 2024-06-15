@@ -9,6 +9,9 @@
                 </div>
             <?php endif ?>
 
+
+
+
             <!-- save add new modal -->
 
             <div class="modal fade" id="newModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -23,11 +26,11 @@
                                 <?= csrf() ?>
                                 <h4 class="my-3">Add New Device</h4>
                                 <div class="alert alert-danger d-none">
-                
-            </div>
+
+                                </div>
 
                                 <div class="col-md-12 mb-3">
-                                <label for="name" class="form-label">Device</label>
+                                    <label for="name" class="form-label">Device</label>
                                     <select name="name" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
                                         <option <?= old_selected('name', 'Switch') ?> value="Router">Router</option>
                                         <option <?= old_selected('name', 'Switch') ?> value="Switch">Switch</option>
@@ -48,7 +51,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="IP" class="form-label"> IP</label>
                                     <input type="text" name="ip" value="<?= old_value('ip') ?>" class="form-control" placeholder="IP Address" aria-label="IP" aria-describedby="addon-wrapping">
-                                    
+
 
                                 </div>
                                 <div class="col-md-6 mb-3">
@@ -78,7 +81,7 @@
                                         <option <?= old_selected('status', 'bad') ?> value="faulty">Fauty</option>
                                     </select>
                                 </div>
-                                
+
                                 <div class="mb-3 col-md-6 ">
                                     <label for="model" class="form-label">Model</label>
                                     <input type="text" name="model" value="<?= old_value('model') ?>" class="form-control" placeholder="Model" aria-label="Model" aria-describedby="addon-wrapping">
@@ -99,7 +102,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" id="save"  class="save btn btn-primary">Save
+                            <button type="submit" id="save" class="save btn btn-primary">Save
                                 changes</button>
                         </div>
                         </form>
@@ -123,7 +126,7 @@
                                 <?= csrf() ?>
                                 <h4 class="my-3">Edit Device</h4>
                                 <input type="text" hidden id="id" name="id" value="" class="form-control" placeholder="Serial Number" aria-label="Username" aria-describedby="addon-wrapping">
-                               
+
 
                                 <div class="col-md-12 mb-3">
                                     <label for="name" class="form-label">Device</label>
@@ -179,7 +182,7 @@
                                         <option <?= old_selected('status', 'bad') ?> value="faulty">Fauty</option>
                                     </select>
                                 </div>
-                               
+
                                 <div class="mb-3 col-md-6 ">
                                     <label for="model" class="form-label">Model</label>
                                     <input type="text" id="model" name="model" value="<?= old_value('model') ?>" class="form-control" placeholder="Model" aria-label="Model" aria-describedby="addon-wrapping">
@@ -206,9 +209,11 @@
                 <input type="text" name="find" value="<?= old_value('find', '', 'get') ?>" class="form-control" aria-label="Amount (to the nearest dollar)">
                 <button class="input-group-text  text-white" style="background-color: #191C1F;  color:white;">Search</button>
             </form>
-           
+
+            <div class="alert alert-success d-none"></div>
 
             <table id="table" class="table table-striped ">
+                <!-- <div class="alert alert-success d-none"></div> -->
                 <tr>
 
                     <th>Device</th>
@@ -261,7 +266,7 @@
                                     <?= $device->model ?? 'Unknown' ?>
 
                                 </td>
-                               
+
 
 
                                 <td>
@@ -272,16 +277,16 @@
 
                                 <td>
                                     <div class="d-flex gap-2">
-                                    <?php if (user_can('install_device')) : ?>
-                                        <button class="btn btn-primary btn-sm">
-                                        <i class="fa-solid fa-plug"></i>
-                                        </button>
-                                    <?php endif ?>
+                                        <?php if (user_can('install_device')) : ?>
+                                            <button class="btn btn-primary btn-sm">
+                                                <i class="fa-solid fa-plug"></i>
+                                            </button>
+                                        <?php endif ?>
                                         <?php if (user_can('view_device_detail')) : ?>
                                             <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/view/<?= $device->id ?>">
                                                 <button class="btn btn-primary btn-sm">
                                                     <i class="fa-solid fa-eye"></i>
-                                                   
+
                                                 </button>
                                             </a>
                                         <?php endif ?>
@@ -289,13 +294,13 @@
 
                                             <button id="<?= $device->id ?>" class="edit btn btn-info" onclick="editModal.show()">
                                                 <i class="fa-solid fa-pen-to-square"></i>
-                                               
+
                                             </button>
                                         <?php endif ?>
                                         <?php if (user_can('delete_device')) : ?>
                                             <button id="<?= $device->id ?>" class="delete btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            <i class="fa-solid fa-trash"></i>
-                                                
+                                                <i class="fa-solid fa-trash"></i>
+
                                             </button>
 
 
@@ -350,112 +355,168 @@
         </div>
 
     <?php endif ?>
+
+
+
+    <div id="alert" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+
+                    </div>
+                    <h4 class="modal-title w-100">Awesome!</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">Your booking has been confirmed. Check your email for detials.</p>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="testModal.hide()" data-bs-dismiss="modal" class="btn btn-success btn-block">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
- var editModal = new bootstrap.Modal($('#editModal'), {})
+        var editModal = new bootstrap.Modal($('#editModal'), {})
+
         var newModal = new bootstrap.Modal($('#newModal'), {})
 
+        var alertModal = new bootstrap.Modal($('#alert'), {})
 
-        function send_data(formdata,obj){            
-            for(key in obj){
-                formdata.append(key, obj[key])            }
 
+
+
+
+
+
+        function send_data(formdata, obj) {
+            for (key in obj) {
+                formdata.append(key, obj[key])
+            }
             $.ajax({
-                url: '<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/add',
+                url: '<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/ajax',
                 method: 'POST',
                 data: formdata,
                 processData: false,
                 contentType: false,
                 success: function(response) {
-                    var db = JSON.parse(response);                  
-                    var errors = db.errors;
-                    if(db.statusCode == 400){
-                        $('.alert').removeClass('d-none')
-                        $.each(errors,function(key,error){
-                            $('.alert').append('<li>'+key.toUpperCase()+" : "+error+'</li>')                            
-                        })
-                    }else if(db.statusCode == 200){
-                        newModal.hide();
-                        location.reload()
-                    }
-                    
+                    var db = JSON.parse(response);
+
+                    handel_result(db)
+
 
                 }
 
             })
 
+
         }
-       
-       
+
+        function handel_result(obj) {
+            if (typeof obj == 'object') {
+
+                if (obj.statusCode == 200) {
+
+                    if (obj.form_id == 'row') {
+                        var row = obj.row
+                        for (key in row) {
+                            if (key == 'comment') {
+                                $(`textarea#${key}`).text(row[key])
+                            }
+                            $(`#${key}`).val(row[key])
+                        }
+                    } else {
+                        if (obj.form_id == 'save') {
+                            newModal.hide()
+                            $("#saveForm")[0].reset()
+                        } else {
+                            if (obj.form_id == 'edit') {
+
+                                editModal.hide()
+                                $("#editForm")[0].reset()
+                            }
+                        }
+                        var message = obj.message
+                        $("#table").load("<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?> #table");
+                        $('.alert').removeClass('d-none')
+                        $('.alert').text(message)
+                        setTimeout(function() {
+                            $('.alert').text("")
+                            $('.alert').addClass('d-none')
+                           
+                        }, 2000);
+
+
+
+
+
+                    }
+
+                } else
+                if (obj.statusCode == 400) {
+                    var errors = obj.errors;
+                    $('.alert').removeClass('d-none')
+                    $('.alert').text(errors)
+                    errors = '';
+
+
+                }
+            }
+
+
+        }
+
+
         $(document).on('click', '#close', function() {
             editModal.hide()
-           
-           
+
+
         })
 
         $(document).on('submit', '#saveForm', function(e) {
             $("#insertBtn").attr("disabled", "disabled");
             e.preventDefault();
+
             var formdata = new FormData(this);
-         var obj = {form_id:'save'}
-            send_data(formdata,obj)
-           
+            var obj = {
+                form_id: 'save'
+            }
+            send_data(formdata, obj);
+
+
+
         })
 
         $(document).on('submit', '#editForm', function(e) {
             $("#insertBtn").attr("disabled", "disabled");
             e.preventDefault();
-            var formdata = new FormData(this);
-            var obj = {'id':id,
-                'form_id':'edit'}
-            send_data(formdata,obj)
-           
-           
 
-           
+            var formdata = new FormData(this);
+            var obj = {
+                'form_id': 'edit'
+            }
+            send_data(formdata, obj)
+
+
+
+
         })
+
 
 
         $(document).on('click', '.edit', function() {
             var id = $(this).attr('id');
-            
+
             var formdata = new FormData();
-            var data = {
-                'id':id,
-                'form_id':'edit'
-            } 
-            for(key in data){
-                formdata.append(key,data[key])
-            }    
-          
-
-            $.ajax({
-                url: '<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/add',
-                method: 'POST',
-                data: formdata,
-                processData: false,       
-                contentType: false,
-                success: function(response) {
-                    var db = JSON.parse(response);   
-                    alert(typeof db)               
-                    for(key in db){
-                      if(key== 'comment'){  
-                                                
-                            $(`textarea#${key}`).text(db[key])
-                        }
-                        $(`#${key}`).val(db[key])
-                    }
-                                         
-              
-
-
-                }
-
-            })
+            var obj = {
+                'id': id,
+                'form_id': 'row'
+            }
+            send_data(formdata, obj)
         })
 
-        function handel_result(){
-            
-        }
+
 
 
         $(document).on('click', '.delete', function(e) {
@@ -463,32 +524,18 @@
             var id = $(this).attr('id');
             var formdata = new FormData();
             formdata.append("form_id", "delete")
-            formdata.append("id", id)
+            var obj = {
+                id: id
+            }
 
             $('.confirm').click(function() {
                 var ok = $(this).attr('id')
-                console.log(ok)
+
                 if (ok) {
-                    $.ajax({
-                        url: "<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/add",
-                        method: 'POST',
-                        data: formdata,
-                        processData: false,
-                        contentType: false,
-                        success: function(response) {
-                            var db = JSON.parse(response);
-                            $("#table").load(
-                                "<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?> #table");
-
-
-                        }
-
-                    })
+                    send_data(formdata, obj)
 
                 }
             })
-
-
 
 
 

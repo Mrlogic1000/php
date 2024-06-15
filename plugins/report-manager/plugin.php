@@ -81,6 +81,12 @@ add_action('controller',function(){
             require plugin_path('controllers/delete-controller.php');
 
 
+        }else
+        if(URL(2)== 'ajax'){
+            require plugin_path('controllers/controller.php');
+            die;
+
+
         }
 
     }

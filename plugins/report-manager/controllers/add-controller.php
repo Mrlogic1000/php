@@ -10,6 +10,18 @@ if($req->posted()){
         message('The record inserted successfully');
         redirect($vars['admin_route'].'/'.$vars['plugin_route']);
    }
+
+   if($postdata['form_id'] == 'delete'){
+      $devices->delete($postdata['id']);
+      echo json_encode([
+          "statusCode" => 200,
+          "message" => "Data deleted successfully 😀",
+          "form_id"=>$postdata['form_id']
+        ]);
+      die;
+
+
+  }
         
     
 }
