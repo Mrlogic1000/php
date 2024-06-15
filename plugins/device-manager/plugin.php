@@ -115,6 +115,7 @@ add_action('basic-admin_main_content', function () {
             $devices::$query_id = 'get-device';
             $devices = $devices->findAll();
             require plugin_path('views/device.php');
+            
             }
            
         }
