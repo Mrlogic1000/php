@@ -1,6 +1,7 @@
 <?php
 
-
+use DeviceManager\Device;
+use DeviceManager\Install;
 
 if ($req->posted()) {
 
@@ -51,8 +52,37 @@ if ($req->posted()) {
             die;
 
 
+        }else
+        if($postdata['form_id'] == 'install'){
+            $install = new DeviceManager\Install;
+            $install_device = $install->first(['device_id'=>$postdata['device_id']]);
+           if($install_device){
+            $install->update($install_device->id,$postdata);
+            echo json_encode([
+                "statusCode" => 200,
+                "message" => "Data updated successfully 😀",
+                "form_id"=>$install_device,
+                
+              ]);
+           }else{
+            $ses = new \Core\Session;
+            $userId = $ses->user('id');
+            $postdata['user_id'] = $userId;
+            $install->insert($postdata);
+            echo json_encode([
+                "statusCode" => 200,
+                "message" => "Data updated successfully 😀",
+                "form_id"=>$install_device,
+                
+              ]);
+           }
+
+           
+            die;
+
         }
-    } else {
+    } 
+    else {
         foreach($devices->errors as $key=>$error){
             echo json_encode([
                 "statusCode" => 400,

@@ -81,9 +81,9 @@ class Model extends Database
 
         // marge data because only one variable supply in the database class/trait
         $data = array_merge($data, $data_not);
-        
+        // echo json_encode($query);       
         $result = $this->query($query, $data, 'object');
-
+        
         if ($result)
             return $result[0];
 

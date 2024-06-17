@@ -2,6 +2,7 @@
 if ($req->posted()) {
    
     $postdata = $req->post();
+  
     if ($installModel->validate($postdata)) {
         $postdata['date_created'] = date('Y-m-d H:i:s');
         $postdata['user_id'] = $userId;      

@@ -33,13 +33,13 @@
 
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="IP" class="form-label"> IP</label>
+                                    <label for="IP" class="form-label"> IP (For network devices)</label>
                                     <input type="text" name="ip" value="<?= old_value('ip') ?>" class="form-control" placeholder="IP Address" aria-label="IP" aria-describedby="addon-wrapping">
 
 
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="MAC" class="form-label">MAC</label>
+                                    <label for="MAC" class="form-label">MAC (For network devices)</label>
                                     <input type="text" name="mac" value="<?= old_value('mac') ?>" class="form-control" placeholder="MAC Address" aria-label="MAC" aria-describedby="addon-wrapping">
 
                                 </div>

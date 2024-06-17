@@ -8,20 +8,9 @@
                     <?= message() ?>
                 </div>
             <?php endif ?>
-
-
-
-
-            <!-- save add new modal -->
-
-            <?php require plugin_path('views/newModal.php');?>
-            
-            <!-- -------------------------------------------------------------------- -->
-
-
-            <!-- save edit modal -->
-
-           <?php require plugin_path('views/editModal.php');?>
+            <?php require plugin_path('views/newModal.php'); ?>
+            <?php require plugin_path('views/editModal.php'); ?>
+            <?php require plugin_path('views/installDevice.php'); ?>
             <!-- -------------------------------------------------------------------- -->
 
 
@@ -38,24 +27,16 @@
 
                     <th>Device</th>
                     <th>Type</th>
-                    <th>ID</th>
+                    <th>IP</th>
                     <th>ID2</th>
+                    <th>Outlet</th>
                     <th>Model</th>
                     <th>Status</th>
-
-
                     <th>
                         <?php if (user_can('view_users')) : ?>
-                            <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary" onclick="newModal.show()">
                                 Add New
                             </button>
-
-                            <!-- <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/add">
-                                        <button class="btn btn-bd-primary btn-sm">
-                                            <i class="fa-solid fa-plus"></i>
-                                            Add New</button>
-                                    </a> -->
                         <?php endif ?>
 
                     </th>
@@ -66,39 +47,28 @@
                         <?php foreach ($devices as $device) : ?>
                             <tr>
 
+                                <td><?= esc($device->name) ?></td>
+                                <td><?= $device->type ?></td>
                                 <td>
-                                    <?= esc($device->name) ?>
-                                </td>
-                                <td>
-                                    <?= $device->type ?>
-
-                                </td>
-
-                                <td>
-                                    <?= $device->ip ?>
+                                <?= $device->ip ?>
 
                                 </td>
+                                <td><?= $device->mac ?></td>
+                                <td> <select name="outlet_id" id="<?= $device->id ?>" onchange="getValue(this,<?= esc($device->id) ?>)" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+                                        <?php if (!empty($outlets)) : ?>
+                                            <?php foreach ($outlets as $outlet) : ?>
+                                                <option  value="0">Unstall</option>
+                                                <option <?= in_array($outlet->id,$device->install??[])?" selected":''?> value="<?= $outlet->id ?>"><?= $outlet->outlet?></option>
+                                            <?php endforeach ?>
+                                        <?php endif ?>
+                                    </select></td>
+                                <td><?= $device->model ?? 'Unknown' ?></td>
                                 <td>
-                                    <?= $device->mac ?>
-
-                                </td>
-                                <td>
-                                    <?= $device->model ?? 'Unknown' ?>
-
-                                </td>
-
-
-
-                                <td>
-                                    <?= $device->status ?>
-
-                                </td>
-
-
+                                    <i class="fa-solid fa-microchip  <?= $device->status == 'good' ? 'text-success' : 'text-danger' ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $device->status ?>"></i>
                                 <td>
                                     <div class="d-flex gap-2">
                                         <?php if (user_can('install_device')) : ?>
-                                            <button class="btn btn-primary btn-sm">
+                                            <button class="btn btn-primary btn-sm" onclick="installDevice.show()">
                                                 <i class="fa-solid fa-plug"></i>
                                             </button>
                                         <?php endif ?>
@@ -139,13 +109,7 @@
         </div>
 
         </div>
-        <!-- mini header -->
-
-
         </div>
-        <!-- Button trigger modal -->
-
-
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-confirm">
@@ -199,10 +163,9 @@
 
     <script>
         var editModal = new bootstrap.Modal($('#editModal'), {})
-
         var newModal = new bootstrap.Modal($('#newModal'), {})
-
         var alertModal = new bootstrap.Modal($('#alert'), {})
+        var installDevice = new bootstrap.Modal($('#installDevice'), {})
 
 
 
@@ -210,12 +173,12 @@
 
 
 
-        function send_data(formdata, obj,address) {
+        function send_data(formdata, obj, address) {
             for (key in obj) {
                 formdata.append(key, obj[key])
             }
             $.ajax({
-                url: address??'<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/ajax',
+                url: address ?? '<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/ajax',
                 method: 'POST',
                 data: formdata,
                 processData: false,
@@ -232,6 +195,8 @@
 
 
         }
+       
+       
 
         function handel_result(obj) {
             if (typeof obj == 'object') {
@@ -258,13 +223,13 @@
                             }
                         }
                         var message = obj.message
-                        $("#table").load("<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?> #table");
+                        // $("#table").load("<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?> #table");
                         $('.alert').removeClass('d-none')
                         $('.alert').text(message)
                         setTimeout(function() {
                             $('.alert').text("")
                             $('.alert').addClass('d-none')
-                           
+
                         }, 2000);
 
 
@@ -360,4 +325,17 @@
 
 
         })
+
+
+
+        function getValue(e,id){
+            var outlet_id = e.value;                    
+            var formdata = new FormData();
+            var obj = {
+                'device_id':id,
+                'outlet_id': outlet_id,
+                'form_id': 'install'
+            }
+            send_data(formdata,obj)
+        }
     </script>

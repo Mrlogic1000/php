@@ -114,6 +114,8 @@ add_action('basic-admin_main_content', function () {
                 $vars = get_value();
             $devices::$query_id = 'get-device';
             $devices = $devices->findAll();
+            $OutletManager = new Outlet;
+            $outlets = $OutletManager->findAll();
             require plugin_path('views/device.php');
             
             }
@@ -132,8 +134,12 @@ add_filter('after_query', function ($data) {
         $outlets = new OutletManager\Outlet;
 
         foreach ($data['result'] as $key => $row) {
-            $outlet = $outlets->first(['id' => $row->id]);
-            $data['result'][$key]->outlet = $outlet;
+            $query = 'select * from install  where outlet_id in (select outlet_id from install where device_id = :device_id) limit 1';
+            $install = $outlets->query($query,['device_id'=>$row->id]); 
+            $install = array_column($install,'outlet_id');
+            if($install){               
+                $data['result'][$key]->install = $install;
+            }
         }
         // dd($data);
     }

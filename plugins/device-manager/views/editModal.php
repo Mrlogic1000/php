@@ -33,7 +33,7 @@
 
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="IP" class="form-label"> IP</label>
+                                    <label for="IP" class="form-label"> IP (For network devices)</label>
                                     <input type="text" id="ip" name="ip" value="<?= old_value('ip') ?>" class="form-control" placeholder="IP Address" aria-label="Username" aria-describedby="addon-wrapping">
                                 </div>
 
@@ -68,7 +68,7 @@
                                 </div>
 
                                 <div class="mb-3 col-md-6 ">
-                                    <label for="model" class="form-label">Model</label>
+                                    <label for="model" class="form-label">Model (For network devices)</label>
                                     <input type="text" id="model" name="model" value="<?= old_value('model') ?>" class="form-control" placeholder="Model" aria-label="Model" aria-describedby="addon-wrapping">
 
 
