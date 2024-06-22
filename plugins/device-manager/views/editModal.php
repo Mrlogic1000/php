@@ -6,7 +6,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="editForm" class="mx-auto row ">
+                            <form onsubmit="submitForm(this,null,'edit')" id="editForm" class="mx-auto row ">
                                 <?= csrf() ?>
                                 <h4 class="my-3">Edit Device</h4>
                                 <input type="text" hidden id="id" name="id" value="" class="form-control" placeholder="Serial Number" aria-label="Username" aria-describedby="addon-wrapping">

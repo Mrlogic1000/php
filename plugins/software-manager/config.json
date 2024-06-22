@@ -1,0 +1,17 @@
+{
+    "name":"software Manager",
+    "version":"1.0.0",
+    "id":"software-manager",
+    "author":"",
+    "author website":"",
+    "thumbnail":"thumbnail.jpg",
+    "active":true,
+    "index":5,
+    "routes":{
+        "on":["admin"],
+        "off":[]
+    },
+    "dependencies":{
+
+    }
+}

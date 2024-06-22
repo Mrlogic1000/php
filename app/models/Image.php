@@ -84,7 +84,7 @@ class Image{
         // --------------------------
         imagecopyresampled($dst_image, $image,0,0,0,0, $dst_w, $dst_h, $src_w, $src_h);
         imagedestroy($image);
-        if($typa=='image/jpeg' && $angle != 0){
+        if($type =='image/jpeg' && $angle != 0){
             $dst_image = imagerotate($dst_image, $angle,0);
         }
         switch($type){

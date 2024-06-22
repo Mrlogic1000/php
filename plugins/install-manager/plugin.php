@@ -62,37 +62,25 @@ add_action('controller', function () {
     $installModel = new Install;
     $deviceModel = new Device;
     $userModel = new User;
-    $outletModel = new Outlet;  
-
-   
+    $outletModel = new Outlet; 
 
     $outlets = $outletModel->findAll();
     $installs = $installModel->findAll();
     $users = $userModel->findAll();
     $install = $installModel->first(['id' => $id]);
     $devices = $deviceModel->findAll();
-
-
-   
-
-
-
     $device = $deviceModel->first(['id' => $id]);
     $vars = get_value();
     $admin_route = $vars['admin_route'];
     $plugin_route = $vars['plugin_route'];
-
+    
     if ($req->posted() && URL(1) == $plugin_route) {
-        if (URL(2) == 'add') {
-            require plugin_path('controllers/add-controller.php');
-        } else
-        if (URL(2) == 'edit') {
-            require plugin_path('controllers/edit-controller.php');
-        } else
-        if (URL(2) == 'delete') {
-            require plugin_path('controllers/delete-controller.php');
-        }
+        if (URL(2) == 'ajax') {
+            require plugin_path('controllers/ajax-controller.php');
+            die;
+        } 
     }
+    
 });
 
 // display the view files
@@ -141,12 +129,15 @@ add_action('basic-admin_main_content', function () {
         if (URL(2) == 'view') {
             require plugin_path('views/view-install.php');
         } else {
+            if (URL(2) !== 'ajax') {
+                $vars = get_value();
+                $installModel::$query_id = 'get-installed';
+                $installs = $installModel->findAll();
+    
+                require plugin_path('views/install.php');
+            }
 
-            $vars = get_value();
-            $installModel::$query_id = 'get-installed';
-            $installs = $installModel->findAll();
-
-            require plugin_path('views/install.php');
+           
         }
     }
 });
@@ -178,6 +169,7 @@ add_filter('after_query', function ($data) {
             $installer = $users->first(['id' => $row->user_id]);
             $data['result'][$key]->installer  = $installer;
         }
+        // dd($data);
         
     }
     return $data;

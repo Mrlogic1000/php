@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="saveForm" onsubmit="submitForm(this,<?= $de ?>,'install')" class="mx-auto row ">
+                <form id="saveForm" class="mx-auto row ">
                     <?= csrf() ?>
                     <div class="col-md-6 mb-3">
                         <label for="outlet" class="form-label">Outlet</label>

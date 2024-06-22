@@ -1,6 +1,6 @@
     <?php if (user_can('view_users')) : ?>
 
-
+        
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="false">installs</button>
@@ -15,11 +15,7 @@
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <div class="table-responsive">
-                    <?php if (!empty(message())) : ?>
-                        <div class="alert alert-success">
-                            <?= message() ?>
-                        </div>
-                    <?php endif ?>
+                   
                     <div id="errorMessage" class="alert alert-danger d-none">
 
                     </div>
@@ -30,23 +26,26 @@
                         <button class="input-group-text  text-white" style="background-color: #191C1F;  color:white;">Search</button>
                     </form>
 
+                    <div class="alert alert-success d-none"></div>
+                    <?php require plugin_path('views/newModal.php'); ?>
+
                     <table class="table table-striped ">
                         <tr>
 
                             <th>Outlet</th>
                             <th>Device</th>
                             <th>IP</th>
+                            <th>version</th>
                             <th>Installer</th>
 
 
                             <th>
                                 <?php if (user_can('view_users')) : ?>
 
-                                    <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/add">
-                                        <button class="btn btn-bd-primary btn-sm">
+                                        <button class="btn btn-bd-primary btn-sm" onclick="newModal.show()">
                                             <i class="fa-solid fa-plus"></i>
-                                            Add New</button>
-                                    </a>
+                                            Add New
+                                        </button>
                                 <?php endif ?>
 
                             </th>
@@ -66,7 +65,7 @@
 
                                         </td>
                                         <td>
-                                            <a href="<?= ROOT ?>/<?= $admin_route ?>/device/view/<?= $install->device->id ?>">
+                                            <a href="<?= ROOT ?>/<?= $admin_route ?>/devices/view/<?= $install->device->id ?>">
 
                                                 <?= $install->device->name ?>
                                             </a>
@@ -75,11 +74,14 @@
                                         <td>
                                             <a href="<?= ROOT ?>/<?= $admin_route ?>/device/view/<?= $install->device->id ?>">
 
-                                                <?= $install->device->ip ?>
+                                                <?= $install->ip ?>
                                             </a>
 
                                         </td>
-                                        
+                                        <td>
+
+                                            <?= $install->version ?>
+                                        </td>
                                         <td>
                                             <a href="<?= ROOT ?>/<?= $admin_route ?>/user/view/<?= $install->installer->id ?? '' ?>">
                                                 <div class="d-flex align-items-center justify-content-between">
@@ -150,23 +152,156 @@
         </div>
 
     <?php endif ?>
-    <script src="<?=plugin_http_path('/assets/js/plugin.js')?>">
-    $(document).on('click','.delete',function(){
-    var id = $(this).attr("id");
-    $.ajax({
-        url:"<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/delete/"+id,
-        method: "POST",
-        data:{id:id},
-        success:function(response){
-            var res = jQuery.parseJSON(response);
-            if(res.status == 422){
 
 
+
+    <script>
+    // var editModal = new bootstrap.Modal($('#editModal'), {})
+        var newModal = new bootstrap.Modal($('#newModal'), {})
+        // var softModal = new bootstrap.Modal($('#softModal'), {})
+        // var alertModal = new bootstrap.Modal($('#alert'), {})
+        // var installDevice = new bootstrap.Modal($('#installDevice'), {})
+
+        function send_data(formdata, obj) {
+            for (key in obj) {
+                formdata.append(key, obj[key])
             }
-            alert('delete successfully')
+            $.ajax({
+                url: '<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/ajax',
+                method: 'POST',
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    var db = JSON.parse(response);                   
+                    handel_result(db)
+
+
+                }
+
+            })
+
+
         }
-    })
-})
+
+
+
+        // function handel_result(obj) {
+        //     if (typeof obj == 'object') {
+
+        //         if (obj.statusCode == 200) {
+
+        //             if (obj.form_id == 'row') {
+        //                 var row = obj.row
+        //                 for (key in row) {
+        //                     if (key == 'comment') {
+        //                         $(`textarea#${key}`).text(row[key])
+        //                     }
+        //                     $(`#${key}`).val(row[key])
+        //                 }
+        //             } else {
+        //                 if (obj.form_id == 'new') {
+        //                     newModal.hide()
+        //                     $("#saveForm")[0].reset()
+        //                 } else {
+        //                     if (obj.form_id == 'edit') {
+        //                         editModal.hide()
+        //                         $("#editForm")[0].reset()
+        //                     }
+        //                 }
+        //                 var message = obj.message
+        //                 // $("#table").load("<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?> #table");
+        //                 $('.alert').removeClass('d-none')
+        //                 $('.alert').text(message)
+        //                 setTimeout(function() {
+        //                     $('.alert').text("")
+        //                     $('.alert').addClass('d-none')
+
+        //                 }, 2000);
+
+        //             }
+
+        //         } else
+        //         if (obj.statusCode == 400) {
+        //             var errors = obj.errors;
+        //             $('.alert').removeClass('d-none')
+        //             $('.alert').text(errors)
+        //             errors = '';
+
+
+        //         }
+        //     }
+
+
+        // }
+
+
+        // $(document).on('click', '#close', function() {
+        //     editModal.hide()
+
+
+        // })
+
+
+
+
+
+        function submitForm(data, id, type,event) {
+            event.preventDefault();   
+           
+            if (type == 'delete') {
+                var formdata = new FormData();
+                $('.confirm').click(function() {
+                    var ok = $(this).attr('id')
+                    if (ok) {
+                        send_data(formdata, obj)
+                    }
+                })
+            } else{
+            if (type == 'row') {
+                    var formdata = new FormData();
+                    var obj = {
+                        'id': id,
+                        'form_id': type
+                    }
+                    send_data(formdata, obj)
+                    editModal.show();
+
+            } else {
+                var formdata = new FormData(data);
+               
+                var obj = {
+                    'form_id': type
+                }
+            }
+            send_data(formdata, obj);
+           
+        }
+
+
+
+        }
+
+
+
+        
+
+
+
+
+
+
+
+        // function getValue(e, id) {
+        //     var outlet_id = e.value;
+        //     var formdata = new FormData();
+        //     var obj = {
+        //         'device_id': id,
+        //         'outlet_id': outlet_id,
+        //         'form_id': 'install'
+        //     }
+        //     send_data(formdata, obj)
+        // }
       
   
 

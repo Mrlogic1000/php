@@ -1,20 +1,27 @@
 <?php
 
-use DeviceManager\Device;
-use DeviceManager\Install;
+
 
 if ($req->posted()) {
+    $install = new \InstallManager\Install;
 
     $postdata = $req->post();
 
-    if ($devices->validate($postdata)) {
-        if ($postdata['form_id'] == 'save') {
-            $devices->insert($postdata);
+  
+    if ($install->validate($postdata)) {
+        if ($postdata['form_id'] == 'new') {
+            $ses = new \Core\Session;
+            $userId = $ses->user('id');
+            $postdata['date_created'] = date('Y-M-D H:i:s');
+            $postdata['user_id'] = $userId; 
+            
+            $install->insert($postdata);
             echo json_encode([
                 "statusCode" => 200,
                 "message" => "Data inserted successfully 😀",
                 "form_id"=>$postdata['form_id']
               ]);
+              die;
             
             
         }else
@@ -31,7 +38,6 @@ if ($req->posted()) {
 
         }else
         if($postdata['form_id'] == 'delete'){
-            $install = new DeviceManager\Install;
             $install_device = $install->first(['device_id'=>$postdata['id']]);
             if($install_device){
                 $install->delete($install_device->id);

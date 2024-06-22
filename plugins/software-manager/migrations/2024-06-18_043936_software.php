@@ -3,35 +3,29 @@ namespace Migration;
 defined('FCPATH') OR exit("Access Denied");
 
 /**
- * Install
+ * Software
  */
-class Install extends Migration{
+class Software extends Migration{
 
 
     public function up(){
         $this->addColumn("id int auto_increment");
-        $this->addColumn("comment text null");       
-        $this->addColumn("version varchar(200) null");       
-        $this->addColumn("ip varchar(200) null");       
-        $this->addColumn("vlan_id varchar(200) null");       
-        $this->addColumn("outlet_id tinyint(1) unsigned default 0");
+        $this->addColumn("name varchar(200) null");
+        $this->addColumn("version varchar(200) null");
+        $this->addColumn("username varchar(200) null");
+        $this->addColumn("password varchar(200) null");
         $this->addColumn("device_id tinyint(1) unsigned default 0");
-        $this->addColumn("user_id tinyint(1) unsigned default 0");
         $this->addColumn("deleted tinyint(1) unsigned default 0");
         $this->addColumn("date_created datetime default null");
         $this->addColumn("date_updated datetime default null");
         $this->addColumn("date_deleted datetime default null");
 
         $this->addPrimaryKey('id');        
-        $this->addKey('user_id');
         $this->addKey('device_id');
-        $this->addKey('outlet_id');
-        $this->addKey('vlan_id');
-        $this->addKey('ip');
         $this->addKey('deleted');
         $this->addKey('date_created');
         $this->addKey('date_deleted');
-        $this->createTable('install');
+        $this->createTable('software');
             /**
              * +++++++++++++++++++++++++++++++++++++++++++++++++
              * +++++ More function in the Migration class ++++++
@@ -39,12 +33,12 @@ class Install extends Migration{
              * 
              * addData(['email'=>mrlogic1987@gmail.com]) and more
              * addUniqueKey(unique_name)
-             * insertData('install')
+             * insertData('software')
              */
     }
 
     public function down(){
-        $this->dropTable('install');
+        $this->dropTable('software');
     }
 
 }
