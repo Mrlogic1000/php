@@ -5,14 +5,16 @@
  * Descriptions
  */
 
-use DeviceManager\Device;
-use DeviceManager\Outlet;
-use DeviceManager\Vlan;
+use InstallManager\User;
+use InstallManager\Device;
+use OtherDevice\Outlet;
+use OtherDevice\Otherdevice;
+use InstallManager\Vlan;
 
 set_value([
     "admin_route" => "admin",
-    "plugin_route"  => "devices",
-    "table" => "my_table",
+    "plugin_route"  => "other-device",
+    "table" => "other_device",
 
 ]);
 
@@ -20,14 +22,14 @@ set_value([
 add_filter('admin-manager_before_section_title', function ($title) {
     $vars = get_value();
 
-    $title = 'Network Devices';
+    $title = 'Other Device';
 
     return $title;
 });
 
 //  set user permission for these plugin
 add_filter('permissions', function ($permissions) {
-    $permissions[] = 'view_devices';
+    $permissions[] = 'view_device';
     $permissions[] = 'view_device_detail';
     $permissions[] = 'add_device';
     $permissions[] = 'edit_device';
@@ -35,11 +37,11 @@ add_filter('permissions', function ($permissions) {
     return $permissions;
 });
 
-if (user_can('view_users')) {
+if (user_can('view_devices')) {
     add_filter('basic-admin_before_admin_links', function ($links) {
         $vars = get_value();
         $obj = (object)[];
-        $obj->title = 'Network Devices';
+        $obj->title = 'Other Device';
         $obj->link = ROOT . '/' . $vars['admin_route'] . '/' . $vars['plugin_route'];
         $obj->icon = 'fa-solid fa-gauge';
         $obj->parent = 0;
@@ -51,74 +53,78 @@ if (user_can('view_users')) {
 
 
 
-
 add_action('controller', function () {
     $req = new \Core\Request;
+    $ses = new \Core\Session;
+    $userId = $ses->user('id');
     $id = URL(3) ?? '';
-    $devices = new Device;
-    $device = $devices->first(['id' => $id]);
+
+    $otherDevice = new Otherdevice; 
+
+   
     $vars = get_value();
     $admin_route = $vars['admin_route'];
     $plugin_route = $vars['plugin_route'];
-
+    
     if ($req->posted() && URL(1) == $plugin_route) {
         if (URL(2) == 'ajax') {
             require plugin_path('controllers/ajax-controller.php');
             die;
         } 
     }
+    
 });
 
 // display the view files
 add_action('basic-admin_main_content', function () {
-    $devices = new Device;
-
+    $ses = new \Core\Session;
+    $userId = $ses->user('id');
     $vars = get_value();
     $admin_route = $vars['admin_route'];
     $plugin_route = $vars['plugin_route'];
     $errors = $vars['errors'] ?? [];
 
-/** Device Ip managment */
-    $vlans = new Vlan;
-    $vlan = $vlans->first(['id'=>4]);
-    $all_ip = [];
-   
-        $all_ip= getEachIpInRange("172.3.100.0/24");
-    
-  
-//   Device Ip managment
-
 
     if (URL(1) == $plugin_route) {
         $id = URL(3) ?? '';
+        $otherDevice = new Otherdevice;
+       
+        $userModel = new User;
 
-        $outletsModel = new Outlet;
-        $outlets = $outletsModel->findAll();
-        $device = $devices->first(['id' => $id]);
-        $device_ip = $devices->findAll();
-       
-        $device_ip = array_column($device_ip, 'ip');
-        
-        $ip_remain = array_diff($all_ip, $device_ip ?? []);
-       
-        
 
+
+        $devices = $otherDevice->findAll();
+        $users = $userModel->findAll();
+
+        $otherDevice::$query_id = 'get-installed';
+        $device = $otherDevice->first(['id' => $id]);    
        
+        
+       
+        if (URL(2) == 'add') {
+            require plugin_path('views/add-Odevice.php');
+        } else
         if (URL(2) == 'edit') {
-            require plugin_path('views/edit-device.php');
+
+            require plugin_path('views/edit-Odevice.php');
+        } else
+        if (URL(2) == 'delete') {
+            require plugin_path('views/delete-Odevice.php');
         } else
         if (URL(2) == 'view') {
-            require plugin_path('views/view-device.php');
+            $devices = $otherDevice->first(['id'=>$id]);
+            require plugin_path('views/view-otherdevice.php');
         } else {
             if (URL(2) !== 'ajax') {
                 $vars = get_value();
-            $devices::$query_id = 'get-device';
-            $devices = $devices->findAll();
-            $OutletManager = new Outlet;
-            $outlets = $OutletManager->findAll();
-            require plugin_path('views/device.php');
-            
+                $otherDevice::$query_id = 'get-installed';
+                $devices = $otherDevice->findAll();
+                $outletDB = new Outlet;
+                $outlets = $outletDB->findAll();
+    
+                require plugin_path('views/otherdevice.php');
             }
+
            
         }
     }
@@ -127,22 +133,19 @@ add_action('basic-admin_main_content', function () {
 // for manipulate data ater query operation
 add_filter('after_query', function ($data) {
 
-    if (empty($data['result']))
+    if (empty($data['result'])) {
         return $data;
-
-    if ($data['query_id'] == 'get-device') {
-        $outlets = new OutletManager\Outlet;
-
-        foreach ($data['result'] as $key => $row) {
-            $query = 'select * from install  where outlet_id in (select outlet_id from install where device_id = :device_id) limit 1';
-            $install = $outlets->query($query,['device_id'=>$row->id]); 
-            $install = array_column($install,'outlet_id');
-            if($install){               
-                $data['result'][$key]->install = $install;
-            }
-        }
-        // dd($data);
     }
 
+
+    if ($data['query_id'] == 'get-installed') {
+
+        
+        $users = new User;
+       
+
+        
+    }
     return $data;
+
 });

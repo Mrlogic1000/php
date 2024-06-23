@@ -47,10 +47,13 @@ if ($req->posted()) {
 
         }else
         if($postdata['form_id'] == 'edit'){
+            $postdata['date_updated'] = date('Y-M-D H:s:i');
+            $postdata['status'] = (int)$postdata['status'];
             $devices->update($postdata['id'],$postdata);
             echo json_encode([
                 "statusCode" => 200,
                 "message" => "Data updated successfully 😀",
+                "form_id"=>$postdata['form_id'],
                 "form_id"=>$postdata['form_id'],
                 
               ]);

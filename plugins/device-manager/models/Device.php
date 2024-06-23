@@ -12,13 +12,15 @@ class Device extends Model{
     protected $allowColumns = [
         'name',
         'sn',
-        'type',
-        'ip',
-        'mac',
+        'mac1',
+        'color',
+        'mac2',
         'model',
+        'ip',
+        'location',
         'version',
-        'comment',
-        'installed',
+        'fcc_id',
+        'product',
         'status',
         'date_updated',
         'date_deleted',
@@ -29,13 +31,15 @@ class Device extends Model{
     protected $allowUpdateColumns = [
         'name',
         'sn',
-        'type',
-        'ip',
-        'mac',
+        'mac1',
+        'color',
+        'mac2',
         'model',
+        'location',
         'version',
-        'comment',
-        'installed',
+        'version',
+        'fcc_id',
+        'product',
         'status',
         'date_updated',
         'date_deleted',
@@ -54,11 +58,7 @@ class Device extends Model{
             "required",
         ],
        
-        "status" => [
-           
-            "required",
-
-        ],
+       
         "ip" => [           
             "ip",
 

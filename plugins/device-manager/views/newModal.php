@@ -12,73 +12,102 @@
                                 <div class="alert alert-danger d-none">
 
                                 </div>
-
                                 <div class="col-md-12 mb-3">
                                     <label for="name" class="form-label">Device</label>
                                     <select name="name" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
-                                        <option <?= old_selected('name', 'Switch') ?> value="Router">Router</option>
-                                        <option <?= old_selected('name', 'Switch') ?> value="Switch">Switch</option>
-                                        <option <?= old_selected('name', 'Save') ?> value="Save">Save</option>
-                                        <option <?= old_selected('name', 'Access Point') ?> value="Access Point">Access Point</option>
-                                        <option <?= old_selected('name', 'TV') ?> value="TV">TV</option>
-                                        <option <?= old_selected('name', 'IPTV') ?> value="IPTV">IPTV</option>
-                                        <option <?= old_selected('name', 'Camera') ?> value="Camera">Camera</option>
-                                        <option <?= old_selected('name', 'Door') ?> value="Door">Door</option>
+                                        <option <?= old_selected('name', 'router') ?> value="router">Route</option>
+                                        <option <?= old_selected('name', 'switch') ?> value="switch">Switch</option>
+                                        <option <?= old_selected('name', 'AP') ?> value="AP">AP</option>
+                                        <option <?= old_selected('name', 'firewall') ?> value="firewall">FireWall</option>
+                                        <option <?= old_selected('name', 'Other') ?> value="other">Other</option>
+                                       
                                     </select>
+                                </div>  
+                               
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="mac1" class="form-label"> MAC1</label>
+                                    <input type="text" name="mac1" value="<?= old_value('mac1') ?>" class="form-control" placeholder="MAC Address" aria-label="mac1" aria-describedby="addon-wrapping">
                                 </div>
 
                                 <div class="col-md-6 mb-3">
-                                    <label for="sn" class="form-label"> Seria Number</label>
-                                    <input type="text" name="sn" value="<?= old_value('sn') ?>" class="form-control" placeholder="Serial Number" aria-label="Username" aria-describedby="addon-wrapping">
-
+                                    <label for="MAC2" class="form-label">MAC2</label>
+                                    <input type="text" name="mac2" value="<?= old_value('mac2') ?>" class="form-control" placeholder="MAC Address" aria-label="MAC2" aria-describedby="addon-wrapping">
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="IP" class="form-label"> IP (For network devices)</label>
-                                    <input type="text" name="ip" value="<?= old_value('ip') ?>" class="form-control" placeholder="IP Address" aria-label="IP" aria-describedby="addon-wrapping">
-
-
+                                    <label for="fcc_id" class="form-label">FCC ID</label>
+                                    <input type="text" name="fcc_id" value="<?= old_value('fcc_id') ?>" class="form-control" placeholder="FCC ID" aria-label="fcc_id" aria-describedby="addon-wrapping">
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="MAC" class="form-label">MAC (For network devices)</label>
-                                    <input type="text" name="mac" value="<?= old_value('mac') ?>" class="form-control" placeholder="MAC Address" aria-label="MAC" aria-describedby="addon-wrapping">
+                                <div class="mb-3 col-md-6 ">
+                                    <label for="ip" class="form-label">IP</label>
+                                    <input type="text" name="ip" value="<?= old_value('ip') ?>" class="form-control" placeholder="IP Address" aria-label="ip" aria-describedby="addon-wrapping">
 
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="type" class="form-label">Type</label>
-                                    <select name="type" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
-                                        <option <?= old_selected('type', 'Switch') ?> value="Switch">Router</option>
-                                        <option <?= old_selected('type', 'Switch') ?> value="Switch">Switch</option>
-                                        <option <?= old_selected('type', 'Save') ?> value="Save">Save</option>
-                                        <option <?= old_selected('type', 'Access Point') ?> value="Access Point"> Access Point</option>
-                                        <option <?= old_selected('type', 'TV') ?> value="TV">TV</option>
-                                        <option <?= old_selected('type', 'Camera') ?> value="Camera">Camera</option>
-                                        <option <?= old_selected('type', 'Door') ?> value="Door">Door</option>
-                                    </select>
-
-
-                                </div>
-
-                                <div class="mb-3 col-md-6">
-                                    <label for="gender" class="form-label">Status</label>
-                                    <select name="status" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
-                                        <option <?= old_selected('status', 'good') ?> value="good">Good</option>
-                                        <option <?= old_selected('status', 'bad') ?> value="faulty">Fauty</option>
-                                    </select>
                                 </div>
 
                                 <div class="mb-3 col-md-6 ">
                                     <label for="model" class="form-label">Model</label>
                                     <input type="text" name="model" value="<?= old_value('model') ?>" class="form-control" placeholder="Model" aria-label="Model" aria-describedby="addon-wrapping">
 
+                                </div>
+                              
+                                <div class="col-md-6 mb-3">
+                                    <label for="sn" class="form-label"> Seria Number</label>
+                                    <input type="text" name="sn" value="<?= old_value('sn') ?>" class="form-control" placeholder="Serial Number" aria-label="Username" aria-describedby="addon-wrapping">
 
                                 </div>
-                                <div class="mb-3">
-                                    <label for="comment" class="form-label">Comment</label>
-                                    <textarea name="comment" class="form-control" id="comment" rows="3">
-  <?= old_value('comment') ?>
-  </textarea>
-                                </div>
 
+
+                                <div class="mb-3 col-md-6 ">
+                                    <label for="location" class="form-label">Location</label>
+                                    <select name="location" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+                                        <?php if(!empty($outlets)): ?>                                            
+                                        <?php foreach($outlets as $outlet): ?>
+                                            <option <?= old_selected('location', $outlet->outlet) ?> value="<?= $outlet->outlet?>"><?= $outlet->outlet?></option>
+                                        <?php endforeach ?>
+                                        <?php endif ?>
+                                        
+                                       
+                                    </select>
+
+                                </div>
+                                <div class="mb-3 col-md-6 ">
+                        <label for="product" class="form-label">Product</label>
+                        <select id="product" name="product" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+                            <option <?= old_selected('product', 'mikrotik') ?> value="mikrotik">Mikrotik</option>
+                            <option <?= old_selected('product', 'cisco') ?> value="cisco">CISCO</option>
+                            <option <?= old_selected('product', 'tp-link') ?> value="tp-link">TP-LINK</option>
+                            <option <?= old_selected('product', 'D-LINK') ?> value="D-LINK">D-LINK</option>
+                            <option <?= old_selected('product', 'hikvision') ?> value="hikvision">Hikvision</option>
+                            <option <?= old_selected('product', 'other') ?> value="other">Other</option>
+
+                        </select>
+
+                    </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="color" class="form-label">Faulty?</label>
+                                    <select name="color" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+                                        <option <?= old_selected('color', '0') ?> value="0">No</option>
+                                        <option <?= old_selected('color', '1') ?> value="1">Yes</option>
+                                       
+                                    </select>
+                                </div>                    
+                                <div class="col-md-6 mb-3">
+                                    <label for="color" class="form-label">Color</label>
+                                    <select name="color" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+                                        <option <?= old_selected('color', 'black') ?> value="black">Black</option>
+                                        <option <?= old_selected('color', 'white') ?> value="white">White</option>
+                                        <option <?= old_selected('color', 'red') ?> value="red">Red</option>
+                                       
+                                    </select>
+                                </div>                    
+                               
+                                
+                                
+                               
+
+                                
+                                
 
 
 

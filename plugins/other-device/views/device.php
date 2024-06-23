@@ -92,7 +92,7 @@
                                             </button>
                                         <?php endif ?>
                                         <?php if (user_can('delete_device')) : ?>
-                                            <button id="<?= $device->id ?>" onclick="submitForm(this,<?= $device->id ?>,'delete',event)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            <button id="<?= $device->id ?>" onclick="submitForm(this,<?= $device->id ?>,'delete')" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                 <i class="fa-solid fa-trash"></i>
 
                                             </button>

@@ -1,5 +1,5 @@
 <?php
-namespace InstallManager;
+namespace OtherDevice;
 defined('ROOT') OR exit("Access Denied");
 
 /**
