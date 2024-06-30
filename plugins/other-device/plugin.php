@@ -9,6 +9,7 @@ use InstallManager\User;
 use InstallManager\Device;
 use OtherDevice\Outlet;
 use OtherDevice\Otherdevice;
+use OtherDevice\Report;
 use InstallManager\Vlan;
 
 set_value([
@@ -96,7 +97,7 @@ add_action('basic-admin_main_content', function () {
         $devices = $otherDevice->findAll();
         $users = $userModel->findAll();
 
-        $otherDevice::$query_id = 'get-installed';
+        $otherDevice::$query_id = 'other-device';
         $device = $otherDevice->first(['id' => $id]);    
        
         
@@ -113,6 +114,8 @@ add_action('basic-admin_main_content', function () {
         } else
         if (URL(2) == 'view') {
             $devices = $otherDevice->first(['id'=>$id]);
+            $getReport = new Report;
+            $reports = $getReport->where(['device_id'=>$id],['category'=>'network']);
             require plugin_path('views/view-otherdevice.php');
         } else {
             if (URL(2) !== 'ajax') {
@@ -138,7 +141,7 @@ add_filter('after_query', function ($data) {
     }
 
 
-    if ($data['query_id'] == 'get-installed') {
+    if ($data['query_id'] == 'other-device') {
 
         
         $users = new User;

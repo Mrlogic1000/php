@@ -6,19 +6,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form onsubmit="submitForm(this,null,'software')" id="saveForm" class="mx-auto row ">
+                <form onsubmit="submitForm(this,null,'software-new',event)" id="saveForm" class="mx-auto row ">
                     <?= csrf() ?>
                     <div class="alert alert-danger d-none">
                     </div>
 
-                    <div class="col-md-6 mb-3">
+                    <input hidden type="text" name="device_id" value="<?= old_value('name',$device->id) ?>" class="form-control" placeholder="Software Name" aria-label="Username" aria-describedby="addon-wrapping">
+                    <div class="col-md-12 mb-3">
                         <label for="sn" class="form-label"> Software</label>
                         <input type="text" name="name" value="<?= old_value('name') ?>" class="form-control" placeholder="Software Name" aria-label="Username" aria-describedby="addon-wrapping">
 
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="sn" class="form-label">Username</label>
+                        <label for="username" class="form-label">Username</label>
                         <input type="text" name="username" value="<?= old_value('username') ?>" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
 
                     </div>
@@ -29,9 +30,20 @@
 
                     </div>
                     <div class="col-md-6 mb-3">
+                        <label for="license" class="form-label"> License Code</label>
+                        <input type="text" name="license" value="<?= old_value('license') ?>" class="form-control" placeholder="License" aria-label="license" aria-describedby="addon-wrapping">
+
+
+                    </div>
+                    <div class="col-md-6 mb-3">
                         <label for="version" class="form-label">Version</label>
                         <input type="text" name="version" value="<?= old_value('version') ?>" class="form-control" placeholder="version" aria-label="MAC" aria-describedby="addon-wrapping">
 
+                    </div>
+                    
+                        <div class="col-md-12 mb-3">                      
+                            <label for="description" class="form-label">Description</label>
+                            <textarea name="description" class="form-control" id="description" rows="3"></textarea>
                     </div>
                     <div class="modal-footer">
                             <button type="button" id="close" class="btn btn-secondary" onclick="softwareForm.hide()" data-bs-dismiss="softwareForm">Close</button>

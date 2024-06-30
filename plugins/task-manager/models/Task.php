@@ -1,47 +1,43 @@
 <?php
-namespace ReportManager;
+namespace TaskManager;
 defined('ROOT') OR exit("Access Denied");
 
 /**
- * Report
+ * Task
  */use \Model\Model;
 
-class Report extends Model{
+class Task extends Model{
 
-    protected $table = 'report';
+    protected $table = 'tasks';
     protected $allowColumns = [
-        'device_id',
-        'status',
-        'user_id',
-        'category',
-        'comment',
-        'date_updated',
-        'date_created',
-        'date_deleted',
-        'deleted',
+        'date_created'
 
     ];
     protected $allowUpdateColumns = [
-        'device_id',
-        'status',
-        'user_id',
-        'category',
-        'comment',
         'date_updated',
         'date_deleted',
         'deleted',
         
 
     ];
-    protected $onUpdateValidationRules = [
-        "device_id" => [           
-            "required",
-        ],
-        "comment" => [           
-            "required",
-        ],
-      
-    ];
+    // protected $onUpdateValidationRules = [
+    //     "email" => [
+    //         "email",
+    //         "unique",
+    //         "required",
+    //     ],
+    //     "password" => [
+    //         "not_less_than_8",
+    //         "required",
+    //     ],
+    //     "username" => [
+    //         "alpha_space",
+    //         "unique",
+    //         "required",
+
+    //     ],
+
+    // ];
     // protected $onInsertValidationRules = [
     //     "email" => [
     //         "email",

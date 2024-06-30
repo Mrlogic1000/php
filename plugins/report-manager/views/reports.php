@@ -6,81 +6,36 @@
             <button class="input-group-text  text-white" style="background-color: #191C1F;  color:white;">Search</button>
         </form>
 
-        <table class="table table-striped ">
+        <table class="table caption-top">
+      <caption>Reports</caption>
+      <thead>
+        <tr>
+          <th scope="col">Reference</th>
+          <th scope="col">Status</th>
+          <th scope="col">Category</th>
+          <th scope="col">Comment</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php if (!empty($reports)) : ?>
+          <?php foreach ($reports as $report) : ?>
             <tr>
-
-                <th>Device</th>
-                <th>Comment</th>
-                <th>Status</th>
-                <th>Date Created</th>
-                <th>Date Updated</th>
-                <th>
-                    <?php if (user_can('view_outlet')) : ?>
-                        <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/add">
-                            <button class="btn btn-bd-primary btn-sm">
-                                <i class="fa-solid fa-plus"></i>
-                                Add New</button>
-                        </a>
-                    <?php endif ?>
-                </th>
+              <td><?= $report->reference ?></td>
+              <td><?= $report->status ?></td>
+              <td><?= $report->category ?></td>
+              <td><?= $report->comment ?></td>
+              <td><?= get_date($report->date_created) ?></td>
+              
 
             </tr>
-            <tbody>
-                <?php if (!empty($reports)) : ?>
-                    <?php foreach ($reports as $report) : ?>
-
-                        <tr>
-
-                            <td>
-                                <?php if (!empty($report->device)) : ?>
-                                    <?php foreach ($report->device as $device) : ?>
-                                        <?= $device->name ?>
-                                    <?php endforeach ?>
-                                <?php endif ?>
-                            </td>
-                            <td>
-                                <?= $report->comment ?>
-                            </td>
-                            <td>
-                                <?= $report->status ?>
-                            </td>
+          <?php endforeach ?>
+        <?php endif ?>
 
 
+      </tbody>
+    </table>
 
-
-                            <td><?= get_date($report->date_created) ?></td>
-                            <td><?= get_date($report->date_updated) ?></td>
-                            <td>
-                                <div class="d-flex gap-2">
-                                    <?php if (user_can('view_user_detail')) : ?>
-                                        <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/view/<?= $report->id ?>">
-                                            <button class="btn btn-primary btn-sm">
-                                                <i class="fa-solid fa-eye"></i>
-                                                view
-                                            </button>
-                                        </a>
-                                    <?php endif ?>
-                                    <?php if (user_can('edit_user')) : ?>
-                                        <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/edit/<?= $report->id ?>">
-
-                                            <button class="btn btn-warning btn-sm">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                                Edit
-                                            </button>
-                                        </a>
-                                    <?php endif ?>
-                                    <?php if (user_can('delete_user')) : ?>
-                                            <button id="<?= $report->id ?>" class="delete btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </button>
-                                    <?php endif ?>
-                                </div>
-                            </td>
-                        </tr>
-                    <?php endforeach ?>
-                <?php endif ?>
-            </tbody>
-        </table>
         
     </div>
 

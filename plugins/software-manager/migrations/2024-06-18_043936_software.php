@@ -14,6 +14,8 @@ class Software extends Migration{
         $this->addColumn("version varchar(200) null");
         $this->addColumn("username varchar(200) null");
         $this->addColumn("password varchar(200) null");
+        $this->addColumn("license varchar(200) null");
+        $this->addColumn("description text null");
         $this->addColumn("device_id tinyint(1) unsigned default 0");
         $this->addColumn("deleted tinyint(1) unsigned default 0");
         $this->addColumn("date_created datetime default null");

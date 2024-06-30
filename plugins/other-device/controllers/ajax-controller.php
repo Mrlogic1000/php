@@ -55,8 +55,35 @@ if ($req->posted()) {
             die;
 
 
+        }else
+        if($postdata['form_id'] == 'report-new'){            
+            $user = new \Core\Session;
+            $report = new \OtherDevice\Report;
+            $postdata['date_created'] = date('Y-m-d H:i:s');
+            $postdata['user_id'] = $user->user('id');
+            $postdata['category'] = 'other-device';
+            $report->insert($postdata);
+            if($report->affected_row > 0){
+                echo json_encode([
+                    "statusCode" => 200,
+                    "message" => "successful 😀",
+                    "form_id"=>$postdata['form_id'],
+                    
+                  ]);
+            }else{
+                echo json_encode([
+                    "statusCode" => 400,
+                    "message" => "Something went wrong 😀",
+                    "form_id"=>$postdata['form_id'],
+                    
+                  ]);
+            }
+            die;
+    
+    
         }
     } 
+    
     else {
         foreach($otherDevice->errors as $key=>$error){
             echo json_encode([

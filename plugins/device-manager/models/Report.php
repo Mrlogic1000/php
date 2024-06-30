@@ -1,5 +1,5 @@
 <?php
-namespace ReportManager;
+namespace DeviceManager;
 defined('ROOT') OR exit("Access Denied");
 
 /**
@@ -13,8 +13,9 @@ class Report extends Model{
         'device_id',
         'status',
         'user_id',
-        'category',
         'comment',
+        'category',
+        'reference',
         'date_updated',
         'date_created',
         'date_deleted',
@@ -25,8 +26,9 @@ class Report extends Model{
         'device_id',
         'status',
         'user_id',
-        'category',
         'comment',
+        'category',
+        'reference',
         'date_updated',
         'date_deleted',
         'deleted',

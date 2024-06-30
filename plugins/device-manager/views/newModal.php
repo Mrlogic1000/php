@@ -6,7 +6,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form onsubmit="submitForm(this,null,'save')" id="saveForm" class="mx-auto row ">
+                            <form onsubmit="submitForm(this,null,'save',event)" id="saveForm" class="mx-auto row ">
                                 <?= csrf() ?>
                                 <h4 class="my-3">Add New Device</h4>
                                 <div class="alert alert-danger d-none">
@@ -23,7 +23,7 @@
                                        
                                     </select>
                                 </div>  
-                               
+                            
 
                                 <div class="col-md-6 mb-3">
                                     <label for="mac1" class="form-label"> MAC1</label>

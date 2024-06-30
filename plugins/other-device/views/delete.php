@@ -18,3 +18,14 @@
                 </div>
             </div>
         </div>
+ <div class="modal fade" id="success" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    
+                    <div class="modal-body">
+                        <p class="text-success h5">Success</p>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>

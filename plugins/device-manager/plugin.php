@@ -8,10 +8,12 @@
 use DeviceManager\Device;
 use DeviceManager\Outlet;
 use DeviceManager\Vlan;
+use DeviceManager\Report;
+use DeviceManager\Software;
 
 set_value([
     "admin_route" => "admin",
-    "plugin_route"  => "devices",
+    "plugin_route"  => "network-devices",
     "table" => "my_table",
 
 ]);
@@ -20,7 +22,7 @@ set_value([
 add_filter('admin-manager_before_section_title', function ($title) {
     $vars = get_value();
 
-    $title = 'Network Devices';
+    $title = 'Devices';
 
     return $title;
 });
@@ -62,10 +64,17 @@ add_action('controller', function () {
     $plugin_route = $vars['plugin_route'];
 
     if ($req->posted() && URL(1) == $plugin_route) {
-        if (URL(2) == 'ajax') {
+        if (URL(2) == 'device') {
             require plugin_path('controllers/ajax-controller.php');
             die;
-        } 
+        }else
+        if(URL(3)=='software'){
+            echo json_encode('connected');
+    die;
+            // require plugin_path('controllers/software-ajax-controller.php');
+            // die;
+
+        }
     }
 });
 
@@ -108,6 +117,10 @@ add_action('basic-admin_main_content', function () {
             require plugin_path('views/edit-device.php');
         } else
         if (URL(2) == 'view') {
+            $getReport = new Report;
+            $reports = $getReport->where(['device_id'=>$id],['category'=>'other-device']);
+            $getSoftware = new Software;
+            $softwares = $getSoftware->where(['device_id'=>$id]);
             require plugin_path('views/view-device.php');
         } else {
             if (URL(2) !== 'ajax') {

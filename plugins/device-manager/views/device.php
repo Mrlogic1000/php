@@ -59,11 +59,11 @@
                                 <td><?= $device->product ?></td>
                                 <td><?= $device->color ?></td>
                                 <td><?= $device->location ?></td>
-                               
+
                                 <td>
                                     <i class="fa-solid fa-microchip  <?= $device->status == 0 ? 'text-success' : 'text-danger' ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $device->status ?>"></i>
-                        </td>
-                               
+                                </td>
+
                                 <td>
                                     <div class="d-flex gap-2">
                                         <?php if (user_can('install_device')) : ?>
@@ -114,7 +114,7 @@
 
         </div>
         </div>
-       
+
 
 
 
@@ -244,18 +244,22 @@
 
 
 
-        function submitForm(data, id, type,event) {
-            event.preventDefault(); 
+        function submitForm(data, id, type, event) {
+            event.preventDefault();
             if (type == 'delete') {
                 var formdata = new FormData();
+                var obj = {
+                    'id': id,
+                    'form_id': type
+                }
                 $('.confirm').click(function() {
                     var ok = $(this).attr('id')
                     if (ok) {
                         send_data(formdata, obj)
                     }
                 })
-            } else{
-            if (type == 'row') {
+            } else {
+                if (type == 'row') {
                     var formdata = new FormData();
                     var obj = {
                         'id': id,
@@ -264,15 +268,15 @@
                     send_data(formdata, obj)
                     editModal.show();
 
-            } else {
+                } else {
 
-                var formdata = new FormData(data);
-                var obj = {
-                    'form_id': type
+                    var formdata = new FormData(data);
+                    var obj = {
+                        'form_id': type
+                    }
                 }
+                send_data(formdata, obj);
             }
-            send_data(formdata, obj);
-        }
 
 
 
@@ -280,7 +284,7 @@
 
 
 
-        
+
 
 
 

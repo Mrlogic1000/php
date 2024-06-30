@@ -4,22 +4,22 @@
  * Plugin name
  * Descriptions
  */
-use ReportManager\User;
+use InstallManager\User;
 use ReportManager\Device;
 // use InstallManager\Outlet;
 use ReportManager\Report;
 
  set_value([
     "admin_route"=>"admin",
-    "plugin_route"  => "report",
-    "table"=>"reports",
+    "plugin_route"  => "task",
+    "table"=>"task",
 
  ]);
  
 
  add_filter('admin-manager_before_section_title',function($title){
     $vars = get_value();    
-        $title = 'Report';
+        $title = 'Task';
     return $title;
  });
 
@@ -37,7 +37,7 @@ if(user_can('view_installationss')){
 add_filter('basic-admin_before_admin_links',function($links){
     $vars = get_value();    
     $obj = (object)[];    
-        $obj->title= 'Reports';
+        $obj->title= 'Task';
         $obj->link= ROOT.'/'.$vars['admin_route'].'/'.$vars['plugin_route'];
         $obj->icon= 'fa-solid fa-gauge';
         $obj->parent= 0;
@@ -56,13 +56,7 @@ add_action('controller',function(){
     $userId=$ses->user('id');
     $id = URL(3) ?? '';
 
-    $reportModel = new Report;
-    
-
-
-    $report = $reportModel->first(['id'=>$id]);
-    // $devices = $deviceModel->findAll(); 
-
+   
      
     // $device = $deviceModel->first(['id'=>$id]);     
     $vars = get_value();
@@ -70,18 +64,7 @@ add_action('controller',function(){
     $plugin_route = $vars['plugin_route'];
 
     if($req->posted() && URL(1)== $plugin_route){
-        if(URL(2)=='add'){
-            require plugin_path('controllers/add-controller.php');
-        }else
-        if(URL(2)== 'edit'){
-            require plugin_path('controllers/edit-controller.php');
-
-        }else
-        if(URL(2)== 'delete'){
-            require plugin_path('controllers/delete-controller.php');
-
-
-        }else
+        
         if(URL(2)== 'ajax'){
             require plugin_path('controllers/controller.php');
             die;
@@ -105,25 +88,8 @@ add_action('basic-admin_main_content', function () {
 
     if(URL(1)== $plugin_route){  
         $id = URL(3) ?? '';
-        $reportModel = new Report;     
-        $deviceModel = new Device;                 
-        $reports = $reportModel->findAll();
-        $devices = $deviceModel->findAll();
-        $report = $reportModel->first(['id'=>$id]);
-        
-        if(URL(2)=='add'){
-            require plugin_path('views/add-report.php');
-        }else
-        if(URL(2)=='edit'){
-           
-            require plugin_path('views/edit-report.php');
-
-        }else
-        if(URL(2)=='delete'){
-            require plugin_path('views/delete-report.php');
-
-
-        }else
+             
+       
         if(URL(2)=='view'){
             require plugin_path('views/view-report.php');
 
@@ -153,19 +119,7 @@ add_filter('after_query',function($data){
 }
 
 
-if($data['query_id']=='get-report'){ 
-   
-    $devices = new Device;   
-    $users = new User;    
-    foreach($data['result'] as $key=>$row){
-        $device =$devices->where(['id'=>$row->device_id]);
-        $data['result'][$key]->device = $device;
 
-    }
-//    dd($data);
-
-    
-}
 
     return $data;
 
