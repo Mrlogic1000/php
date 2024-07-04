@@ -1,4 +1,3 @@
-    <?php if (user_can('view_users')) : ?>
 
 
 
@@ -118,13 +117,7 @@
 
 
 
-    <?php else : ?>
-        <div class="alert alert-danger text-center">
-            Access denied! Please contact admin to view this page
-        </div>
-
-    <?php endif ?>
-
+   
 
 
     <div id="alert" class="modal fade">

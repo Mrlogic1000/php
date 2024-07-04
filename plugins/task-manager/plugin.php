@@ -33,7 +33,7 @@ add_filter('permissions',function($permissions){
     return $permissions;
 });
 
-if(user_can('view_installationss')){
+
 add_filter('basic-admin_before_admin_links',function($links){
     $vars = get_value();    
     $obj = (object)[];    
@@ -45,7 +45,7 @@ add_filter('basic-admin_before_admin_links',function($links){
         return $links;
 });
 
-}    
+  
         
 
 

@@ -4,22 +4,12 @@ use DeviceManager\Device;
 
 if ($req->posted()) {
 
-    $postdata = $req->post();
-
-    $form_id = explode('-', $postdata['form_id']);
+    $postdata = $req->post();   
     
-
-
-
-    // software CRUD
-   
-    // END software CRUD
-    // DEVICE CRUD
-
-    if ($form_id[0] == 'device') {
         $devices = new Device;
         if ($devices->validate($postdata)) {
-            if ($form_id[1] == 'new') {
+
+            if ($postdata['form_id'] == 'new') {
                 $devices->insert($postdata);
                 echo json_encode([
                     "statusCode" => 200,
@@ -27,8 +17,9 @@ if ($req->posted()) {
                     "form_id" => $postdata['form_id']
                 ]);
                 die;
-            } else
-            if ($form_id[1] == 'row') {
+            } 
+
+            if ($postdata['form_id'] == 'row') {
                 $device = $devices->first(['id' => $postdata['id']]);
                 echo json_encode([
                     'statusCode' => 200,
@@ -37,8 +28,8 @@ if ($req->posted()) {
                 ]);
                 // echo json_encode("The data deleted successfully");
                 die;
-            } else
-            if ($form_id == 'update') {
+            }
+            if ($postdata['form_id'] == 'update') {
                 $postdata['date_updated'] = date('Y-M-D H:s:i');
                 $postdata['status'] = (int)$postdata['status'];
                 $devices->update($postdata['id'], $postdata);
@@ -50,8 +41,8 @@ if ($req->posted()) {
 
                 ]);
                 die;
-            } else
-            if ($form_id == 'delete') {
+            }
+            if ($postdata['form_id'] == 'delete') {
                 $install = new DeviceManager\Install;
                 $install_device = $install->first(['device_id' => $postdata['id']]);
                 if ($install_device) {
@@ -68,7 +59,7 @@ if ($req->posted()) {
         }else{
             echo json_encode($devices->errors);
         }
-    }
+    
 
 
 

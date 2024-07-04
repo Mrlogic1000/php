@@ -1,4 +1,3 @@
-<?php if (user_can('view_users')) : ?>
 
 <div class="table-responsive">
 
@@ -77,9 +76,3 @@
 
     <!-- <?= $pager->display() ?> -->
 </div>
-<?php else : ?>
-<div class="alert alert-danger text-center">
-    Access denied! Please contact admin to view this page
-</div>
-
-<?php endif ?>

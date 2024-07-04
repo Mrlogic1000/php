@@ -29,29 +29,29 @@ if (!$db->table_exists($tables)) {
     die;
 }
 
-add_filter('user_permissions', function ($permissions) {
-    $ses = new \Core\Session;
-    if ($ses->is_logged_in()) {
-        $vars = get_value();
-        $db = new \Core\Database;
-        $query = "select * from " . $vars['optional_table']['roles_table'];
-        $roles = $db->query($query);
+// add_filter('user_permissions', function ($permissions) {
+//     $ses = new \Core\Session;
+//     if ($ses->is_logged_in()) {
+//         $vars = get_value();
+//         $db = new \Core\Database;
+//         $query = "select * from " . $vars['optional_table']['roles_table'];
+//         $roles = $db->query($query);
 
-        if (is_array($roles)) {
-            $user_id = $ses->user('id');
-            $query = " select permission from " . $vars['optional_table']['permissions_table'] . " where disable = 0 && role_id in  ( select role_id from " .
-                $vars['optional_table']['roles_map_table'] . " where disable = 0 && user_id = :user_id)";
-            $perms = $db->query($query, ['user_id' => $user_id]);
-            if ($perms) {
-                $permissions = array_column($perms, 'permission');
-            }
-        } else {
-            $permissions[] = 'all';
-        }
-    }
+//         if (is_array($roles)) {
+//             $user_id = $ses->user('id');
+//             $query = " select permission from " . $vars['optional_table']['permissions_table'] . " where disable = 0 && role_id in  ( select role_id from " .
+//                 $vars['optional_table']['roles_map_table'] . " where disable = 0 && user_id = :user_id)";
+//             $perms = $db->query($query, ['user_id' => $user_id]);
+//             if ($perms) {
+//                 $permissions = array_column($perms, 'permission');
+//             }
+//         } else {
+//             $permissions[] = 'all';
+//         }
+//     }
 
-    return $permissions;
-});
+//     return $permissions;
+// });
 
 
 add_action('controller', function () {

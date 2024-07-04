@@ -38,7 +38,7 @@ add_filter('permissions', function ($permissions) {
     return $permissions;
 });
 
-if (user_can('view_devices')) {
+
     add_filter('basic-admin_before_admin_links', function ($links) {
         $vars = get_value();
         $obj = (object)[];
@@ -49,7 +49,7 @@ if (user_can('view_devices')) {
         $links[] = $obj;
         return $links;
     });
-}
+
 
 
 

@@ -28,16 +28,16 @@ add_filter('admin-manager_before_section_title', function ($title) {
 });
 
 //  set user permission for these plugin
-add_filter('permissions', function ($permissions) {
-    $permissions[] = 'view_devices';
-    $permissions[] = 'view_device_detail';
-    $permissions[] = 'add_device';
-    $permissions[] = 'edit_device';
-    $permissions[] = 'delete_device';
-    return $permissions;
-});
+// add_filter('permissions', function ($permissions) {
+//     $permissions[] = 'view_devices';
+//     $permissions[] = 'view_device_detail';
+//     $permissions[] = 'add_device';
+//     $permissions[] = 'edit_device';
+//     $permissions[] = 'delete_device';
+//     return $permissions;
+// });
 
-if (user_can('view_users')) {
+
     add_filter('basic-admin_before_admin_links', function ($links) {
         $vars = get_value();
         $obj = (object)[];
@@ -48,7 +48,7 @@ if (user_can('view_users')) {
         $links[] = $obj;
         return $links;
     });
-}
+
 
 
 
@@ -68,11 +68,9 @@ add_action('controller', function () {
             require plugin_path('controllers/ajax-controller.php');
             die;
         }else
-        if(URL(3)=='software'){
-            echo json_encode('connected');
-    die;
-            // require plugin_path('controllers/software-ajax-controller.php');
-            // die;
+        if(URL(2)=='software'){          
+            require plugin_path('controllers/software-ajax-controller.php');
+           
 
         }
     }
@@ -146,14 +144,14 @@ add_filter('after_query', function ($data) {
     if ($data['query_id'] == 'get-device') {
         $outlets = new OutletManager\Outlet;
 
-        foreach ($data['result'] as $key => $row) {
-            $query = 'select * from install  where outlet_id in (select outlet_id from install where device_id = :device_id) limit 1';
-            $install = $outlets->query($query,['device_id'=>$row->id]); 
-            $install = array_column($install,'outlet_id');
-            if($install){               
-                $data['result'][$key]->install = $install;
-            }
-        }
+        // foreach ($data['result'] as $key => $row) {
+        //     $query = 'select * from install  where outlet_id in (select outlet_id from install where device_id = :device_id) limit 1';
+        //     $install = $outlets->query($query,['device_id'=>$row->id]); 
+        //     $install = array_column($install,'outlet_id');
+        //     if($install){               
+        //         $data['result'][$key]->install = $install;
+        //     }
+        // }
         // dd($data);
     }
 

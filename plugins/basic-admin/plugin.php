@@ -23,7 +23,7 @@
 
     add_action('before_controller',function(){
         $vars = get_value();
-        if(false && page() == $vars['plugin_route'] && !user_can('view_admin_page')){
+        if(false && page() == $vars['plugin_route'] ){
             message('Access denied! Contact admin');
             redirect('login');
 

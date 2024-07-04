@@ -1,4 +1,3 @@
-    <?php if (user_can('view_users')) : ?>
 
 
 
@@ -8,10 +7,8 @@
                     <?= message() ?>
                 </div>
             <?php endif ?>
-            <?php require plugin_path('views/newModal.php'); ?>
-            <?php require plugin_path('views/softModal.php'); ?>
-            <?php require plugin_path('views/editModal.php'); ?>
-            <?php require plugin_path('views/installDevice.php'); ?>
+            <?php require plugin_path('views/device/edit.php'); ?>
+            <?php require plugin_path('views/device/new.php'); ?>
             <?php require plugin_path('views/delete.php'); ?>
             <!-- -------------------------------------------------------------------- -->
 
@@ -37,11 +34,9 @@
                     <th>LOCATION</th>
                     <th>STATUS</th>
                     <th>
-                        <?php if (user_can('view_users')) : ?>
                             <button type="button" class="btn btn-primary" onclick="newModal.show()">
                                 Add New
                             </button>
-                        <?php endif ?>
 
                     </th>
 
@@ -66,33 +61,23 @@
 
                                 <td>
                                     <div class="d-flex gap-2">
-                                        <?php if (user_can('install_device')) : ?>
-                                            <!-- <button class="btn btn-primary btn-sm" id="<?= $device->id ?>" onclick="softModal.show()">
-                                                <i class="fa-brands fa-windows"></i>
-                                            </button> -->
-                                        <?php endif ?>
-                                        <?php if (user_can('install_device')) : ?>
+                                        
                                             <button class="btn btn-primary btn-sm" onclick="installDevice.show()">
                                                 <i class="fa-solid fa-plug"></i>
                                             </button>
-                                        <?php endif ?>
-                                        <?php if (user_can('view_device_detail')) : ?>
                                             <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/view/<?= $device->id ?>">
                                                 <button class="btn btn-primary btn-sm">
                                                     <i class="fa-solid fa-eye"></i>
 
                                                 </button>
                                             </a>
-                                        <?php endif ?>
-                                        <?php if (user_can('edit_device')) : ?>
 
-                                            <button id="<?= $device->id ?>" class="edit btn btn-info" onclick="submitForm(this,'<?= $device->id ?>','row',event)">
+                                            <button id="<?= $device->id ?>" class="edit btn btn-info" onclick="submitForm(this,'<?= $device->id ?>','device-row',event)">
                                                 <i class="fa-solid fa-pen-to-square"></i>
 
                                             </button>
-                                        <?php endif ?>
                                         <?php if (user_can('delete_device')) : ?>
-                                            <button id="<?= $device->id ?>" onclick="submitForm(this,<?= $device->id ?>,'delete',event)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            <button id="<?= $device->id ?>" onclick="submitForm(this,<?= $device->id ?>,'device-delete',event)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                 <i class="fa-solid fa-trash"></i>
 
                                             </button>
@@ -118,14 +103,7 @@
 
 
 
-    <?php else : ?>
-        <div class="alert alert-danger text-center">
-            Access denied! Please contact admin to view this page
-        </div>
-
-    <?php endif ?>
-
-
+    
 
     <div id="alert" class="modal fade">
         <div class="modal-dialog modal-confirm">
@@ -149,9 +127,7 @@
     <script>
         var editModal = new bootstrap.Modal($('#editModal'), {})
         var newModal = new bootstrap.Modal($('#newModal'), {})
-        var softModal = new bootstrap.Modal($('#softModal'), {})
         var alertModal = new bootstrap.Modal($('#alert'), {})
-        var installDevice = new bootstrap.Modal($('#installDevice'), {})
 
 
 
@@ -164,7 +140,7 @@
                 formdata.append(key, obj[key])
             }
             $.ajax({
-                url: address ?? '<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/ajax',
+                url: address ?? '<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/'+address,
                 method: 'POST',
                 data: formdata,
                 processData: false,

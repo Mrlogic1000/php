@@ -34,7 +34,7 @@ add_filter('permissions', function ($permissions) {
     return $permissions;
 });
 
-if (user_can('view_users')) {
+
     add_filter('basic-admin_before_admin_links', function ($links) {
         $vars = get_value();
         $obj = (object)[];
@@ -45,7 +45,7 @@ if (user_can('view_users')) {
         $links[] = $obj;
         return $links;
     });
-}
+
 
 
 
@@ -118,14 +118,14 @@ add_filter('after_query', function ($data) {
     if ($data['query_id'] == 'get-device') {
         $outlets = new OutletManager\Outlet;
 
-        foreach ($data['result'] as $key => $row) {
-            $query = 'select * from install  where outlet_id in (select outlet_id from install where device_id = :device_id) limit 1';
-            $install = $outlets->query($query,['device_id'=>$row->id]); 
-            $install = array_column($install,'outlet_id');
-            if($install){               
-                $data['result'][$key]->install = $install;
-            }
-        }
+        // foreach ($data['result'] as $key => $row) {
+        //     $query = 'select * from install  where outlet_id in (select outlet_id from install where device_id = :device_id) limit 1';
+        //     $install = $outlets->query($query,['device_id'=>$row->id]); 
+        //     $install = array_column($install,'outlet_id');
+        //     if($install){               
+        //         $data['result'][$key]->install = $install;
+        //     }
+        // }
         // dd($data);
     }
 

@@ -25,7 +25,7 @@ add_filter('permissions', function ($permissions) {
 return $permissions;
 });
 
-if(user_can('view_outlets')){
+
     add_filter('basic-admin_before_admin_links', function ($links) {
         $vars = get_value();
     
@@ -38,7 +38,7 @@ if(user_can('view_outlets')){
     
         return $links;
     });
-}
+
 
 add_action('controller',function(){
     $vars = get_value();
