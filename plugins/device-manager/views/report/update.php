@@ -1,4 +1,4 @@
-<div class="modal" id="editReport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="updateReport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,7 +13,7 @@
 
                     <input hidden type="text" id="id" name="id" value="<?= old_value('id') ?>" class="form-control" placeholder="Software Name" aria-label="Username" aria-describedby="addon-wrapping">
                     <div class="col-md-12 mb-3">
-                        <label for="sn" class="form-label"> Software</label>
+                        <label for="name" class="form-label"> Software</label>
                         <input type="text" id="name" name="name" value="<?= old_value('name') ?>" class="form-control" placeholder="Software Name" aria-label="Username" aria-describedby="addon-wrapping">
 
                     </div>
@@ -24,7 +24,7 @@
 
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="IP" class="form-label"> Password</label>
+                        <label for="password" class="form-label"> Password</label>
                         <input type="text" id="password" name="password" value="<?= old_value('password') ?>" class="form-control" placeholder="Password" aria-label="IP" aria-describedby="addon-wrapping">
 
 
@@ -46,7 +46,7 @@
                         <textarea id="description" name="description" class="form-control" id="description" rows="3"></textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="close" class="btn btn-secondary" onclick="editReport.hide()" data-bs-dismiss="editReport">Close</button>
+                        <button type="button" id="close" class="btn btn-secondary" onclick="editReport.hide()" data-bs-dismiss="updateReport">Close</button>
                         <button type="submit" id="save" class="update btn btn-primary">Update</button>
                     </div>
 

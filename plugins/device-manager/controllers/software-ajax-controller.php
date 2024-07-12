@@ -30,14 +30,19 @@ if ($req->posted()) {
                 ]);
                 die;
             }
+            die;
         } else
         if ($postdata['form_id'] == 'row') {
-                $row = $software->first(['id' => $postdata['id']]);
+
+            // echo json_encode($postdata);
+            // die;
+           
+                $row = $software->first(['device_id' => $postdata['id']]);
                 if ($row) {
                     echo json_encode([
                         "statusCode" => 200,
                         "message" => "successful 😀",
-                        "row" => $row,
+                        "data" => $row,
                         "form_id" => $postdata['form_id'],
 
                     ]);

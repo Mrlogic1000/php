@@ -5,20 +5,20 @@
       <a type="button" href="<?= ROOT . '/' . $vars['admin_route'] . '/' . $vars['plugin_route']; ?>" class="btn btn-primary btn-sm">Home</a>
     </div>
     <div>
-      <button type="button" class="btn btn-primary btn-sm" onclick="softwareForm.show()">
+      <button type="button" class="btn btn-primary btn-sm" onclick="newSoftware.show()">
         Install software
       </button>
     </div>
     <div>
-      <button type="button" class="btn btn-primary btn-sm" onclick="reportModal.show()">
+      <button type="button" class="btn btn-primary btn-sm" onclick="newReport.show()">
         Report
       </button>
     </div>
   </div>
 
 </div>
-<?php require plugin_path('views/software/new.php'); ?>
 <?php require plugin_path('views/software/update.php'); ?>
+<?php require plugin_path('views/software/new.php'); ?>
 <?php require plugin_path('views/report/new.php'); ?>
 <?php require plugin_path('views/delete.php'); ?>
 <?php require plugin_path('views/report/update.php'); ?>
@@ -110,7 +110,6 @@
               <th scope="col">Lisense</th>
               <th scope="col">Version</th>
               <th scope="col">Description</th>
-              <th scope="col">Date</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -124,15 +123,14 @@
                 <td><?= $software->license ?></td>
                 <td><?= $software->version ?></td>
                 <td><?= $software->description ?></td>
-                <td><?= get_date($software->date_created) ?></td>
                 <td>
                   <div class="d-flex gap-2">
 
 
-                    <button class="btn btn-warning btn-sm" onclick="submitForm(this,'<?= $software->id ?>','software-row',event)">
+                    <button class="btn btn-warning btn-sm" onclick="getRow(<?= $device->id ?>)">
                       <i class="fa-solid fa-pen-to-square"></i>
                     </button>
-                    <button id="<?= $device->id ?>" onclick="submitForm(this,<?= $software->id ?>,'software-delete',event)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button id="<?= $device->id ?>" onclick="delete(<?= $software->id ?>)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                       <i class="fa-solid fa-trash"></i>
 
                     </button>
@@ -182,7 +180,7 @@
                 <div class="d-flex gap-2">
 
 
-                  <button class="btn btn-warning btn-sm" onclick="submitForm(this,'<?= $device->id ?>','report-row',event)">
+                  <button class="btn btn-warning btn-sm" onclick="getRow(<?= $device->id ?>)">
                     <i class="fa-solid fa-pen-to-square"></i>
                   </button>
                   <button id="<?= $device->id ?>" onclick="submitForm(this,<?= $device->id ?>,'report-delete',event)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -200,5 +198,26 @@
       </tbody>
     </table>
   </div>
+  
+    
 </div>
-<?php require plugin_path('views/js/view-j.php'); ?>
+<!-- <?php require plugin_path('views/js/view-j.php'); ?> -->
+<script src="<?= plugin_http_path('assets/js/plugin.js') ?>">
+
+</script>
+<script>
+  var url = '<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/' 
+
+  var Software = new CRUD(url,'software');
+
+
+  function deleteItem(id){
+    Software.delete(id)
+  }
+
+  function getRow(id){
+    Software.row(id)
+
+  }
+</script>
+

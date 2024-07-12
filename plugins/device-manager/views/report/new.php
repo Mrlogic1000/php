@@ -1,4 +1,4 @@
-<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="newReport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" id="close" class="btn btn-secondary" onclick="reportModal.hide()" data-bs-dismiss="reportModal">Close</button>
+                        <button type="button" id="close" class="btn btn-secondary" onclick="reportModal.hide()" data-bs-dismiss="newReport">Close</button>
                         <button type="submit" id="save" class="update btn btn-primary">Report</button>
                     </div>
 

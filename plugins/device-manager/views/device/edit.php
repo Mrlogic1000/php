@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form onsubmit="submitForm(this,null,'edit',event)" id="editForm" class="mx-auto row ">
+                <form onsubmit="submitForm(this,null,'device-update',event)" id="editForm" class="mx-auto row ">
                     <?= csrf() ?>
                     <h4 class="my-3">Edit Device</h4>
                     <input type="text" hidden id="id" name="id" value="" class="form-control" placeholder="Serial Number" aria-label="Username" aria-describedby="addon-wrapping">
@@ -14,9 +14,9 @@
 
 
                     <div class="col-md-12 mb-3">
-                        <label for="name" class="form-label">Color</label>
+                        <label for="name" class="form-label">Device</label>
                         <select id="name" name="name" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
-                            <option <?= old_selected('name', 'router') ?> value="router">Route</option>
+                            <option <?= old_selected('name', 'Router') ?> value="Router">Route</option>
                             <option <?= old_selected('name', 'switch') ?> value="switch">Switch</option>
                             <option <?= old_selected('name', 'AP') ?> value="AP">AP</option>
                             <option <?= old_selected('name', 'firewall') ?> value="firewall">FireWall</option>

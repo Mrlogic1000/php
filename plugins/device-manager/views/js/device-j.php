@@ -1,17 +1,7 @@
-
 <script>
-  'use strict';
-  
-
-    // src="<?= plugin_http_path('assets/js/plugin.js') ?>"
-  var newSoftware = new bootstrap.Modal($('#newSoftware'), {})
-  var updateSoftware = new bootstrap.Modal($('#updateSoftware'), {})
-  var updateReport = new bootstrap.Modal($('#updateReport'), {})
-  var newReport = new bootstrap.Modal($('#newReport'), {})
-  var successAlert = new bootstrap.Modal($('#success'), {})
-  // var alertModal = new bootstrap.Modal($('#alert'), {})
-  // var installDevice = new bootstrap.Modal($('#installDevice'), {})
-
+  var editModal = new bootstrap.Modal($('#editModal'), {})
+  var newModal = new bootstrap.Modal($('#newModal'), {})
+  var alertModal = new bootstrap.Modal($('#alert'), {})
   // $(document).ready(function() {
   //   successAlert.show();
   //   setTimeout(function() {
@@ -20,20 +10,13 @@
   // })
 
 
-  // dynamic modal call
-  function callModal(first, string = '', show = 'show') {
-    var mod = first + string.charAt(0).toUpperCase() + string.slice(1)
 
-    console.log(mod)
-    // $(`#${mod}`).modal(`${show}`)
-    mod ?? 'newSoftware'.hide()
 
-  }
 
 
 
   function send_data(formdata, obj, address) {
-    for (let key in obj) {
+    for (key in obj) {
       formdata.append(key, obj[key])
     }
     $.ajax({
@@ -63,7 +46,7 @@
       if (obj.statusCode == 200) {
         if (obj.form_id == 'row') {
           var row = obj.row
-          for (let key in row) {
+          for (key in row) {
             if (key == 'description') {
               $(`textarea#${key}`).text(row[key])
             }
@@ -71,21 +54,19 @@
           }
 
 
-        } else {
-
-          if (obj.message !== '') {
-            var message = obj.message;
-            $('.text-success').text(message);
-            successAlert.show();
-            console.log(message)
-            setTimeout(function() {
-              successAlert.hide();
-              $(`#${address}`).load(`<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/view/<?= $device->id ?> #${address}`);
-            }, 2000);
-
-          }
         }
 
+        // if (obj.message !== '') {
+        //   var message = obj.message;
+        //   $('#success').text(message);
+        //   successAlert.show();
+        //   setTimeout(function() {
+        //     successAlert.hide();
+        //   }, 2000);
+
+        // }
+        // $("#table").load("<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?> #table");
+        // location.reload()
 
 
       }
@@ -109,7 +90,7 @@
 
 
   $(document).on('click', '#close', function() {
-    updateSoftware.hide()
+    editModal.hide()
 
 
   })
@@ -142,48 +123,22 @@
       })
     } else
     if (form_id == 'row') {
-      
       var formdata = new FormData();
       var obj = {
         'id': id,
         'form_id': form_id
       }
-      send_data(formdata, obj, address);
-      if (address == 'software') {
-        // updateSoftware.show()
-        Software.row()
-      } else
-      if (address == 'report') {
-        // updateReport.show()
-      }
-
-
-
-
+      send_data(formdata, obj, address)
+      editModal.show();
 
     } else
-    if (form_id == 'update') {
+
+    if (form_id == 'new' || form_id == 'update') {
       var formdata = new FormData(data);
       var obj = {
         'form_id': form_id
       }
       send_data(formdata, obj, address);
-      // callModal('update', address, 'hide');
-      updateSoftware.hide()
-    } else
-    if (form_id == 'new') {     
-      var formdata = new FormData(data);
-      var obj = {
-        'form_id': form_id
-      }
-      send_data(formdata, obj, address);
-      document.getElementById('newForm').reset();
-      if (address == 'software') {
-        updateSoftware.show()
-      } else
-      if (address == 'report') {
-        updateReport.show()
-      }
     }
 
   }
