@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form onsubmit="submitForm(this,null,'software-update',event)" id="editForm" class="mx-auto row ">
+                <form onsubmit="updateSoftware(this,event)" id="editForm" class="mx-auto row ">
                     <?= csrf() ?>
                     <div class="alert alert-danger d-none">
                     </div>

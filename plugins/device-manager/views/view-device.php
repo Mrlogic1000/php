@@ -5,12 +5,12 @@
       <a type="button" href="<?= ROOT . '/' . $vars['admin_route'] . '/' . $vars['plugin_route']; ?>" class="btn btn-primary btn-sm">Home</a>
     </div>
     <div>
-      <button type="button" class="btn btn-primary btn-sm" onclick="newSoftware.show()">
+      <button type="button" class="btn btn-primary btn-sm" onclick="Software.display('new')">
         Install software
       </button>
     </div>
     <div>
-      <button type="button" class="btn btn-primary btn-sm" onclick="newReport.show()">
+      <button type="button" class="btn btn-primary btn-sm" onclick="Report.display('new')">
         Report
       </button>
     </div>
@@ -127,10 +127,10 @@
                   <div class="d-flex gap-2">
 
 
-                    <button class="btn btn-warning btn-sm" onclick="getRow(<?= $device->id ?>)">
+                    <button class="btn btn-warning btn-sm" onclick="Software.row(<?= $software->id ?>)">
                       <i class="fa-solid fa-pen-to-square"></i>
                     </button>
-                    <button id="<?= $device->id ?>" onclick="delete(<?= $software->id ?>)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button  onclick="Software.delete(<?= $software->id ?>)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                       <i class="fa-solid fa-trash"></i>
 
                     </button>
@@ -180,13 +180,19 @@
                 <div class="d-flex gap-2">
 
 
-                  <button class="btn btn-warning btn-sm" onclick="getRow(<?= $device->id ?>)">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  </button>
-                  <button id="<?= $device->id ?>" onclick="submitForm(this,<?= $device->id ?>,'report-delete',event)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="fa-solid fa-trash"></i>
+                <td>
+                  <div class="d-flex gap-2">
 
-                  </button>
+
+                    <button class="btn btn-warning btn-sm" onclick="Report.row(<?= $report->id ?>)">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button  onclick="Report.delete(<?= $report->id ?>)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      <i class="fa-solid fa-trash"></i>
+
+                    </button>
+                  </div>
+                </td>
                 </div>
               </td>
 
@@ -201,23 +207,44 @@
   
     
 </div>
-<!-- <?php require plugin_path('views/js/view-j.php'); ?> -->
-<script src="<?= plugin_http_path('assets/js/plugin.js') ?>">
+<script src="<?=ROOT?>/assets/js/plugin.js">
 
 </script>
 <script>
   var url = '<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/' 
 
   var Software = new CRUD(url,'software');
+  
 
 
-  function deleteItem(id){
-    Software.delete(id)
+  
+  function createSoftware(data,event){    
+    event.preventDefault();
+    Software.create(data)
+
+  }
+  function updateSoftware(data,event){    
+    event.preventDefault();
+    Software.update(data)
   }
 
-  function getRow(id){
-    Software.row(id)
+  var Report = new CRUD(url,'report');
+
+  function createReport(data,event){    
+    event.preventDefault();
+    // console.log("Report")
+    Report.create(data)
 
   }
+  function updateReport(data,event){    
+    event.preventDefault();
+    Report.update(data)
+
+  }
+  
+
+  
+
+ 
 </script>
 

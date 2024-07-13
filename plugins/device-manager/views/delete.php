@@ -12,7 +12,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancle</button>
-                        <button type="button" id="true" data-bs-dismiss="modal" class="confirm btn btn-danger">Yes, delete
+                        <button type="button" boolean="true" id="confirm" data-bs-dismiss="modal" class="confirm btn btn-danger">Yes, delete
                             it!</button>
                     </div>
                 </div>

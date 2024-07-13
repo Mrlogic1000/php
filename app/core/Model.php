@@ -126,7 +126,8 @@ class Model extends Database
         $query = trim($query, ", ");
         $query .= " where $id_column = :$id_column";
        
-        $data[$id_column] = $id;      
+        $data[$id_column] = $id;  
+        echo json_encode($query);    
         $this->query($query, $data);
         return false;
     }
@@ -165,7 +166,7 @@ class Model extends Database
                             }
                             break;
                         case "email":
-                            if (!filter_var($data[$column], FILTER_VALIDATE_EMAIL)) {
+                            if (filter_var($data[$column], FILTER_VALIDATE_EMAIL)) {
                                 $this->errors[$column] = "Invalid " . $column . " address";
                             }
                         case "ip":

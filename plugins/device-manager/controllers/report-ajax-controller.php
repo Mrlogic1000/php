@@ -1,5 +1,5 @@
 <?php
-use DeviceManager\Software;
+use DeviceManager\Report;
 
 if ($req->posted()) {
     
@@ -7,13 +7,15 @@ if ($req->posted()) {
     
 
 
-    $software = new Software;
-    if ($software->validate($postdata)) {
+    $report = new Report;
+    if ($report->validate($postdata)) {
         
         if ($postdata['form_id'] =='new') {
             $postdata['date_created'] = date('Y-m-d H:i:s');
-            $software->insert($postdata);
-            if ($software->affected_row > 0) {
+            $postdata['category'] = 'network';
+            $postdata['user_id'] = $ses->user('id');
+            $report->insert($postdata);
+            if ($report->affected_row > 0) {
                 echo json_encode([
                     "statusCode" => 200,
                     "message" => "Created successful 😀",
@@ -37,7 +39,7 @@ if ($req->posted()) {
             // echo json_encode($postdata);
             // die;
            
-                $row = $software->first(['id' => $postdata['id']]);
+                $row = $report->first(['id' => $postdata['id']]);
                 if ($row) {
                     echo json_encode([
                         "statusCode" => 200,
@@ -50,9 +52,11 @@ if ($req->posted()) {
                 }
                 die;
         } else
-    if ($postdata['form_id'] == 'update') {
-            $software->update($postdata['id'], $postdata);
-            if ($software->affected_row > 0) {
+    if ($postdata['form_id'] == 'update') {        
+        $postdata['date_updated'] = date('Y-m-d H:i:s');
+            $report->update($postdata['id'], $postdata);
+
+            if ($report->affected_row > 0) {
                 echo json_encode([
                     "statusCode" => 200,
                     "message" => "successful 😀",
@@ -72,8 +76,8 @@ if ($req->posted()) {
         } else
     if ($postdata['form_id'] == 'delete') {
        
-            $software->delete($postdata['id']);
-            if ($software->affected_row > 0) {
+            $report->delete($postdata['id']);
+            if ($report->affected_row > 0) {
                 echo json_encode([
                     "statusCode" => 200,
                     "message" => "successful 😀",
@@ -93,7 +97,8 @@ if ($req->posted()) {
             die;
         }
     } else {
-        echo json_encode($software->errors);
+        echo json_encode($report->errors);
+        
         die;
     }
 }

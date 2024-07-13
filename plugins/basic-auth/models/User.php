@@ -42,7 +42,6 @@ class User extends Model{
             "required",
         ],
         "email" => [
-            "email",
             "unique",
             "required",
         ],

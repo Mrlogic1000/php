@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form onsubmit="submitForm(this,null,'software-new',event)" id="newForm" class="mx-auto row ">
+                <form onsubmit="createSoftware(this,event)" id="newForm" class="mx-auto row ">
                     <?= csrf() ?>
                     <div class="alert alert-danger d-none">
                     </div>

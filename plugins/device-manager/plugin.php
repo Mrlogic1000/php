@@ -56,6 +56,7 @@ add_filter('admin-manager_before_section_title', function ($title) {
 
 add_action('controller', function () {
     $req = new \Core\Request;
+    $ses = new \Core\Session;    
     $id = URL(3) ?? '';
     $devices = new Device;
     $device = $devices->first(['id' => $id]);
@@ -70,6 +71,11 @@ add_action('controller', function () {
         }else
         if(URL(2)=='software'){          
             require plugin_path('controllers/software-ajax-controller.php');
+           
+
+        }else
+        if(URL(2)=='report'){          
+            require plugin_path('controllers/report-ajax-controller.php');
            
 
         }
@@ -116,7 +122,7 @@ add_action('basic-admin_main_content', function () {
         } else
         if (URL(2) == 'view') {
             $getReport = new Report;
-            $reports = $getReport->where(['device_id'=>$id],['category'=>'other-device']);
+            $reports = $getReport->where(['device_id'=>$id,'category'=>'network']);
             $getSoftware = new Software;
             $softwares = $getSoftware->where(['device_id'=>$id]);
             require plugin_path('views/view-device.php');
