@@ -23,7 +23,7 @@ if ($req->posted()) {
                 $device = $devices->first(['id' => $postdata['id']]);
                 echo json_encode([
                     'statusCode' => 200,
-                    'row' => $device,
+                    'data' => $device,
                     "form_id" => $postdata['form_id']
                 ]);
                 // echo json_encode("The data deleted successfully");

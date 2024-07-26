@@ -1,4 +1,4 @@
-<div class="modal fade" id="newModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="newDevice" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -6,7 +6,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form onsubmit="submitForm(this,null,'device-new',event)" id="saveForm" class="mx-auto row ">
+                            <form onsubmit="createDevice(this,event)" id="deviceNewForm" class="mx-auto row ">
                                 <?= csrf() ?>
                                 <h4 class="my-3">Add New Device</h4>
                                 <div class="alert alert-danger d-none">

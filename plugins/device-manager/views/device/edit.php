@@ -1,4 +1,4 @@
-<div class="modal" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="updateDevice" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,10 +6,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form onsubmit="submitForm(this,null,'device-update',event)" id="editForm" class="mx-auto row ">
+                <form onsubmit="updateDevice(this,event)" id="deviceUpdateForm" class="mx-auto row ">
                     <?= csrf() ?>
                     <h4 class="my-3">Edit Device</h4>
-                    <input type="text" hidden id="id" name="id" value="" class="form-control" placeholder="Serial Number" aria-label="Username" aria-describedby="addon-wrapping">
+
+                    <div class="col-md-6 mb-3">
+                        <input type="text" id="id" name="id" value="" class="form-control" placeholder="id" aria-label="Username" aria-describedby="addon-wrapping">
+                        
+                    </div>
 
 
 
@@ -110,7 +114,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" id="close" class="btn btn-secondary" data-bs-dismiss="editModal">Close</button>
+                <button type="button" id="close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" id="save" class="update btn btn-primary">Update</button>
             </div>
             </form>

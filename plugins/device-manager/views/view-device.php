@@ -17,11 +17,11 @@
   </div>
 
 </div>
+<?php require plugin_path('views/report/new.php'); ?>
+<?php require plugin_path('views/report/update.php'); ?>
 <?php require plugin_path('views/software/update.php'); ?>
 <?php require plugin_path('views/software/new.php'); ?>
-<?php require plugin_path('views/report/new.php'); ?>
 <?php require plugin_path('views/delete.php'); ?>
-<?php require plugin_path('views/report/update.php'); ?>
 
 
 

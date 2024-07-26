@@ -6,12 +6,15 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form onsubmit="updateSoftware(this,event)" id="editForm" class="mx-auto row ">
+                <form onsubmit="updateSoftware(this,event)" id="softwareUpdateForm" class="mx-auto row ">
                     <?= csrf() ?>
                     <div class="alert alert-danger d-none">
                     </div>
 
-                    <input hidden type="text" id="id" name="id" value="<?= old_value('id') ?>" class="form-control" placeholder="Software Name" aria-label="Username" aria-describedby="addon-wrapping">
+                    <div hidden class="col-md-12 mb-3">
+                        <input type="text" id="id" name="id" value="<?= old_value('id') ?>" class="form-control" placeholder="id" aria-label="Username" aria-describedby="addon-wrapping">
+                       
+                    </div>
                     <div class="col-md-12 mb-3">
                         <label for="name" class="form-label"> Software</label>
                         <input type="text" id="name" name="name" value="<?= old_value('name') ?>" class="form-control" placeholder="Software Name" aria-label="Username" aria-describedby="addon-wrapping">
@@ -46,7 +49,7 @@
                         <textarea id="description" name="description" class="form-control" id="description" rows="3"></textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="close" class="btn btn-secondary" onclick="updateSoftware.hide()" data-bs-dismiss="modal">Close</button>
+                        <button type="button" id="close" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
                         <button type="submit" id="save" class="update btn btn-primary">Update</button>
                     </div>
 

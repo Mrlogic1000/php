@@ -28,7 +28,8 @@ class Report extends Model
     ];
     protected $allowUpdateColumns = [
         'status',        
-        'comment',        
+        'comment',   
+        'reference',
         'date_updated',
         'date_deleted',
         'deleted',
