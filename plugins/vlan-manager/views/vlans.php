@@ -37,14 +37,12 @@
                 <td> <?= esc($vlan->cidr) ?> </td>
                 <td> <?= esc($vlan->ip) ?> </td>
                 <td>
-                <?php if(user_can('view_user_detail')):?>
                     <a  href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/view/<?= $vlan->id ?>">
                     <button class="btn btn-primary btn-sm">
                         <i class="fa-solid fa-eye"></i>
                         view
                     </button>
                 </a>
-                <?php endif?>
 
                     <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/edit/<?= $vlan->id ?>">
 

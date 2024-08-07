@@ -46,13 +46,13 @@
                             <textarea name="description" class="form-control" id="description" rows="3"></textarea>
                     </div>
                     <div class="modal-footer">
-                            <button type="button" id="close" class="btn btn-secondary" onclick="newSoftware.hide()" data-bs-dismiss="modal">Close</button>
+                            <button type="button" id="close" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
                             <button type="submit" id="save" class="update btn btn-primary">Install</button>
                         </div>
                         
                         
                     </form>
-                    <button onclick="callModal('new','software','hide');">test</button>
+                   
 
             </div>
         </div>

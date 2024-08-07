@@ -15,22 +15,13 @@
         this.address = url + instance;
         instance = this.converter(instance);
 
-        this.newModal = new bootstrap.Modal(
-          document.getElementById(`new${instance}`),
-          {}
-        );
-        this.instanceNewModal = bootstrap.Modal.getInstance(
-          document.getElementById(`new${instance}`)
-        );
+        this.newModal = new bootstrap.Modal( document.getElementById(`new${instance}`),{} );
+        this.instanceNewModal = bootstrap.Modal.getInstance(document.getElementById(`new${instance}`));
 
-        this.updateModal = new bootstrap.Modal(
-          document.getElementById(`update${instance}`),
-          {}
-        );
-        this.instanceUpdateModal = bootstrap.Modal.getInstance(
-          document.getElementById(`update${instance}`)
-        );
-        // console.log(this.instance)
+        this.updateModal = new bootstrap.Modal( document.getElementById(`update${instance}`), {} );
+        this.instanceUpdateModal = bootstrap.Modal.getInstance(document.getElementById(`update${instance}`));
+        
+        console.log(this.instance)
       }
 
       converter(string) {
@@ -38,9 +29,12 @@
 
         return string;
       }
+      title(){
+        return this.converter(this.instance)
+      }
 
       display(modal = "new") {
-        if (modal == "new") {
+        if (modal == "new") {        
           this.instanceNewModal.show();
         } else {
           this.instanceUpdateModal.show();
@@ -80,6 +74,8 @@
         this.sendData(form, obj);
         this.instanceNewModal.hide();
         location.reload();
+        var triggerEl = document.querySelector(`#myTab a[href="#${this.instance}"]`)
+bootstrap.Tab.getInstance(triggerEl).show() // Select tab by name
       }
 
       async row(id = "") {
@@ -91,11 +87,9 @@
         let form = new FormData();
         let result = await this.sendData(form, obj);
         let row = result.data;
-        console.log(row)      
-        console.log(`#${this.updateForm}`)
+        
         for (let key in row) { 
-            console.log(key)
-            
+          // console.log(row[key])
                 
                   if (key == 'description'|| key=='comment') {
                   
@@ -110,13 +104,22 @@
         
       }
 
-      async update(data) {
+       update(data) {
         let obj = { form_id: "update" };
         let form = new FormData(data);
-        let result = await this.sendData(form, obj);
-        console.log(result)
+        let result = this.sendData(form, obj);
         this.instanceUpdateModal.hide();
-        location.reload();
+        // console.log(this.updateModal)
+        $('#updateOutlet').on('show.bs.modal', function (event) {
+          console.log('The modal closed')
+
+
+        })
+        // location.reload();
+        var someTabTriggerEl = document.querySelector('#report')
+        var tab = new bootstrap.Tab(someTabTriggerEl)
+      
+        tab.show()
       }
 
       delete(id) {
@@ -143,7 +146,11 @@
               success: function (resp) {
                 var result = JSON.parse(resp);
                 console.log(result);
-                location.reload();
+                // location.reload();
+
+
+                var table = $('#report').DataTable();
+table.ajax.reload();
               },
             });
           }

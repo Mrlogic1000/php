@@ -8,54 +8,42 @@ defined('ROOT') OR exit("Access Denied");
 
 class Task extends Model{
 
-    protected $table = 'tasks';
+    protected $table = 'task';
+
     protected $allowColumns = [
+        'assign',
+        'status',
+        'comment',
+        'startdate',
+        'enddate',
         'date_created'
 
     ];
     protected $allowUpdateColumns = [
+        'assign',
+        'status',
+        'comment',
+        'startdate',
+        'enddate',
         'date_updated',
         'date_deleted',
         'deleted',
         
 
     ];
-    // protected $onUpdateValidationRules = [
-    //     "email" => [
-    //         "email",
-    //         "unique",
-    //         "required",
-    //     ],
-    //     "password" => [
-    //         "not_less_than_8",
-    //         "required",
-    //     ],
-    //     "username" => [
-    //         "alpha_space",
-    //         "unique",
-    //         "required",
+    protected $onUpdateValidationRules = [
+        "assign" => [            
+            "required",
+        ],
+      
 
-    //     ],
-
-    // ];
-    // protected $onInsertValidationRules = [
-    //     "email" => [
-    //         "email",
-    //         "unique",
-    //         "required",
-    //     ],
-    //     "password" => [
-    //         "not_less_than_8",
-    //         "required",
-    //     ],
-    //     "username" => [
-    //         "alpha_space",
-    //         "unique",
-    //         "required",
-
-    //     ],
-
-    // ];
+    ];
+    protected $onInsertValidationRules = [
+        "assign" => [            
+            "required",
+        ],
+      
+    ];
 
 
 

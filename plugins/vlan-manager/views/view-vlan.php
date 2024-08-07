@@ -1,4 +1,3 @@
-<?php if (user_can('view_users')) : ?>
 
 <div class="table-responsive">
 
@@ -13,7 +12,6 @@
                 <div class="alert alert-success">
                 <?= esc($vlan->name) ?>(<?= esc($vlan->vlan_id) ?>)
                 <a href="<?= ROOT ?>/<?= $admin_route ?>/<?= $plugin_route ?>/edit/<?= $vlan->id ?>">
-
                         <button class="btn btn-warning btn-sm">
                             <i class="fa-solid fa-pen-to-square"></i>
                             Edit
@@ -58,9 +56,3 @@
 
     <!-- <?= $pager->display() ?> -->
 </div>
-<?php else : ?>
-<div class="alert alert-danger text-center">
-    Access denied! Please contact admin to view this page
-</div>
-
-<?php endif ?>

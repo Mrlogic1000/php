@@ -11,6 +11,10 @@ class Outlet extends Migration{
     public function up(){
         $this->addColumn("id int auto_increment");
         $this->addColumn("outlet varchar(200)");
+        $this->addColumn("email varchar(200) null");
+        $this->addColumn("email_password varchar(200) null");
+        $this->addColumn("phone1 varchar(200) null");
+        $this->addColumn("phone2 varchar(200) null"); 
         $this->addColumn("description text null");
         $this->addColumn("deleted tinyint(1) unsigned default 0");
         $this->addColumn("date_created datetime default null");

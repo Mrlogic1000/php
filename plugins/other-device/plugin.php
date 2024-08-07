@@ -14,7 +14,7 @@ use InstallManager\Vlan;
 
 set_value([
     "admin_route" => "admin",
-    "plugin_route"  => "other-device",
+    "plugin_route"  => "otherdevice",
     "table" => "other_device",
 
 ]);
@@ -22,21 +22,20 @@ set_value([
 
 add_filter('admin-manager_before_section_title', function ($title) {
     $vars = get_value();
-
     $title = 'Other Device';
 
     return $title;
 });
 
 //  set user permission for these plugin
-add_filter('permissions', function ($permissions) {
-    $permissions[] = 'view_device';
-    $permissions[] = 'view_device_detail';
-    $permissions[] = 'add_device';
-    $permissions[] = 'edit_device';
-    $permissions[] = 'delete_device';
-    return $permissions;
-});
+// add_filter('permissions', function ($permissions) {
+//     $permissions[] = 'view_device';
+//     $permissions[] = 'view_device_detail';
+//     $permissions[] = 'add_device';
+//     $permissions[] = 'edit_device';
+//     $permissions[] = 'delete_device';
+//     return $permissions;
+// });
 
 
     add_filter('basic-admin_before_admin_links', function ($links) {
@@ -68,8 +67,8 @@ add_action('controller', function () {
     $plugin_route = $vars['plugin_route'];
     
     if ($req->posted() && URL(1) == $plugin_route) {
-        if (URL(2) == 'ajax') {
-            require plugin_path('controllers/ajax-controller.php');
+        if (URL(2) == 'otherdevice') {
+            require plugin_path('controllers/otherdevice-ajax-controller.php');
             die;
         } 
     }
@@ -92,8 +91,6 @@ add_action('basic-admin_main_content', function () {
        
         $userModel = new User;
 
-
-
         $devices = $otherDevice->findAll();
         $users = $userModel->findAll();
 
@@ -113,7 +110,7 @@ add_action('basic-admin_main_content', function () {
             require plugin_path('views/delete-Odevice.php');
         } else
         if (URL(2) == 'view') {
-            $devices = $otherDevice->first(['id'=>$id]);
+            $device = $otherDevice->first(['id'=>$id]);
             $getReport = new Report;
             $reports = $getReport->where(['device_id'=>$id],['category'=>'network']);
             require plugin_path('views/view-otherdevice.php');

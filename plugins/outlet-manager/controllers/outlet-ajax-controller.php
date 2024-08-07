@@ -1,0 +1,99 @@
+<?php
+use outletManager\Outlet;
+
+if ($req->posted()) {
+    
+    $postdata = $req->post();
+    
+
+
+    $outlet = new Outlet;
+    if ($outlet->validate($postdata)) {
+        
+        if ($postdata['form_id'] =='new') {
+            $postdata['date_created'] = date('Y-m-d H:i:s');
+            $outlet->insert($postdata);
+            if ($outlet->affected_row > 0) {
+                echo json_encode([
+                    "statusCode" => 200,
+                    "message" => "Created successful 😀",
+                    "form_id" => $postdata['form_id'],
+
+                ]);
+                die;
+            } else {
+                echo json_encode([
+                    "statusCode" => 400,
+                    "message" => "Something went wrong 😀",
+                    "form_id" => $postdata['form_id'],
+
+                ]);
+                die;
+            }
+            die;
+        } else
+        if ($postdata['form_id'] == 'row') {
+
+            // echo json_encode($postdata);
+            // die;
+           
+                $row = $outlet->first(['id' => $postdata['id']]);
+                if ($row) {
+                    echo json_encode([
+                        "statusCode" => 200,
+                        "message" => "successful 😀",
+                        "data" => $row,
+                        "form_id" => $postdata['form_id'],
+
+                    ]);
+                    die;
+                }
+                die;
+        } else
+    if ($postdata['form_id'] == 'update') {
+            $outlet->update($postdata['id'], $postdata);
+            if ($outlet->affected_row > 0) {
+                echo json_encode([
+                    "statusCode" => 200,
+                    "message" => "successful 😀",
+                    "form_id" => $postdata['form_id'],
+
+                ]);
+                die;
+            } else {
+                echo json_encode([
+                    "statusCode" => 400,
+                    "message" => "Something went wrong 😀",
+                    "form_id" => $postdata['form_id'],
+
+                ]);
+                die;
+            }
+        } else
+    if ($postdata['form_id'] == 'delete') {
+       
+            $outlet->delete($postdata['id']);
+            if ($outlet->affected_row > 0) {
+                echo json_encode([
+                    "statusCode" => 200,
+                    "message" => "successful 😀",
+                    "form_id" => $postdata['form_id'],
+
+                ]);
+                die;
+            } else {
+                echo json_encode([
+                    "statusCode" => 400,
+                    "message" => "Something went wrong 😀",
+                    "form_id" => $postdata['form_id'],
+
+                ]);
+                die;
+            }
+            die;
+        }
+    } else {
+        echo json_encode($outlet->errors);
+        die;
+    }
+}

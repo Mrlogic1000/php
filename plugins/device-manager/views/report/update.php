@@ -29,7 +29,7 @@
 
                     <div class="col-md-12 mb-3">
                         <label for="comment" class="form-label">Report</label>
-                        <textarea  class="form-control" id="comment" rows="3"></textarea>
+                        <textarea  class="form-control" id="comment" name="comment" rows="3"></textarea>
                     </div>
 
                     <div class="modal-footer">

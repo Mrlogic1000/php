@@ -13,8 +13,8 @@ class Task extends Migration{
         $this->addColumn("status varchar(200) null");
         $this->addColumn("assign varchar(200) null");
         $this->addColumn("comment text null");
-        $this->addColumn("startdate datetime default null");
-        $this->addColumn("enddate datetime default null");
+        $this->addColumn("startdate date default null");
+        $this->addColumn("enddate date default null");
         $this->addColumn("deleted tinyint(1) unsigned default 0");
         $this->addColumn("date_created datetime default null");
         $this->addColumn("date_updated datetime default null");

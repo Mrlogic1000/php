@@ -16,14 +16,14 @@
  ]);
 
 //  set user permission for these plugin
-add_filter('permissions', function ($permissions) {
-    $permissions[] = 'view_ips';
-    $permissions[] = 'view_detail_ip';
-    $permissions[] = 'add_ip';
-    $permissions[] = 'edit_ip';
-    $permissions[] = 'delete_ip';
-return $permissions;
-});
+// add_filter('permissions', function ($permissions) {
+//     $permissions[] = 'view_ips';
+//     $permissions[] = 'view_detail_ip';
+//     $permissions[] = 'add_ip';
+//     $permissions[] = 'edit_ip';
+//     $permissions[] = 'delete_ip';
+// return $permissions;
+// });
 
 
     add_filter('basic-admin_before_admin_links', function ($links) {

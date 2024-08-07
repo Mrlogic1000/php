@@ -8,6 +8,7 @@ use InstallManager\User;
 use ReportManager\Device;
 // use InstallManager\Outlet;
 use ReportManager\Report;
+use TaskManager\Task;
 
  set_value([
     "admin_route"=>"admin",
@@ -65,8 +66,8 @@ add_action('controller',function(){
 
     if($req->posted() && URL(1)== $plugin_route){
         
-        if(URL(2)== 'ajax'){
-            require plugin_path('controllers/controller.php');
+        if(URL(2)== 'task'){
+            require plugin_path('controllers/task-ajax-controller.php');
             die;
 
 
@@ -86,25 +87,16 @@ add_action('basic-admin_main_content', function () {
     $errors = $vars['errors'] ?? []; 
          
 
-    if(URL(1)== $plugin_route){  
+    if(URL(1)== $plugin_route){ 
+        $taskModel = new Task; 
         $id = URL(3) ?? '';
-             
+        $vars = get_value();                
+        $taskModel::$query_id = 'get-task';
+        $tasks =  $taskModel->findAll();
+        require plugin_path('views/task.php');
        
-        if(URL(2)=='view'){
-            require plugin_path('views/view-report.php');
-
-
-        }
-        
-        else{
-            
-            $vars = get_value();                
-            $reportModel::$query_id = 'get-report';
-            $reports = $reportModel->findAll();
-                      
-            require plugin_path('views/reports.php');
-
-        }
+       
+      
     
            
         }

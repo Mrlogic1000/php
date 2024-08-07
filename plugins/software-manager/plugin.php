@@ -71,6 +71,8 @@ add_action('controller', function () {
 // display the view files
 add_action('basic-admin_main_content', function () {
     $softwares = new Software;
+    $deviceModel = new Device;
+    $devices = $deviceModel->findAll();    
     $vars = get_value();
     $admin_route = $vars['admin_route'];
     $plugin_route = $vars['plugin_route'];

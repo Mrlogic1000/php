@@ -1,4 +1,4 @@
-<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="newReport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,7 +9,7 @@
             <div class="alert alert-danger d-none">
             </div>
                
-                <form onsubmit="submitForm(this,<?=$device->id?>,'report-new',event)" id="saveForm" class="mx-auto row ">
+                <form onsubmit="createReport(this,event)" id="saveForm" class="mx-auto row ">
                     <?= csrf() ?>
                     
 
@@ -20,7 +20,7 @@
                    
                     
                     <div class="col-md-6 mb-3">
-                        <label for="device_id" class="form-label">Status</label>
+                        <label for="status" class="form-label">Status</label>
                         <select id="status" name="status" class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
                             <option <?= old_selected('status', 'urgent') ?> value="urgent">Urgent</option>
                             <option <?= old_selected('status', 'fair') ?> value="fair">Fair</option>
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" id="close" class="btn btn-secondary" onclick="reportModal.hide()" data-bs-dismiss="reportModal">Close</button>
+                        <button type="button" id="close" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
                         <button type="submit" id="save" class="update btn btn-primary">Report</button>
                     </div>
 

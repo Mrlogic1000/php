@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" id="close" class="btn btn-secondary" onclick="newReport.hide()" data-bs-dismiss="newReport">Close</button>
+                        <button type="button" id="close" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
                         <button type="submit" id="save" class="update btn btn-primary">Report</button>
                     </div>
 

@@ -253,17 +253,7 @@
       </button>
     </li>
   </ul>
-  <ul class="nav flex-row mb-auto">
-          <?php foreach($bottom_links as $link): ?>
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="<?= $link->link?>">
-                <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg>
-                <i class="<?= $link->icon?>"></i>
-                <?= $link->title?>
-              </a>
-            </li>
-            <?php endforeach?>           
-          </ul>
+  
 
   <div id="navbarSearch" class="navbar-search w-100 collapse">
     <input class="form-control w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">

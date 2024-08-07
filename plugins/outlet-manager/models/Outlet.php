@@ -11,12 +11,20 @@ class Outlet extends Model{
     protected $table = 'outlet';
     protected $allowColumns = [
         'outlet',
+        'email',
+        'email_password',
+        'phone1',
+        'phone2',
         'description',
         'date_created'
 
     ];
     protected $allowUpdateColumns = [
         'outlet',
+        'email',
+        'email_password',
+        'phone1',
+        'phone2',
         'description',
         'date_updated'
         
@@ -24,7 +32,7 @@ class Outlet extends Model{
     ];
 
     protected $onInsertValidationRules = [
-        "name" => [           
+        "outlet" => [           
             "unique",
             "required",
         ],
@@ -33,7 +41,7 @@ class Outlet extends Model{
 
     protected $onUpdateValidationRules = [
        
-        "name" => [               
+        "outlet" => [               
             "required",
         ],
 

@@ -7,6 +7,7 @@
 
 use DeviceManager\Device;
 use DeviceManager\Outlet;
+use DeviceManager\Port;
 use DeviceManager\Vlan;
 use DeviceManager\Report;
 use DeviceManager\Software;
@@ -58,8 +59,9 @@ add_action('controller', function () {
     $req = new \Core\Request;
     $ses = new \Core\Session;    
     $id = URL(3) ?? '';
-    $devices = new Device;
-    $device = $devices->first(['id' => $id]);
+    
+    // $device = $devices->first(['id' => $id]);
+    // dd($device);
     $vars = get_value();
     $admin_route = $vars['admin_route'];
     $plugin_route = $vars['plugin_route'];
@@ -76,6 +78,11 @@ add_action('controller', function () {
         }else
         if(URL(2)=='report'){          
             require plugin_path('controllers/report-ajax-controller.php');
+           
+
+        }else
+        if(URL(2)=='port'){          
+            require plugin_path('controllers/port-ajax-controller.php');
            
 
         }
@@ -106,23 +113,20 @@ add_action('basic-admin_main_content', function () {
         $id = URL(3) ?? '';
 
         $outletsModel = new Outlet;
-        $outlets = $outletsModel->findAll();
-        $device = $devices->first(['id' => $id]);
+        $outlets = $outletsModel->findAll();        
         $device_ip = $devices->findAll();
        
-        $device_ip = array_column($device_ip, 'ip');
+        $device_ip = array_column($device_ip, 'ip');        
+        $ip_remain = array_diff($all_ip, $device_ip ?? []);       
         
-        $ip_remain = array_diff($all_ip, $device_ip ?? []);
-       
-        
-
-       
-        if (URL(2) == 'edit') {
-            require plugin_path('views/edit-device.php');
-        } else
         if (URL(2) == 'view') {
             $getReport = new Report;
+            $portModel = new Port;
+            $device = $devices->first(['id' => $id]);
+           
             $reports = $getReport->where(['device_id'=>$id,'category'=>'network']);
+            $ports = $portModel->where(['device_id'=>$id]);
+            $neigbors = $devices->findAll();
             $getSoftware = new Software;
             $softwares = $getSoftware->where(['device_id'=>$id]);
             require plugin_path('views/view-device.php');

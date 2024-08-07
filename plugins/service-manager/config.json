@@ -1,0 +1,17 @@
+{
+    "name":"Service Manager",
+    "version":"1.0.0",
+    "id":"service-manager",
+    "author":"",
+    "author website":"",
+    "thumbnail":"thumbnail.jpg",
+    "active":true,
+    "index":7,
+    "routes":{
+        "on":["admin"],
+        "off":[]
+    },
+    "dependencies":{
+
+    }
+}
